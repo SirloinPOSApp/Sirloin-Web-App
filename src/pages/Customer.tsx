@@ -1,8 +1,9 @@
-import { FiEdit, FiShoppingBag, FiTrash2 } from "react-icons/fi";
+import React from "react";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
 import Button from "../components/Button";
 import { Layout } from "../components/Layout";
 
-const Product = () => {
+const Customer = () => {
   return (
     <Layout>
       <div className="flex flex-row justify-between m-5">
@@ -76,4 +77,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Customer;
