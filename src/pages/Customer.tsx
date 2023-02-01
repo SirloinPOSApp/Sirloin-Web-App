@@ -7,9 +7,9 @@ const Customer = () => {
   return (
     <Layout>
       <div className="flex flex-row justify-between m-5">
-        <h3 className="font-bold text-2xl text-[#4AA3BA]">Product Tenant</h3>
+        <h3 className="font-bold text-2xl text-[#4AA3BA]">Daftar Customer</h3>
         <Button
-          label="Tambah Product"
+          label="Tambah Customer"
           buttonSet="bg-[#4AA3BA] border-none capitalize w-48"
         />
       </div>
@@ -18,19 +18,19 @@ const Customer = () => {
         <table className="table w-full px-10">
           <thead>
             <tr>
-              <th>Nama Product</th>
-              <th>Kategori</th>
-              <th>Harga Jual</th>
-              <th>Stock</th>
+              <th>Nama Customer</th>
+              <th>Alamat</th>
+              <th>Nomor Telephone</th>
+              <th>Email</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th>Product 1</th>
-              <td>Kategori 1</td>
-              <td>Rp. 35000</td>
-              <td>10</td>
+              <th>Joko</th>
+              <td>Jl.kenari no.25</td>
+              <td>0812345678910</td>
+              <td>joko@mail.com</td>
               <td className="flex col-span-2">
                 <button className="btn btn-ghost btn-square">
                   <FiTrash2 size="20" color="red" />
@@ -42,10 +42,10 @@ const Customer = () => {
             </tr>
 
             <tr>
-              <th>Product 1</th>
-              <td>Kategori 1</td>
-              <td>Rp. 35000</td>
-              <td>10</td>
+              <th>Reyhand</th>
+              <td>Jl.kenanga no.25</td>
+              <td>0812345678910</td>
+              <td>reyhan@mail.com</td>
               <td className="flex col-span-2">
                 <button className="btn btn-ghost btn-square">
                   <FiTrash2 size="20" color="red" />
@@ -57,10 +57,40 @@ const Customer = () => {
             </tr>
 
             <tr>
-              <th>Product 1</th>
-              <td>Kategori 1</td>
-              <td>Rp. 35000</td>
-              <td>10</td>
+              <th>Mega</th>
+              <td>Jl.mawar no.25</td>
+              <td>0812345678910</td>
+              <td>mega@mail.com</td>
+              <td className="flex col-span-2">
+                <button className="btn btn-ghost btn-square">
+                  <FiTrash2 size="20" color="red" />
+                </button>
+                <button className="btn btn-ghost btn-square">
+                  <FiEdit size="20" color="teal" />
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <th>Ayu</th>
+              <td>Jl.Kintamani no.25</td>
+              <td>0812345678910</td>
+              <td>Ayu@mail.com</td>
+              <td className="flex col-span-2">
+                <button className="btn btn-ghost btn-square">
+                  <FiTrash2 size="20" color="red" />
+                </button>
+                <button className="btn btn-ghost btn-square">
+                  <FiEdit size="20" color="teal" />
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <th>Cahya</th>
+              <td>Jl.Melati no.25</td>
+              <td>0812345678910</td>
+              <td>Cahya@mail.com</td>
               <td className="flex col-span-2">
                 <button className="btn btn-ghost btn-square">
                   <FiTrash2 size="20" color="red" />
