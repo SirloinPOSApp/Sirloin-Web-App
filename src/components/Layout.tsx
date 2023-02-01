@@ -34,7 +34,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
             backgroundColor: "teal",
           },
         }}
-        className="h-screen"
+        className="h-full"
       >
         <Menu className="text-white">
           <button className="p-7" onClick={() => collapseSidebar()}>
