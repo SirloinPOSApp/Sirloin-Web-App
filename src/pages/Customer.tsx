@@ -6,7 +6,7 @@ import { Layout } from "../components/Layout";
 const Customer = () => {
   return (
     <Layout>
-      <div className="flex flex-row justify-between m-5">
+      <div className="flex flex-row justify-between m-10">
         <h3 className="font-bold text-2xl text-[#4AA3BA]">Daftar Customer</h3>
         <Button
           label="Tambah Customer"
@@ -14,7 +14,7 @@ const Customer = () => {
         />
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto m-10">
         <table className="table w-full px-10">
           <thead>
             <tr>

@@ -55,7 +55,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
           <MenuItem icon={<FiLogOut size="20" />}> Log Out</MenuItem>
         </Menu>
       </Sidebar>
-      <main className="h-full w-full overflow-auto mx-5 my-5">{children}</main>
+      <main className="h-full w-full overflow-auto">{children}</main>
     </div>
   );
 };

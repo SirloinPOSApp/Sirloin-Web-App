@@ -5,7 +5,7 @@ import { Layout } from "../components/Layout";
 const HistoryBelanja = () => {
   return (
     <Layout>
-      <div className="flex flex-col m-5">
+      <div className="flex flex-col m-10">
         <h3 className="font-bold text-2xl text-[#4AA3BA]">
           History Belanja Product
         </h3>
@@ -17,7 +17,7 @@ const HistoryBelanja = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto m-10">
         <table className="table w-full px-10">
           <thead>
             <tr>
