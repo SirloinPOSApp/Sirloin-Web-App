@@ -9,6 +9,8 @@ import { TenantProfile } from "../pages/TenantProfile";
 import { Register } from "../pages/Register";
 import Transaksi from "../pages/Transaksi";
 import { TenantEdit } from "../pages/TenantEdit";
+import HistoryBelanja from "../pages/HistoryBelanja";
+import { LandingPage } from "../pages/LandingPage";
 
 const router = createBrowserRouter([
   {
@@ -24,11 +26,15 @@ const router = createBrowserRouter([
     element: <Homepage />,
   },
   {
+    path: "/landing",
+    element: <LandingPage />,
+  },
+  {
     path: "/products",
     element: <Product />,
   },
   {
-    path: "/add-products",
+    path: "/add-product",
     element: <Product />,
   },
   {
@@ -50,6 +56,10 @@ const router = createBrowserRouter([
   {
     path: "/edit-tenant",
     element: <TenantEdit />,
+  },
+  {
+    path: "/history-shopping",
+    element: <HistoryBelanja />,
   },
 ]);
 
