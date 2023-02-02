@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "../components/Button";
+import { Input, TextArea } from "../components/Input";
 import { LayoutPlain } from "../components/Layout";
 
 export const Register = () => {
@@ -18,61 +20,55 @@ export const Register = () => {
               <h1 className="text-center text-[#306D75] font-bold text-5xl mb-11 ">
                 Register
               </h1>
-              <label htmlFor="" className="mb-1 tracking-widest">
-                Nama Bisnis/Toko
-              </label>
-              <input
+              <Input
                 id="business-name"
-                type="text"
                 name="business-name"
-                className="w-full bg-[#FFFFFF] p-4 mb-5 border-2 rounded-lg placeholder-[#DDE2E5]"
+                label="Nama Bisnis/Toko"
                 placeholder="Nama Bisnis/Toko"
-              ></input>
-              <label htmlFor="" className="mb-1 tracking-widest">
-                Email
-              </label>
-              <input
+                labelSet="tracking-widest text-[#1E1E1E]"
+                inputSet="w-full bg-[#FFFFFF] p-4 border-2 rounded-lg placeholder-[#DDE2E5]"
+                type={"text"}
+              ></Input>
+              <Input
                 id="email"
-                type="email"
                 name="email"
-                className="w-full bg-[#FFFFFF] p-4 mb-5 border-2 rounded-lg placeholder-[#DDE2E5]"
+                label="Email"
                 placeholder="Email"
-              ></input>
-              <label htmlFor="" className="mb-1 tracking-widest">
-                Password
-              </label>
-              <input
+                labelSet="tracking-widest text-[#1E1E1E]"
+                inputSet="w-full bg-[#FFFFFF] p-4 border-2 rounded-lg placeholder-[#DDE2E5]"
+                type={"email"}
+              ></Input>
+              <Input
                 id="password"
-                type="password"
                 name="password"
-                className="w-full bg-[#FFFFFF] p-4 mb-9 border-2 rounded-lg placeholder-[#DDE2E5]"
+                label="Password"
                 placeholder="Password"
-              ></input>
-              <label htmlFor="" className="mb-1 tracking-widest">
-                Nomor Telephone
-              </label>
-              <input
+                labelSet="tracking-widest text-[#1E1E1E]"
+                inputSet="w-full bg-[#FFFFFF] p-4 border-2 rounded-lg placeholder-[#DDE2E5]"
+                type={"password"}
+              ></Input>
+              <Input
                 id="number-hp"
-                type="number"
                 name="number-hp"
-                className="w-full bg-[#FFFFFF] p-4 mb-5 border-2 rounded-lg placeholder-[#DDE2E5]"
+                label="Nomor Telephone"
                 placeholder="Nomor Telephone"
-              ></input>
-              <label htmlFor="" className="mb-1 tracking-widest">
-                Alamat
-              </label>
-              <textarea
+                labelSet="tracking-widest text-[#1E1E1E] "
+                inputSet="w-full bg-[#FFFFFF] p-4 border-2 rounded-lg placeholder-[#DDE2E5]"
+                type={"tel"}
+              ></Input>
+              <TextArea
                 id="address"
                 name="address"
+                label="Alamat"
                 rows={5}
-                className="w-full bg-[#FFFFFF] p-4 mb-2 border-2 rounded-lg"
-              ></textarea>
-              <button
-                className="btn w-full mb-7 bg-[#306D75] capitalize font-medium"
+                labelSet="tracking-widest text-[#1E1E1E] "
+                inputSet="w-full "
+              />
+              <Button
+                label="Register"
+                buttonSet="btn w-full mb-10 bg-[#306D75] capitalize font-medium mb-10 mt-5"
                 type="submit"
-              >
-                Register
-              </button>
+              />
               <p className="text-center underline cursor-pointer text-[#306D75]">
                 Login
               </p>

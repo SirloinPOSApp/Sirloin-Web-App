@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "../components/Button";
+import { Input } from "../components/Input";
 import { LayoutPlain } from "../components/Layout";
 
 export const Login = () => {
@@ -18,32 +20,29 @@ export const Login = () => {
               <h1 className="text-center text-[#306D75] font-bold text-5xl mb-11">
                 Login
               </h1>
-              <label htmlFor="" className="mb-1 tracking-widest">
-                Email
-              </label>
-              <input
+              <Input
                 id="email"
-                type="email"
                 name="email"
-                className="w-full bg-[#FFFFFF] p-4 mb-5 border-2 rounded-lg placeholder-[#DDE2E5]"
+                label="Email"
                 placeholder="Email"
-              ></input>
-              <label htmlFor="" className="mb-1 tracking-widest">
-                Password
-              </label>
-              <input
+                labelSet="tracking-widest text-[#1E1E1E]"
+                inputSet="w-full bg-[#FFFFFF] p-4 border-2 rounded-lg placeholder-[#DDE2E5]"
+                type={"email"}
+              ></Input>
+              <Input
                 id="password"
-                type="password"
                 name="password"
-                className="w-full bg-[#FFFFFF] p-4 mb-9 border-2 rounded-lg placeholder-[#DDE2E5]"
+                label="Password"
                 placeholder="Password"
-              ></input>
-              <button
-                className="btn w-full mb-10 bg-[#306D75] capitalize font-medium"
+                labelSet="tracking-widest text-[#1E1E1E]"
+                inputSet="w-full bg-[#FFFFFF] p-4 border-2 rounded-lg placeholder-[#DDE2E5]"
+                type={"password"}
+              ></Input>
+              <Button
+                label="Login"
+                buttonSet="btn w-full mb-10 bg-[#306D75] capitalize font-medium mb-10 mt-5"
                 type="submit"
-              >
-                Login
-              </button>
+              />
               <p className="text-center underline cursor-pointer text-[#306D75]">
                 Register
               </p>
