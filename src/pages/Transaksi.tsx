@@ -5,7 +5,7 @@ import { Layout } from "../components/Layout";
 const Transaksi = () => {
   return (
     <Layout>
-      <div className="flex flex-col m-5">
+      <div className="flex flex-col m-10">
         <h3 className="font-bold text-2xl text-[#4AA3BA]">Laporan Transaksi</h3>
         <div className="flex-row py-5">
           <label className="font-bold">Dari</label>
@@ -15,7 +15,7 @@ const Transaksi = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto m-10">
         <table className="table w-full px-10">
           <thead>
             <tr>

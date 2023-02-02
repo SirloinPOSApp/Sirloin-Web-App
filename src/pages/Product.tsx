@@ -5,7 +5,7 @@ import { Layout } from "../components/Layout";
 const Product = () => {
   return (
     <Layout>
-      <div className="flex flex-row justify-between m-5">
+      <div className="flex flex-row justify-between m-10">
         <h3 className="font-bold text-2xl text-[#4AA3BA]">Product Tenant</h3>
         <Button
           label="Tambah Product"
@@ -13,7 +13,7 @@ const Product = () => {
         />
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto m-10">
         <table className="table w-full px-10">
           <thead>
             <tr>
