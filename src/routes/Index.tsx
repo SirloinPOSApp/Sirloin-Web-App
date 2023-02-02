@@ -12,6 +12,7 @@ import { TenantEdit } from "../pages/TenantEdit";
 import HistoryBelanja from "../pages/HistoryBelanja";
 import { LandingPage } from "../pages/LandingPage";
 import { TransaksiDetail } from "../pages/TransaksiDetail";
+import LaporanPenjualan from "../pages/LaporanPenjualan";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
   {
     path: "/history-shopping",
     element: <HistoryBelanja />,
+  },
+  {
+    path: "/report-selling",
+    element: <LaporanPenjualan />,
   },
 ]);
 
