@@ -6,6 +6,23 @@
   font-family: "Poppins", sans-serif;
 }
 
+::-webkit-scrollbar {
+  border-radius: 9999px;
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 9999px;
+  background: #f0f0f0;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 9999px;
+  background: #555;
+}
+
 /* :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
