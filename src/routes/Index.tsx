@@ -11,6 +11,7 @@ import Transaksi from "../pages/Transaksi";
 import { TenantEdit } from "../pages/TenantEdit";
 import HistoryBelanja from "../pages/HistoryBelanja";
 import { LandingPage } from "../pages/LandingPage";
+import { TransaksiDetail } from "../pages/TransaksiDetail";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/transaction",
     element: <Transaksi />,
+  },
+  {
+    path: "/detail-transaction",
+    element: <TransaksiDetail />,
   },
   {
     path: "/profile-tenant",
