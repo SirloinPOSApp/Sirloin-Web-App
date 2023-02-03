@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../components/Button";
-import { Input } from "../components/Input";
-import { LayoutPlain } from "../components/Layout";
+import Button from "../../components/Button";
+import { Input } from "../../components/Input";
+import { LayoutPlain } from "../../components/Layout";
 
 export const Login = () => {
   return (

@@ -1,21 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Customer from "../pages/Customer";
-import CustomerInput from "../pages/CustomerInput";
-
-import Homepage from "../pages/Homepage";
-import { Login } from "../pages/Login";
-import Product from "../pages/Product";
-import { TenantProfile } from "../pages/TenantProfile";
-import { Register } from "../pages/Register";
-import Transaksi from "../pages/Transaksi";
-import { TenantEdit } from "../pages/TenantEdit";
-import HistoryBelanja from "../pages/HistoryBelanja";
+import Customer from "../pages/customers/Customer";
+import CustomerInput from "../pages/customers/CustomerInput";
+import { Login } from "../pages/auth/Login";
+import Product from "../pages/products/Product";
+import { TenantProfile } from "../pages/tenants/TenantProfile";
+import { Register } from "../pages/auth/Register";
+import Transaksi from "../pages/transactions/Transaksi";
+import { TenantEdit } from "../pages/tenants/TenantEdit";
+import HistoryBelanja from "../pages/products/HistoryBelanja";
 import { LandingPage } from "../pages/LandingPage";
-import { TransaksiDetail } from "../pages/TransaksiDetail";
-import LaporanPenjualan from "../pages/LaporanPenjualan";
+import { TransaksiDetail } from "../pages/transactions/TransaksiDetail";
+import LaporanPenjualan from "../pages/products-admin/LaporanPenjualan";
 import { Etalase } from "../pages/Etalase";
 import Pembayaran from "../pages/Pembayaran";
-import ProductInput from "../pages/ProductInput";
+import ProductInput from "../pages/products/ProductInput";
 
 const router = createBrowserRouter([
   {

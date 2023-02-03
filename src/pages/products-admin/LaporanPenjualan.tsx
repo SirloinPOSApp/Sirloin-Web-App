@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
-import { Layout } from "../components/Layout";
+import { Layout } from "../../components/Layout";
 import DatePicker from "react-datepicker";
 import { AiOutlineCalendar } from "react-icons/ai";
 
@@ -53,7 +53,6 @@ const LaporanPenjualan = () => {
               <th className="bg-[#306D75] text-lg font-normal">
                 Status Transaksi
               </th>
-              <th className="bg-[#306D75] text-lg font-normal">Metode Bayar</th>
             </tr>
           </thead>
           <tbody>
@@ -63,7 +62,6 @@ const LaporanPenjualan = () => {
               <td>Nana</td>
               <td>Rp.300.000</td>
               <td className="text-teal-700 font-semibold">Selesai</td>
-              <td>Tunai</td>
             </tr>
 
             <tr>
@@ -72,7 +70,6 @@ const LaporanPenjualan = () => {
               <td>Nina</td>
               <td>Rp.300.000</td>
               <td className="text-[#DA5C53] font-semibold">Dibatalkan</td>
-              <td>Tunai</td>
             </tr>
 
             <tr>
@@ -81,7 +78,6 @@ const LaporanPenjualan = () => {
               <td>Nunung</td>
               <td>Rp.300.000</td>
               <td className="text-teal-700 font-semibold">Selesai</td>
-              <td>Tunai</td>
             </tr>
 
             <tr>
@@ -90,7 +86,6 @@ const LaporanPenjualan = () => {
               <td>Nanang</td>
               <td>Rp.300.000</td>
               <td className="text-[#DA5C53] font-semibold">Dibatalkan</td>
-              <td>Tunai</td>
             </tr>
 
             <tr>
@@ -99,7 +94,6 @@ const LaporanPenjualan = () => {
               <td>Nani</td>
               <td>Rp.300.000</td>
               <td className="text-teal-700 font-semibold">Selesai</td>
-              <td>Tunai</td>
             </tr>
           </tbody>
           <tfoot>
@@ -111,7 +105,6 @@ const LaporanPenjualan = () => {
               <th className="bg-[#306D75] text-lg font-normal"></th>
               <th></th>
               <th className="text-lg font-bold">Rp 1.500.000</th>
-              <th></th>
             </tr>
           </tfoot>
         </table>

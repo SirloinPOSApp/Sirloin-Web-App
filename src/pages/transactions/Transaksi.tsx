@@ -1,6 +1,6 @@
 import React from "react";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
-import { Layout } from "../components/Layout";
+import { Layout } from "../../components/Layout";
 
 const Transaksi = () => {
   return (

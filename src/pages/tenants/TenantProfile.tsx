@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../components/Button";
-import { Layout } from "../components/Layout";
+import Button from "../../components/Button";
+import { Layout } from "../../components/Layout";
 
 export const TenantProfile = () => {
   return (

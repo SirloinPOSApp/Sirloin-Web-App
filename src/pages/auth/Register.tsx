@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../components/Button";
-import { Input, TextArea } from "../components/Input";
-import { LayoutPlain } from "../components/Layout";
+import Button from "../../components/Button";
+import { Input, TextArea } from "../../components/Input";
+import { LayoutPlain } from "../../components/Layout";
 
 export const Register = () => {
   return (
