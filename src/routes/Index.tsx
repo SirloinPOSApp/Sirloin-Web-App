@@ -13,7 +13,7 @@ import HistoryBelanja from "../pages/HistoryBelanja";
 import { LandingPage } from "../pages/LandingPage";
 import { TransaksiDetail } from "../pages/TransaksiDetail";
 import LaporanPenjualan from "../pages/LaporanPenjualan";
-import Etalase from "../pages/Etalase";
+import { Etalase } from "../pages/Etalase";
 
 const router = createBrowserRouter([
   {
