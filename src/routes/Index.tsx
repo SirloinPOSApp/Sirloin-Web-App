@@ -15,6 +15,7 @@ import { TransaksiDetail } from "../pages/TransaksiDetail";
 import LaporanPenjualan from "../pages/LaporanPenjualan";
 import { Etalase } from "../pages/Etalase";
 import Pembayaran from "../pages/Pembayaran";
+import ProductInput from "../pages/ProductInput";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/add-product",
-    element: <Product />,
+    element: <ProductInput />,
   },
   {
     path: "/customer",

@@ -57,20 +57,28 @@ const Pembayaran = () => {
       <div className="divider mx-5"></div>
       <div className="flex flex-row mx-10 space-x-96">
         <h3 className="font-bold text-2xl text-[#4AA3BA] ">Cara Bayar</h3>
-        <select className="select select-bordered w-full max-w-xs">
+        <select
+          id="chose-payment"
+          className="select select-bordered w-full max-w-xs"
+        >
           <option disabled selected>
             Pilih Cara Bayar
           </option>
-          <option>Tunai</option>
-          <option>Non-Tunai</option>
-          <option>Gopay</option>
-          <option>ShopeePay</option>
-          <option>Otto Click</option>
+          <option id="tunai">Tunai</option>
+          <option id="non-tunai">Non-Tunai</option>
+          <option id="gopay">Gopay</option>
+          <option id="shopee">ShopeePay</option>
+          <option id="ottoclick">Otto Click</option>
         </select>
       </div>
       <div className="flex flex-row justify-start space-x-10 px-10 py-20">
-        <Button label="Kembali" buttonSet="w-40 text-[#DA5C53]  btn-outline" />
         <Button
+          id="back"
+          label="Kembali"
+          buttonSet="w-40 text-[#DA5C53]  btn-outline"
+        />
+        <Button
+          id="order"
           label="Bayar"
           buttonSet="w-40 text-white bg-teal-700  border-none"
         />

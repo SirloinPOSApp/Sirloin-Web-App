@@ -37,22 +37,41 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         className="h-full"
       >
         <Menu className="text-white">
-          <button className="p-7" onClick={() => collapseSidebar()}>
+          <button id="burger" className="p-7" onClick={() => collapseSidebar()}>
             {<FiMenu size="30" />}
           </button>
-          <MenuItem icon={<FiHome size="20" />}>Home</MenuItem>
-          <MenuItem icon={<FiPackage size="20" />}> Product</MenuItem>
-          <MenuItem icon={<FiShoppingBag size="20" />}>
+          <MenuItem id="home" icon={<FiHome size="20" />}>
+            Home
+          </MenuItem>
+          <MenuItem id="product" icon={<FiPackage size="20" />}>
+            {" "}
+            Product
+          </MenuItem>
+          <MenuItem id="etalase-belanja" icon={<FiShoppingBag size="20" />}>
             Etalase Belanja
           </MenuItem>
-          <MenuItem icon={<FiUsers size="20" />}> Customer</MenuItem>
-          <MenuItem icon={<FiFileText size="20" />}>Laporan Penjualan</MenuItem>
-          <MenuItem icon={<FiRepeat size="20" />}> Laporan Transaksi</MenuItem>
-          <MenuItem icon={<FiCalendar size="20" />}>
+          <MenuItem id="customer" icon={<FiUsers size="20" />}>
+            {" "}
+            Customer
+          </MenuItem>
+          <MenuItem id="laporan-penjualan" icon={<FiFileText size="20" />}>
+            Laporan Penjualan
+          </MenuItem>
+          <MenuItem id="laporan-transaksi" icon={<FiRepeat size="20" />}>
+            {" "}
+            Laporan Transaksi
+          </MenuItem>
+          <MenuItem id="history-pembelanjaan" icon={<FiCalendar size="20" />}>
             History Pembelanjaan
           </MenuItem>
-          <MenuItem icon={<BsShop size="20" />}> Profil Tenant</MenuItem>
-          <MenuItem icon={<FiLogOut size="20" />}> Log Out</MenuItem>
+          <MenuItem id="profil-tenant" icon={<BsShop size="20" />}>
+            {" "}
+            Profil Tenant
+          </MenuItem>
+          <MenuItem id="logout" icon={<FiLogOut size="20" />}>
+            {" "}
+            Log Out
+          </MenuItem>
         </Menu>
       </Sidebar>
       <main className="h-full w-full overflow-auto">{children}</main>

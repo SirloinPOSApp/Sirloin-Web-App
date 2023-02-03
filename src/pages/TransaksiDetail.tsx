@@ -82,6 +82,7 @@ export const TransaksiDetail = () => {
         </div>
         <div className="flex justify-end">
           <Button
+            id="cancel-order"
             label="Batalkan Order"
             buttonSet="w-48 h-16 text-white bg-teal-700 mt-7 border-none bg-[#DA5C53] capitalize "
           />
