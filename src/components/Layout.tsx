@@ -18,6 +18,7 @@ import {
   useProSidebar,
 } from "react-pro-sidebar";
 import { BsShop } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -40,38 +41,51 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
           <button id="burger" className="p-7" onClick={() => collapseSidebar()}>
             {<FiMenu size="30" />}
           </button>
-          <MenuItem id="home" icon={<FiHome size="20" />}>
-            Home
-          </MenuItem>
-          <MenuItem id="product" icon={<FiPackage size="20" />}>
-            {" "}
-            Product
-          </MenuItem>
-          <MenuItem id="etalase-belanja" icon={<FiShoppingBag size="20" />}>
-            Etalase Belanja
-          </MenuItem>
-          <MenuItem id="customer" icon={<FiUsers size="20" />}>
-            {" "}
-            Customer
-          </MenuItem>
-          <MenuItem id="laporan-penjualan" icon={<FiFileText size="20" />}>
-            Laporan Penjualan
-          </MenuItem>
-          <MenuItem id="laporan-transaksi" icon={<FiRepeat size="20" />}>
-            {" "}
-            Laporan Transaksi
-          </MenuItem>
-          <MenuItem id="history-pembelanjaan" icon={<FiCalendar size="20" />}>
-            History Pembelanjaan
-          </MenuItem>
-          <MenuItem id="profil-tenant" icon={<BsShop size="20" />}>
-            {" "}
-            Profil Tenant
-          </MenuItem>
-          <MenuItem id="logout" icon={<FiLogOut size="20" />}>
-            {" "}
-            Log Out
-          </MenuItem>
+          <Link to={"/landing"}>
+            <MenuItem id="home" icon={<FiHome size="20" />}>
+              Home
+            </MenuItem>
+          </Link>
+          <Link to={"/products"}>
+            <MenuItem id="product" icon={<FiPackage size="20" />}>
+              Product
+            </MenuItem>
+          </Link>
+          <Link to={"/etalase"}>
+            <MenuItem id="etalase-belanja" icon={<FiShoppingBag size="20" />}>
+              Etalase Belanja
+            </MenuItem>
+          </Link>
+          <Link to={"/customer"}>
+            <MenuItem id="customer" icon={<FiUsers size="20" />}>
+              Customer
+            </MenuItem>
+          </Link>
+          <Link to={"/report-selling"}>
+            <MenuItem id="laporan-penjualan" icon={<FiFileText size="20" />}>
+              Laporan Penjualan
+            </MenuItem>
+          </Link>
+          <Link to={"/transaction"}>
+            <MenuItem id="laporan-transaksi" icon={<FiRepeat size="20" />}>
+              Laporan Transaksi
+            </MenuItem>
+          </Link>
+          <Link to={"/history-shopping"}>
+            <MenuItem id="history-pembelanjaan" icon={<FiCalendar size="20" />}>
+              History Pembelanjaan
+            </MenuItem>
+          </Link>
+          <Link to={"/profile-tenant"}>
+            <MenuItem id="profil-tenant" icon={<BsShop size="20" />}>
+              Profil Tenant
+            </MenuItem>
+          </Link>
+          <Link to={"/login"}>
+            <MenuItem id="logout" icon={<FiLogOut size="20" />}>
+              Log Out
+            </MenuItem>
+          </Link>
         </Menu>
       </Sidebar>
       <main className="h-full w-full overflow-auto">{children}</main>
