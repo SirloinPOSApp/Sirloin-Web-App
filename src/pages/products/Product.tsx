@@ -1,6 +1,6 @@
 import { FiEdit, FiShoppingBag, FiTrash2 } from "react-icons/fi";
-import Button from "../components/Button";
-import { Layout } from "../components/Layout";
+import Button from "../../components/Button";
+import { Layout } from "../../components/Layout";
 
 const Product = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
-import { Layout } from "../components/Layout";
+import { Layout } from "../../components/Layout";
 import DatePicker from "react-datepicker";
 import { AiOutlineCalendar } from "react-icons/ai";
 

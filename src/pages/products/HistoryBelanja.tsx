@@ -1,6 +1,6 @@
 import React from "react";
 import { FiEdit } from "react-icons/fi";
-import { Layout } from "../components/Layout";
+import { Layout } from "../../components/Layout";
 
 const HistoryBelanja = () => {
   return (
