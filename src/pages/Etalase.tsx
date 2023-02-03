@@ -134,7 +134,7 @@ export const Etalase = () => {
             </div>
           </div>
 
-          <div className="bg-[#F7F6F6] mt-7 rounded-xl p-10 flex flex-col gap-6">
+          <div className="bg-[#F7F6F6] mt-7 rounded-xl py-10 px-9 flex flex-col gap-6">
             <div className="flex justify-between">
               <p className="font-medium">Sub Total</p>
               <p>Rp. 31.000</p>
