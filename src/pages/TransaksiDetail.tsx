@@ -9,9 +9,14 @@ export const TransaksiDetail = () => {
         Detail Transaksi
       </h3>
       <div className="rounded-xl border m-10 p-5 mx-40 shadow-lg font-medium text-lg">
-        <h1 className="text-[#306D75] border-b-2 font-bold text-xl pb-5 mb-4">
-          Pesanan Selesai
-        </h1>
+        <div className="relative text-[#306D75]">
+          <h1 className="border-b-2 font-bold text-xl pb-5 mb-4">
+            Pesanan Selesai
+          </h1>
+          <p className="absolute top-[-0.5rem] left-0 ml-[-1.5rem] text-5xl">
+            l
+          </p>
+        </div>
         <div className="flex justify-between font-semibold mb-4">
           <p>INV/20230123/MPL/0001</p>
           <p>Invoice</p>
