@@ -15,6 +15,7 @@ export const CardEtalase: FC<CardProps> = ({
   product_image,
   stok,
   price,
+  id,
 }) => {
   return (
     <div className="card shadow-lg h-96 bg-white">
@@ -31,7 +32,11 @@ export const CardEtalase: FC<CardProps> = ({
         <p className="font-bold text-lg py-2">Rp. 10.000</p>
       </div>
       <div className="card-actions m-5 justify-end">
-        <Button label="Beli" buttonSet="btn-sm w-32 bg-[#4AA3BA] border-none" />
+        <Button
+          id={`select-product-${id}`}
+          label="Beli"
+          buttonSet="btn-sm w-32 bg-[#4AA3BA] border-none"
+        />
       </div>
     </div>
   );

@@ -39,11 +39,15 @@ export const Login = () => {
                 type={"password"}
               ></Input>
               <Button
+                id="login"
                 label="Login"
                 buttonSet="btn w-full mb-10 bg-[#306D75] capitalize font-medium mb-10 mt-5"
                 type="submit"
               />
-              <p className="text-center underline cursor-pointer text-[#306D75]">
+              <p
+                id="to-register"
+                className="text-center underline cursor-pointer text-[#306D75]"
+              >
                 Register
               </p>
             </div>

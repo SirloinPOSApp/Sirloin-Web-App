@@ -9,6 +9,7 @@ const Customer = () => {
       <div className="flex flex-row justify-between m-10">
         <h3 className="font-bold text-2xl text-[#4AA3BA]">Daftar Customer</h3>
         <Button
+          id="add-custumer"
           label="Tambah Customer"
           buttonSet="bg-[#4AA3BA] border-none capitalize w-48"
         />
@@ -32,10 +33,10 @@ const Customer = () => {
               <td>0812345678910</td>
               <td>joko@mail.com</td>
               <td className="flex col-span-2">
-                <button className="btn btn-ghost btn-square">
+                <button id="del-custumer" className="btn btn-ghost btn-square">
                   <FiTrash2 size="20" color="red" />
                 </button>
-                <button className="btn btn-ghost btn-square">
+                <button id="edit-custumer" className="btn btn-ghost btn-square">
                   <FiEdit size="20" color="teal" />
                 </button>
               </td>
@@ -47,10 +48,10 @@ const Customer = () => {
               <td>0812345678910</td>
               <td>reyhan@mail.com</td>
               <td className="flex col-span-2">
-                <button className="btn btn-ghost btn-square">
+                <button id="del-custumer" className="btn btn-ghost btn-square">
                   <FiTrash2 size="20" color="red" />
                 </button>
-                <button className="btn btn-ghost btn-square">
+                <button id="edit-custumer" className="btn btn-ghost btn-square">
                   <FiEdit size="20" color="teal" />
                 </button>
               </td>
@@ -62,10 +63,10 @@ const Customer = () => {
               <td>0812345678910</td>
               <td>mega@mail.com</td>
               <td className="flex col-span-2">
-                <button className="btn btn-ghost btn-square">
+                <button id="del-custumer" className="btn btn-ghost btn-square">
                   <FiTrash2 size="20" color="red" />
                 </button>
-                <button className="btn btn-ghost btn-square">
+                <button id="edit-custumer" className="btn btn-ghost btn-square">
                   <FiEdit size="20" color="teal" />
                 </button>
               </td>
@@ -77,10 +78,10 @@ const Customer = () => {
               <td>0812345678910</td>
               <td>Ayu@mail.com</td>
               <td className="flex col-span-2">
-                <button className="btn btn-ghost btn-square">
+                <button id="del-custumer" className="btn btn-ghost btn-square">
                   <FiTrash2 size="20" color="red" />
                 </button>
-                <button className="btn btn-ghost btn-square">
+                <button id="edit-custumer" className="btn btn-ghost btn-square">
                   <FiEdit size="20" color="teal" />
                 </button>
               </td>
@@ -92,10 +93,10 @@ const Customer = () => {
               <td>0812345678910</td>
               <td>Cahya@mail.com</td>
               <td className="flex col-span-2">
-                <button className="btn btn-ghost btn-square">
+                <button id="del-custumer" className="btn btn-ghost btn-square">
                   <FiTrash2 size="20" color="red" />
                 </button>
-                <button className="btn btn-ghost btn-square">
+                <button id="edit-custumer" className="btn btn-ghost btn-square">
                   <FiEdit size="20" color="teal" />
                 </button>
               </td>

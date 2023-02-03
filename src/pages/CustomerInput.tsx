@@ -50,10 +50,12 @@ const CustomerInput = () => {
           </div>
           <div className="flex flex-row">
             <Button
+              id="back"
               label="Kembali"
               buttonSet="w-40 text-[#DA5C53] my-3 mr-10 btn-outline"
             />
             <Button
+              id="save"
               label="Simpan"
               buttonSet="w-40 text-white bg-teal-700 my-3 mr-10 border-none"
             />

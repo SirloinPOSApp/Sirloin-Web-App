@@ -65,11 +65,15 @@ export const Register = () => {
                 inputSet="w-full "
               />
               <Button
+                id="register"
                 label="Register"
                 buttonSet="btn w-full mb-10 bg-[#306D75] capitalize font-medium mb-10 mt-5"
                 type="submit"
               />
-              <p className="text-center underline cursor-pointer text-[#306D75]">
+              <p
+                id="to-login"
+                className="text-center underline cursor-pointer text-[#306D75]"
+              >
                 Login
               </p>
             </div>

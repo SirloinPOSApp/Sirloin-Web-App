@@ -8,6 +8,7 @@ const Product = () => {
       <div className="flex flex-row justify-between m-10">
         <h3 className="font-bold text-2xl text-[#4AA3BA]">Product Tenant</h3>
         <Button
+          id="add-product"
           label="Tambah Product"
           buttonSet="bg-[#4AA3BA] border-none capitalize w-48"
         />
@@ -31,10 +32,10 @@ const Product = () => {
               <td>Rp. 35000</td>
               <td>10</td>
               <td className="flex col-span-2">
-                <button className="btn btn-ghost btn-square">
+                <button id="del-product" className="btn btn-ghost btn-square">
                   <FiTrash2 size="20" color="red" />
                 </button>
-                <button className="btn btn-ghost btn-square">
+                <button id="edit-product" className="btn btn-ghost btn-square">
                   <FiEdit size="20" color="teal" />
                 </button>
               </td>

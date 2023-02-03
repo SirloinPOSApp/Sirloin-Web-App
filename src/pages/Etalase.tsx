@@ -17,14 +17,14 @@ export const Etalase = () => {
             </h3>
           </div>
           <div className="grid grid-cols-4  gap-4 mt-20">
-            <CardEtalase />
-            <CardEtalase />
-            <CardEtalase />
-            <CardEtalase />
-            <CardEtalase />
-            <CardEtalase />
-            <CardEtalase />
-            <CardEtalase />
+            <CardEtalase id={1} />
+            <CardEtalase id={2} />
+            <CardEtalase id={3} />
+            <CardEtalase id={4} />
+            <CardEtalase id={5} />
+            <CardEtalase id={6} />
+            <CardEtalase id={7} />
+            <CardEtalase id={8} />
           </div>
         </div>
         <div className="p-10 w-1/4">
@@ -41,16 +41,25 @@ export const Etalase = () => {
                 <p>Rp. 3500.-</p>
                 <div className="flex gap-5">
                   <div className="flex items-center rounded-xl border-2 w-28 divide-x border-gray-300">
-                    <button className="text-xl w-9 bg-white  rounded-l-xl">
+                    <button
+                      id="inc-product"
+                      className="text-xl w-9 bg-white  rounded-l-xl"
+                    >
                       +
                     </button>
                     <p className=" w-12 text-center">20</p>
                     {/* <input type="number" className="w-14 px-3" /> */}
-                    <button className="text-xl w-9 bg-white text-center rounded-r-xl">
+                    <button
+                      id="dec-product"
+                      className="text-xl w-9 bg-white text-center rounded-r-xl"
+                    >
                       -
                     </button>
                   </div>
-                  <HiOutlineTrash className="w-7 h-7 text-[#DA5C53] cursor-pointer" />
+                  <HiOutlineTrash
+                    id="del-product"
+                    className="w-7 h-7 text-[#DA5C53] cursor-pointer"
+                  />
                 </div>
               </div>
             </div>
@@ -67,16 +76,24 @@ export const Etalase = () => {
                 <p>Rp. 3500.-</p>
                 <div className="flex gap-5">
                   <div className="flex items-center rounded-xl border-2 w-28 divide-x border-gray-300">
-                    <button className="text-xl w-9 bg-white  rounded-l-xl">
+                    <button
+                      id="inc-product"
+                      className="text-xl w-9 bg-white  rounded-l-xl"
+                    >
                       +
                     </button>
-                    <p className=" w-12 text-center">20</p>
+                    <p id="dec-product" className=" w-12 text-center">
+                      20
+                    </p>
                     {/* <input type="number" className="w-14 px-3" /> */}
                     <button className="text-xl w-9 bg-white text-center rounded-r-xl">
                       -
                     </button>
                   </div>
-                  <HiOutlineTrash className="w-7 h-7 text-[#DA5C53] cursor-pointer" />
+                  <HiOutlineTrash
+                    id="del-product"
+                    className="w-7 h-7 text-[#DA5C53] cursor-pointer"
+                  />
                 </div>
               </div>
             </div>
@@ -93,16 +110,25 @@ export const Etalase = () => {
                 <p>Rp. 3500.-</p>
                 <div className="flex gap-5">
                   <div className="flex items-center rounded-xl border-2 w-28 divide-x border-gray-300">
-                    <button className="text-xl w-9 bg-white  rounded-l-xl">
+                    <button
+                      id="inc-product"
+                      className="text-xl w-9 bg-white  rounded-l-xl"
+                    >
                       +
                     </button>
                     <p className=" w-12 text-center">20</p>
                     {/* <input type="number" className="w-14 px-3" /> */}
-                    <button className="text-xl w-9 bg-white text-center rounded-r-xl">
+                    <button
+                      id="dec-product"
+                      className="text-xl w-9 bg-white text-center rounded-r-xl"
+                    >
                       -
                     </button>
                   </div>
-                  <HiOutlineTrash className="w-7 h-7 text-[#DA5C53] cursor-pointer" />
+                  <HiOutlineTrash
+                    id="del-product"
+                    className="w-7 h-7 text-[#DA5C53] cursor-pointer"
+                  />
                 </div>
               </div>
             </div>
@@ -123,6 +149,7 @@ export const Etalase = () => {
             </div>
           </div>
           <Button
+            id="order"
             type="submit"
             label="Bayar"
             buttonSet="w-full bg-[#306D75] capitalize border-none mt-7 text-lg h-14"

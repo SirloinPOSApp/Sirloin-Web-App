@@ -17,6 +17,7 @@ const LaporanPenjualan = () => {
         <div className="flex-row py-5 flex gap-20 relative">
           <label className="font-bold text-xl">Dari</label>
           <DatePicker
+            id="start-date"
             dateFormat="dd/MM/yyyy"
             className="z-10 border p-2 pl-11 "
             selected={startDate}
@@ -27,6 +28,7 @@ const LaporanPenjualan = () => {
         <div className="flex-row py-5 flex gap-11 relative">
           <label className="font-bold text-xl">Sampai</label>
           <DatePicker
+            id="end-date"
             dateFormat="dd/MM/yyyy"
             className="z-10 border p-2 pl-11"
             selected={endDate}
