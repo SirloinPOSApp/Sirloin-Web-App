@@ -14,6 +14,7 @@ import { LandingPage } from "../pages/LandingPage";
 import { TransaksiDetail } from "../pages/TransaksiDetail";
 import LaporanPenjualan from "../pages/LaporanPenjualan";
 import { Etalase } from "../pages/Etalase";
+import Pembayaran from "../pages/Pembayaran";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
   {
     path: "/etalase",
     element: <Etalase />,
+  },
+  {
+    path: "/pembayaran_detail",
+    element: <Pembayaran />,
   },
 ]);
 
