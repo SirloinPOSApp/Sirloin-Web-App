@@ -14,6 +14,8 @@ import LaporanPenjualan from "../pages/products-admin/LaporanPenjualan";
 import { Etalase } from "../pages/Etalase";
 import Pembayaran from "../pages/Pembayaran";
 import ProductInput from "../pages/products/ProductInput";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +85,33 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  const [cookie, , removeCookie] = useCookies(["token", "id_user", "name"]);
+  const checkToken = cookie.token;
+
+  axios.interceptors.request.use(function (config: any) {
+    config.headers = config.headers || {};
+    config.headers.Authorization = `Bearer ${checkToken}`;
+    return config;
+  });
+
+  axios.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    function (error) {
+      const { data } = error.response;
+      if (
+        data === "Missing or malformed JWT" ||
+        [401, 403].includes(data.code)
+      ) {
+        removeCookie("token");
+        removeCookie("id_user");
+        removeCookie("name");
+      }
+      return Promise.reject(error);
+    }
+  );
+
   return <RouterProvider router={router} />;
 };
 export default App;
