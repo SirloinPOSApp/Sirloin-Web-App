@@ -1,13 +1,36 @@
-import React, { useState } from "react";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { Layout } from "../../components/Layout";
 import DatePicker from "react-datepicker";
 import Button from "../../components/Button";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Transaksi = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
+  const [datas, setDatas] = useState<any>([]);
+
+  useEffect(() => {
+    fetchDataProducts();
+  }, []);
+
+  function fetchDataProducts() {
+    axios
+      .get(
+        `https://bluepath.my.id/transactions?status=sell&from=${startDate}&to=${endDate}`
+      )
+      .then((res) => {
+        console.log(res.data.data);
+        setDatas(res.data.data);
+      })
+      .catch((err) => {
+        // alert(err.toString());
+        alert(err.response.data.message);
+      });
+  }
+
   return (
     <Layout>
       <div className="flex flex-col m-10">
