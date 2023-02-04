@@ -1,33 +1,57 @@
-import React from "react";
-import { FiEdit } from "react-icons/fi";
+import { useState } from "react";
+import { AiOutlineCalendar } from "react-icons/ai";
+import DatePicker from "react-datepicker";
 import { Layout } from "../../components/Layout";
 
 const HistoryBelanja = () => {
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [endDate, setEndDate] = useState<Date | null>(new Date());
+
   return (
     <Layout>
       <div className="flex flex-col m-10">
         <h3 className="font-bold text-2xl text-[#4AA3BA]">
           History Belanja Product
         </h3>
-        <div className="flex-row py-5">
+        <div className="flex-row py-5 flex gap-20 relative">
           <label className="font-bold">Dari</label>
+          <DatePicker
+            id="start-date"
+            dateFormat="dd/MM/yyyy"
+            className="z-10 border rounded-md p-2 pl-11 "
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          />
+          <AiOutlineCalendar className="absolute left-32 top-7" size={24} />
         </div>
-        <div className="flex-row py-5">
+        <div className="flex-row py-5 flex gap-12 relative">
           <label className="font-bold">Sampai</label>
+          <DatePicker
+            id="end-date"
+            dateFormat="dd/MM/yyyy"
+            className="z-10 border rounded-md p-2 pl-11"
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+          />
+          <AiOutlineCalendar className="absolute left-32 top-7" size={24} />
         </div>
       </div>
 
       <div className="overflow-x-auto m-10">
-        <table className="table w-full px-10">
+        <table className="table w-full px-10 border z-0">
           <thead>
-            <tr>
-              <th>Tanggal</th>
-              <th>No. Order Barang</th>
-              <th>Nama Product</th>
-              <th>Qty</th>
-              <th>Harga Satuan</th>
-              <th>Total Belanja</th>
-              <th>Supplier</th>
+            <tr className=" text-white">
+              <th className="bg-[#306D75] text-lg font-normal">Tanggal</th>
+              <th className="bg-[#306D75] text-lg font-normal">
+                No. Order Barang
+              </th>
+              <th className="bg-[#306D75] text-lg font-normal">Nama Product</th>
+              <th className="bg-[#306D75] text-lg font-normal">Qty</th>
+              <th className="bg-[#306D75] text-lg font-normal">Harga Satuan</th>
+              <th className="bg-[#306D75] text-lg font-normal">
+                Total Belanja
+              </th>
+              <th className="bg-[#306D75] text-lg font-normal">Supplier</th>
             </tr>
           </thead>
           <tbody>
@@ -63,12 +87,14 @@ const HistoryBelanja = () => {
           </tbody>
           <tfoot>
             <tr>
-              <th>Total Belanja Product</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th>Rp 1.500.000</th>
+              <th className="bg-[#306D75] text-lg font-normal text-white">
+                Total Belanja Product
+              </th>
+              <th className="bg-[#306D75]"></th>
+              <th className="bg-[#306D75]"></th>
+              <th className="bg-[#306D75]"></th>
+              <th className="bg-[#306D75]"></th>
+              <th className="text-lg font-bold">Rp 1.500.000</th>
               <th></th>
             </tr>
           </tfoot>
