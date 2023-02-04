@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import { AiOutlineCalendar } from "react-icons/ai";
 
 import "react-datepicker/dist/react-datepicker.css";
+import Button from "../../components/Button";
 const LaporanPenjualan = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
@@ -19,22 +20,27 @@ const LaporanPenjualan = () => {
           <DatePicker
             id="start-date"
             dateFormat="dd/MM/yyyy"
-            className="z-10 border p-2 pl-11 "
+            className="z-10 border rounded-md p-2 pl-11 "
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           />
-          <AiOutlineCalendar className="w-8 h-8 absolute left-32 top-6" />
+          <AiOutlineCalendar className="absolute left-32 top-7" size={24} />
         </div>
         <div className="flex-row py-5 flex gap-11 relative">
           <label className="font-bold text-xl">Sampai</label>
           <DatePicker
             id="end-date"
             dateFormat="dd/MM/yyyy"
-            className="z-10 border p-2 pl-11"
+            className="z-10 border rounded-md p-2 pl-11"
             selected={endDate}
             onChange={(date) => setEndDate(date)}
           />
-          <AiOutlineCalendar className="w-8 h-8 absolute left-32 top-6" />
+          <AiOutlineCalendar className="absolute left-32 top-7" size={24} />
+          <Button
+            id="tampil-data"
+            label="Tampilkan Data"
+            buttonSet="bg-[#4AA3BA] border-none capitalize btn-md w-64"
+          />
         </div>
       </div>
 
