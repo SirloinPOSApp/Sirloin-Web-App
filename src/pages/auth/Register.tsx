@@ -38,7 +38,7 @@ export const Register = () => {
     } else {
       setIsDisable(false);
     }
-    console.log(formRegister);
+    // console.log(formRegister);
   }, [formRegister]);
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -46,7 +46,7 @@ export const Register = () => {
     axios
       .postForm("https://bluepath.my.id/register", formRegister)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         MySwal.fire({
           title: "Berhasil Register",
           text: response.data.message,
