@@ -11,7 +11,9 @@ const Transaksi = () => {
   return (
     <Layout>
       <div className="flex flex-col m-10">
-        <h3 className="font-bold text-2xl text-[#4AA3BA]">Laporan Transaksi</h3>
+        <h3 className="font-bold text-2xl text-[#4AA3BA] mb-10">
+          Laporan Transaksi
+        </h3>
         <div className="flex-row py-5 flex gap-20 relative">
           <label className="font-bold">Dari</label>
           <DatePicker

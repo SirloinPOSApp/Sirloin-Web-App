@@ -11,7 +11,7 @@ const HistoryBelanja = () => {
   return (
     <Layout>
       <div className="flex flex-col m-10">
-        <h3 className="font-bold text-2xl text-[#4AA3BA]">
+        <h3 className="font-bold text-2xl text-[#4AA3BA] mb-10">
           History Belanja Product
         </h3>
         <div className="flex-row py-5 flex gap-20 relative">
