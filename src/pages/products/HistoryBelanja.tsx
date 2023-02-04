@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AiOutlineCalendar } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import { Layout } from "../../components/Layout";
+import Button from "../../components/Button";
 
 const HistoryBelanja = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -34,6 +35,11 @@ const HistoryBelanja = () => {
             onChange={(date) => setEndDate(date)}
           />
           <AiOutlineCalendar className="absolute left-32 top-7" size={24} />
+          <Button
+            id="tampil-data"
+            label="Tampilkan Data"
+            buttonSet="bg-[#4AA3BA] border-none capitalize btn-md w-64"
+          />
         </div>
       </div>
 
@@ -41,17 +47,21 @@ const HistoryBelanja = () => {
         <table className="table w-full px-10 border z-0">
           <thead>
             <tr className=" text-white">
-              <th className="bg-[#306D75] text-lg font-normal">Tanggal</th>
-              <th className="bg-[#306D75] text-lg font-normal">
+              <th className="bg-[#306D75] text-base font-normal">Tanggal</th>
+              <th className="bg-[#306D75] text-base font-normal">
                 No. Order Barang
               </th>
-              <th className="bg-[#306D75] text-lg font-normal">Nama Product</th>
-              <th className="bg-[#306D75] text-lg font-normal">Qty</th>
-              <th className="bg-[#306D75] text-lg font-normal">Harga Satuan</th>
-              <th className="bg-[#306D75] text-lg font-normal">
+              <th className="bg-[#306D75] text-base font-normal">
+                Nama Product
+              </th>
+              <th className="bg-[#306D75] text-base font-normal">Qty</th>
+              <th className="bg-[#306D75] text-base font-normal">
+                Harga Satuan
+              </th>
+              <th className="bg-[#306D75] text-base font-normal">
                 Total Belanja
               </th>
-              <th className="bg-[#306D75] text-lg font-normal">Supplier</th>
+              <th className="bg-[#306D75] text-base font-normal">Supplier</th>
             </tr>
           </thead>
           <tbody>
@@ -87,13 +97,13 @@ const HistoryBelanja = () => {
           </tbody>
           <tfoot>
             <tr>
-              <th className="bg-[#306D75] text-lg font-normal text-white">
+              <th className="bg-[#306D75] text-lg font-bold text-white">
                 Total Belanja Product
               </th>
               <th className="bg-[#306D75]"></th>
               <th className="bg-[#306D75]"></th>
               <th className="bg-[#306D75]"></th>
-              <th className="bg-[#306D75]"></th>
+              <th></th>
               <th className="text-lg font-bold">Rp 1.500.000</th>
               <th></th>
             </tr>
