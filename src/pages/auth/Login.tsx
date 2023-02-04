@@ -36,7 +36,7 @@ export const Login = () => {
     } else {
       setIsDisable(false);
     }
-    console.log(formLogin);
+    // console.log(formLogin);
   }, [formLogin]);
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,7 +44,7 @@ export const Login = () => {
     axios
       .postForm("https://bluepath.my.id/login", formLogin)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         localStorage.setItem("token", response.data.data.token);
         removeCookie("token", { path: "/" });
         removeCookie("id", { path: "/" });
@@ -63,7 +63,7 @@ export const Login = () => {
           confirmButtonAriaLabel: "ok",
         });
         // alert(response.data.message);
-        // navigate("/landing");
+        navigate("/landing");
       })
       .catch((err) => {
         MySwal.fire({
