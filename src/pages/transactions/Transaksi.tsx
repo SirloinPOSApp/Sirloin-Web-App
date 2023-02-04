@@ -1,36 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
+import { AiOutlineCalendar } from "react-icons/ai";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { Layout } from "../../components/Layout";
+import DatePicker from "react-datepicker";
+import Button from "../../components/Button";
 
 const Transaksi = () => {
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [endDate, setEndDate] = useState<Date | null>(new Date());
   return (
     <Layout>
       <div className="flex flex-col m-10">
         <h3 className="font-bold text-2xl text-[#4AA3BA]">Laporan Transaksi</h3>
-        <div className="flex-row py-5">
+        <div className="flex-row py-5 flex gap-20 relative">
           <label className="font-bold">Dari</label>
+          <DatePicker
+            id="start-date"
+            dateFormat="dd/MM/yyyy"
+            className="z-10 border rounded-md p-2 pl-11 "
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          />
+          <AiOutlineCalendar className="absolute left-32 top-7" size={24} />
         </div>
-        <div className="flex-row py-5">
+        <div className="flex-row py-5 flex gap-12 relative">
           <label className="font-bold">Sampai</label>
+          <DatePicker
+            id="end-date"
+            dateFormat="dd/MM/yyyy"
+            className="z-10 border rounded-md p-2 pl-11"
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+          />
+          <AiOutlineCalendar className="absolute left-32 top-7" size={24} />
+          <Button
+            id="tampil-data"
+            label="Tampilkan Data"
+            buttonSet="bg-[#4AA3BA] border-none capitalize btn-md w-64"
+          />
         </div>
       </div>
 
       <div className="overflow-x-auto m-10">
         <table className="table w-full px-10">
           <thead>
-            <tr>
-              <th>Tanggal</th>
-              <th>No.Transaksi</th>
-              <th>Nama Product</th>
-              <th>Qty</th>
-              <th>Total Belanja</th>
-              <th>Status Transaksi</th>
-              <th>Action</th>
+            <tr className=" text-white">
+              <th className="bg-[#306D75] text-base font-normal">Tanggal</th>
+              <th className="bg-[#306D75] text-base font-normal">
+                No.Transaksi
+              </th>
+              <th className="bg-[#306D75] text-base font-normal">
+                Nama Product
+              </th>
+              <th className="bg-[#306D75] text-base font-normal">Qty</th>
+              <th className="bg-[#306D75] text-base font-normal">
+                Total Belanja
+              </th>
+              <th className="bg-[#306D75] text-base font-normal">
+                Status Transaksi
+              </th>
+              <th className="bg-[#306D75] text-base font-normal">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th>01/01/2023</th>
+              <td>01/01/2023</td>
               <td>INV/20230123/MPL/0002</td>
               <td>Product 1</td>
               <td>10</td>
@@ -44,7 +78,7 @@ const Transaksi = () => {
             </tr>
 
             <tr>
-              <th>01/01/2023</th>
+              <td>01/01/2023</td>
               <td>INV/20230123/MPL/0002</td>
               <td>Product 1</td>
               <td>10</td>
@@ -58,7 +92,7 @@ const Transaksi = () => {
             </tr>
 
             <tr>
-              <th>01/01/2023</th>
+              <td>01/01/2023</td>
               <td>INV/20230123/MPL/0002</td>
               <td>Product 1</td>
               <td>10</td>
@@ -72,7 +106,7 @@ const Transaksi = () => {
             </tr>
 
             <tr>
-              <th>01/01/2023</th>
+              <td>01/01/2023</td>
               <td>INV/20230123/MPL/0002</td>
               <td>Product 1</td>
               <td>10</td>
@@ -86,7 +120,7 @@ const Transaksi = () => {
             </tr>
 
             <tr>
-              <th>01/01/2023</th>
+              <td>01/01/2023</td>
               <td>INV/20230123/MPL/0002</td>
               <td>Product 1</td>
               <td>10</td>
@@ -101,12 +135,14 @@ const Transaksi = () => {
           </tbody>
           <tfoot>
             <tr>
-              <th>Total Transaksi</th>
+              <th className="bg-[#306D75] text-lg font-bold text-white">
+                Total Transaksi
+              </th>
+              <th className="bg-[#306D75]"></th>
+              <th className="bg-[#306D75]"></th>
+              <th className="bg-[#306D75]"></th>
               <th></th>
-              <th></th>
-              <th></th>
-              <th>Rp 1.500.000</th>
-              <th></th>
+              <th className="text-lg font-bold">Rp 1.500.000</th>
               <th></th>
             </tr>
           </tfoot>
