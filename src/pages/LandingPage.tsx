@@ -21,7 +21,7 @@ export const LandingPage = () => {
               />
               <FiSearch
                 id="search-product"
-                className="absolute top-3 right-3 w-6 h-6 "
+                className="absolute top-3 right-3 w-6 h-6 cursor-pointer"
               />
             </form>
           </div>
