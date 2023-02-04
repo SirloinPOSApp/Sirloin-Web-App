@@ -60,6 +60,7 @@ export const Login = () => {
           title: "Berhasil Login",
           text: response.data.message,
           icon: "success",
+          confirmButtonAriaLabel: "ok",
         });
         // alert(response.data.message);
         // navigate("/landing");
@@ -69,6 +70,7 @@ export const Login = () => {
           title: "Gagal Login",
           text: err.response.data.message,
           icon: "error",
+          confirmButtonAriaLabel: "ok",
         });
         // alert(err.response.data.message);
         // alert(err.toString());
