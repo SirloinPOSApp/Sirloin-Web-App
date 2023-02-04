@@ -51,6 +51,7 @@ export const Register = () => {
           title: "Berhasil Register",
           text: response.data.message,
           icon: "success",
+          confirmButtonAriaLabel: "ok",
         });
         alert(response.data.message);
         navigate("/login");
@@ -60,6 +61,7 @@ export const Register = () => {
           title: "Gagal Register",
           text: err.response.data.message,
           icon: "error",
+          confirmButtonAriaLabel: "ok",
         });
         // alert(err.response.data.message);
         // alert(err.toString());
