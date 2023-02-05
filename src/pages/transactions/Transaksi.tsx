@@ -6,30 +6,60 @@ import Button from "../../components/Button";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const Transaksi = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const [datas, setDatas] = useState<any>([]);
+  const [from, setFrom] = useState(startDate?.toISOString().split("T")[0]);
+  const [to, setTo] = useState(endDate?.toISOString().split("T")[0]);
+  const [datas, setDatas] = useState<any[]>([]);
+  const [pdf, setPdf] = useState("");
+  const [totalTransaction, setTotalTransaction] = useState(0);
 
   useEffect(() => {
     fetchDataProducts();
   }, []);
 
+  useEffect(() => {
+    const start = startDate?.toISOString().split("T")[0];
+    const end = endDate?.toISOString().split("T")[0];
+
+    if (start && end) {
+      setFrom(start);
+      setTo(end);
+    }
+    // console.log("start:", start);
+    // console.log("end:", end);
+    // console.log("from:", from);
+    // console.log("to:", to);
+    // console.log(pdf);
+    setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_price, 0));
+  }, [startDate, endDate, pdf, from, to]);
+
   function fetchDataProducts() {
     axios
       .get(
-        `https://bluepath.my.id/transactions?status=sell&from=${startDate}&to=${endDate}`
+        `https://bluepath.my.id/transactions?status=sell&from=${from}&to=${to}`
       )
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setDatas(res.data.data);
+        setPdf(res.data.pdf_url);
       })
       .catch((err) => {
         // alert(err.toString());
         alert(err.response.data.message);
       });
   }
+
+  const handleChangeDate = () => {
+    fetchDataProducts();
+  };
+
+  const handlePDF = () => {
+    window.open(pdf);
+  };
 
   return (
     <Layout>
@@ -41,7 +71,7 @@ const Transaksi = () => {
           <label className="font-bold">Dari</label>
           <DatePicker
             id="start-date"
-            dateFormat="dd/MM/yyyy"
+            dateFormat="yyyy-MM-dd"
             className="z-10 border rounded-md p-2 pl-11 "
             selected={startDate}
             onChange={(date) => setStartDate(date)}
@@ -52,13 +82,16 @@ const Transaksi = () => {
           <label className="font-bold">Sampai</label>
           <DatePicker
             id="end-date"
-            dateFormat="dd/MM/yyyy"
+            dateFormat="yyyy-MM-dd"
             className="z-10 border rounded-md p-2 pl-11"
             selected={endDate}
             onChange={(date) => setEndDate(date)}
           />
           <AiOutlineCalendar className="absolute left-32 top-7" size={24} />
           <Button
+            onClick={() => {
+              handleChangeDate();
+            }}
             id="tampil-data"
             label="Tampilkan Data"
             buttonSet="bg-[#4AA3BA] border-none capitalize btn-md w-64"
@@ -66,113 +99,92 @@ const Transaksi = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto m-10">
-        <table className="table w-full px-10">
-          <thead>
-            <tr className=" text-white">
-              <th className="bg-[#306D75] text-base font-normal">Tanggal</th>
-              <th className="bg-[#306D75] text-base font-normal">
-                No.Transaksi
-              </th>
-              <th className="bg-[#306D75] text-base font-normal">
-                Nama Product
-              </th>
-              <th className="bg-[#306D75] text-base font-normal">Qty</th>
-              <th className="bg-[#306D75] text-base font-normal">
-                Total Belanja
-              </th>
-              <th className="bg-[#306D75] text-base font-normal">
-                Status Transaksi
-              </th>
-              <th className="bg-[#306D75] text-base font-normal">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>01/01/2023</td>
-              <td>INV/20230123/MPL/0002</td>
-              <td>Product 1</td>
-              <td>10</td>
-              <td>Rp.300.000</td>
-              <td className="text-teal-700 font-semibold">Selesai</td>
-              <td>
-                <button className="btn btn-ghost btn-square">
-                  <FiEdit size="20" color="teal" />
-                </button>
-              </td>
-            </tr>
+      {datas.length === 0 ? (
+        <div className="text-center">
+          <a href="">No Data</a>
+        </div>
+      ) : (
+        <div className="overflow-x-auto m-10">
+          <div className="flex justify-end mb-10 ">
+            <Button
+              onClick={() => {
+                handlePDF();
+              }}
+              id="pdf"
+              label="Print"
+              buttonSet="bg-[#4AA3BA] border-none capitalize btn-md w-32"
+            />
+          </div>
+          <table className="table w-full px-10 z-0">
+            <thead>
+              <tr className=" text-white">
+                <th className="bg-[#306D75] text-base font-normal">Tanggal</th>
+                <th className="bg-[#306D75] text-base font-normal">
+                  No.Transaksi
+                </th>
+                <th className="bg-[#306D75] text-base font-normal">
+                  Total Belanja
+                </th>
+                <th className="bg-[#306D75] text-base font-normal">
+                  Status Transaksi
+                </th>
+                <th className="bg-[#306D75] text-base font-normal text-center">
+                  Detail Transaksi
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {datas.map((data, index) => (
+                <tr key={index}>
+                  <td>
+                    {moment(data.created_at).format("YYYY-MM-DD hh:mm A")}
+                  </td>
+                  <td>INV/MPL/{data.id}</td>
+                  <td className="text-right">
+                    Rp.{" "}
+                    {data.total_bill
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                  </td>
+                  <td
+                    className={
+                      data.transaction_Status === "success"
+                        ? "text-green-600"
+                        : data.transaction_Status === "pending"
+                        ? "text-orange-300"
+                        : "text-red-500"
+                    }
+                  >
+                    {data.transaction_Status}
+                  </td>
+                  <td className="flex justify-center">
+                    <button className="btn btn-ghost btn-square">
+                      <FiEdit size="20" color="teal" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th className="bg-[#306D75] text-lg font-bold text-white">
+                  Total Transaksi
+                </th>
+                <th className="bg-[#306D75]"></th>
+                <th className="bg-[#306D75]"></th>
 
-            <tr>
-              <td>01/01/2023</td>
-              <td>INV/20230123/MPL/0002</td>
-              <td>Product 1</td>
-              <td>10</td>
-              <td>Rp.300.000</td>
-              <td className="text-red-500 font-semibold">Dibatalkan</td>
-              <td>
-                <button className="btn btn-ghost btn-square">
-                  <FiEdit size="20" color="teal" />
-                </button>
-              </td>
-            </tr>
-
-            <tr>
-              <td>01/01/2023</td>
-              <td>INV/20230123/MPL/0002</td>
-              <td>Product 1</td>
-              <td>10</td>
-              <td>Rp.300.000</td>
-              <td className="text-teal-700 font-semibold">Selesai</td>
-              <td>
-                <button className="btn btn-ghost btn-square">
-                  <FiEdit size="20" color="teal" />
-                </button>
-              </td>
-            </tr>
-
-            <tr>
-              <td>01/01/2023</td>
-              <td>INV/20230123/MPL/0002</td>
-              <td>Product 1</td>
-              <td>10</td>
-              <td>Rp.300.000</td>
-              <td className="text-red-500 font-semibold">Dibatalkan</td>
-              <td>
-                <button className="btn btn-ghost btn-square">
-                  <FiEdit size="20" color="teal" />
-                </button>
-              </td>
-            </tr>
-
-            <tr>
-              <td>01/01/2023</td>
-              <td>INV/20230123/MPL/0002</td>
-              <td>Product 1</td>
-              <td>10</td>
-              <td>Rp.300.000</td>
-              <td className="text-teal-700 font-semibold">Selesai</td>
-              <td>
-                <button className="btn btn-ghost btn-square">
-                  <FiEdit size="20" color="teal" />
-                </button>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th className="bg-[#306D75] text-lg font-bold text-white">
-                Total Transaksi
-              </th>
-              <th className="bg-[#306D75]"></th>
-              <th className="bg-[#306D75]"></th>
-              <th className="bg-[#306D75]"></th>
-              <th></th>
-              <th className="text-lg font-bold">Rp 1.500.000</th>
-              <th></th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+                <th></th>
+                <th className="text-lg font-bold">
+                  Rp.{" "}
+                  {totalTransaction
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      )}
     </Layout>
   );
 };
