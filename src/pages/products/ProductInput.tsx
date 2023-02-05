@@ -80,7 +80,7 @@ const ProductInput = () => {
           icon: "success",
           confirmButtonAriaLabel: "ok",
         });
-        navigate("/");
+        navigate("/landing");
       })
       .catch((err) => {
         MySwal.fire({

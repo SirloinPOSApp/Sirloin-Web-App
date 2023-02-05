@@ -133,13 +133,13 @@ export const LandingPage = () => {
                   <img
                     src="https://s3-alpha-sig.figma.com/img/087e/7d99/bb4c9304728e8dcb2d6d815e2e44c4f5?Expires=1676246400&Signature=B2b~0n6LoIUHyBFrVZgujcgTh5jRsM4i3Vu7jAAXnsgOLdViDJtCjrut93dZ5lV~zEq18jWE17MWrCqcfIM8e-FAjJ9oVI3BGfW1RermqxD2XR3jDdq2DxpVTrDSrflXxYRI0H5ySpfDgjTLNv2PD3rBA8KXm6sSSklVGLpWJ310V97jFBLwnUeF5IY6Led-x-vfoZPFqtB4ohNBwBKFJiEXpQTRTDeDcQY7w4SbQtDb7yfPeOBKCxduxld3hmw8qy4JZINfs8UDaweLO4~HBKuWi-HRAo7EXsoZeipWupaICpWZHijVoljJdADPftLf~pFsAMAzvSo6rhc~poPHaA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
                     alt="product"
-                    className="w-64 "
+                    className="w-64 h-64"
                   />
                 ) : (
                   <img
                     src={data.product_image}
                     alt="product"
-                    className="w-64 "
+                    className="w-64 h-64"
                   />
                 )}
                 <p className="font-bold text-xl text-[#4AA3BA]">
@@ -152,18 +152,6 @@ export const LandingPage = () => {
                 </p>
               </div>
             ))}
-            <div
-              id="select-product"
-              className="flex flex-col text-center content-center justify-center items-center border rounded-2xl shadow-lg h-96 gap-2 bg-white"
-            >
-              <img
-                src="https://s3-alpha-sig.figma.com/img/087e/7d99/bb4c9304728e8dcb2d6d815e2e44c4f5?Expires=1676246400&Signature=B2b~0n6LoIUHyBFrVZgujcgTh5jRsM4i3Vu7jAAXnsgOLdViDJtCjrut93dZ5lV~zEq18jWE17MWrCqcfIM8e-FAjJ9oVI3BGfW1RermqxD2XR3jDdq2DxpVTrDSrflXxYRI0H5ySpfDgjTLNv2PD3rBA8KXm6sSSklVGLpWJ310V97jFBLwnUeF5IY6Led-x-vfoZPFqtB4ohNBwBKFJiEXpQTRTDeDcQY7w4SbQtDb7yfPeOBKCxduxld3hmw8qy4JZINfs8UDaweLO4~HBKuWi-HRAo7EXsoZeipWupaICpWZHijVoljJdADPftLf~pFsAMAzvSo6rhc~poPHaA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-                alt="product"
-                className="w-64 "
-              />
-              <p className="font-bold text-xl text-[#4AA3BA]">Nama Product</p>
-              <p>Rp. 3500.-</p>
-            </div>
           </div>
         </div>
         <div className="p-10 w-1/4">
@@ -187,7 +175,7 @@ export const LandingPage = () => {
                       <img
                         src={cart.product_image}
                         alt="product"
-                        className="h-32 "
+                        className="h-32 w-32 p-1"
                       />
                     )}
                     <div className=" flex flex-col p-3 justify-between">
