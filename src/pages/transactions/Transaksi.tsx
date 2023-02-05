@@ -152,6 +152,8 @@ const Transaksi = () => {
                         ? "text-green-600"
                         : data.transaction_Status === "pending"
                         ? "text-orange-300"
+                        : data.transaction_Status === "waiting payment"
+                        ? "text-orange-300"
                         : "text-red-500"
                     }
                   >
