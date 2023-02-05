@@ -99,7 +99,10 @@ const Pembayaran = () => {
               <tr key={cart.id}>
                 <td>{cart.product_name}</td>
                 <td>{cart.quantity}</td>
-                <td>{cart.price}</td>
+                <td>
+                  Rp.{" "}
+                  {cart.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -114,10 +117,16 @@ const Pembayaran = () => {
           <h5 className="font-bold text-lg text-[#4AA3BA]">Total Belanja</h5>
         </div>
         <div className="flex flex-col space-y-3">
-          <p>Rp. {summary.sub_total}</p>
-          <p>Rp. {summary.discount}</p>
+          <p>
+            Rp.{" "}
+            {summary.sub_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+          </p>
+          <p>
+            Rp.{" "}
+            {summary.discount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+          </p>
           <h5 className="font-bold text-lg text-[#4AA3BA]">
-            Rp. {summary.total}
+            Rp. {summary.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </h5>
         </div>
       </div>
