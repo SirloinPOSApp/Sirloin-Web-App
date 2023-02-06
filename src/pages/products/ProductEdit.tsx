@@ -14,8 +14,8 @@ interface ProductType {
   category: string;
   product_name: string;
   stock: number;
-  min_stock: number;
-  buy_price: number;
+  minimum_stock: number;
+  buying_price: number;
   price: number;
   product_image: string;
   supplier: string;
@@ -48,6 +48,13 @@ const ProductEdit = () => {
     });
   };
 
+  const handleChange = (event: any) => {
+    setFormProduct({
+      ...formProduct,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   useEffect(() => {
     if (product) {
       setFormProduct({
@@ -55,9 +62,9 @@ const ProductEdit = () => {
         category: product.category,
         product_name: product.product_name,
         stock: product.stock,
-        minimum_stock: product.min_stock,
-        buying_price: product.buy_price,
-        price: product.buy_price,
+        minimum_stock: product.minimum_stock,
+        buying_price: product.buying_price,
+        price: product.price,
         product_image: product.product_image,
         supplier: product.supplier,
       });
@@ -66,6 +73,7 @@ const ProductEdit = () => {
 
   useEffect(() => {
     Product();
+    console.log(product);
   }, []);
 
   function Product() {
@@ -136,6 +144,7 @@ const ProductEdit = () => {
             <input
               id="product_image"
               type="file"
+              name="product_image"
               className="file-input file-input-bordered file-input-[#4AA3BA]  w-full max-w-md"
               onChange={handleFileChange}
               ref={fileInputRef}
@@ -146,7 +155,7 @@ const ProductEdit = () => {
               id="category"
               type={"text"}
               placeholder="Kategori Product"
-              onChange={handleFileChange}
+              onChange={handleChange}
               value={formProduct.category}
               label="Kategori Product"
               name="category"
@@ -157,7 +166,7 @@ const ProductEdit = () => {
               id="product_name"
               type={"text"}
               placeholder="Nama Product"
-              onChange={handleFileChange}
+              onChange={handleChange}
               value={formProduct.product_name}
               label="Nama Product"
               name="product_name"
@@ -168,7 +177,7 @@ const ProductEdit = () => {
               id="stock"
               type={"number"}
               placeholder="10"
-              onChange={handleFileChange}
+              onChange={handleChange}
               value={formProduct.stock}
               label="Stok Product"
               name="stock"
@@ -179,7 +188,7 @@ const ProductEdit = () => {
               id="minimum_stock"
               type={"number"}
               placeholder="5"
-              onChange={handleFileChange}
+              onChange={handleChange}
               value={formProduct.minimum_stock}
               label="Minimum Stok Barang"
               name="minimum_stock"
@@ -192,7 +201,7 @@ const ProductEdit = () => {
               id="upc"
               type={"text"}
               placeholder="No.barcode"
-              onChange={handleFileChange}
+              onChange={handleChange}
               value={formProduct.upc}
               label="No.Barcode"
               name="upc"
@@ -203,7 +212,7 @@ const ProductEdit = () => {
               id="supplier"
               type={"text"}
               placeholder="Supplier"
-              onChange={handleFileChange}
+              onChange={handleChange}
               value={formProduct.supplier}
               label="Nama Supllier"
               name="supplier"
@@ -214,7 +223,7 @@ const ProductEdit = () => {
               id="price"
               type={"number"}
               placeholder="30000"
-              onChange={handleFileChange}
+              onChange={handleChange}
               value={formProduct.price}
               label="Harga Jual"
               name="price"
@@ -225,7 +234,7 @@ const ProductEdit = () => {
               id="buying_price"
               type="number"
               placeholder="25000"
-              onChange={handleFileChange}
+              onChange={handleChange}
               value={formProduct.buying_price}
               label="Harga Beli"
               name="buying_price"
