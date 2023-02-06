@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTitle } from "../../utils/Title";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Swal from "../../utils/Swal";
+import withReactContent from "sweetalert2-react-content";
 
 interface userType {
   id: number;
@@ -16,6 +18,7 @@ interface userType {
 }
 
 export const TenantEdit = () => {
+  const MySwal = withReactContent(Swal);
   useTitle("Sirloin-Profil Tenant");
   const [user, setUser] = useState<userType>();
   // const fileInputRef: any = React.createRef();
@@ -52,11 +55,23 @@ export const TenantEdit = () => {
     axios
       .get("https://bluepath.my.id/users")
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setUser(res.data.data);
+        MySwal.fire({
+          title: "Berhasil",
+          text: res.data.message,
+          icon: "success",
+          confirmButtonAriaLabel: "ok",
+        });
       })
       .catch((err) => {
-        alert(err.toString());
+        MySwal.fire({
+          title: "Gagal Login",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonAriaLabel: "ok",
+        });
+        // alert(err.toString());
       });
   }
 
