@@ -57,16 +57,10 @@ export const TenantEdit = () => {
       .then((res) => {
         // console.log(res.data.data);
         setUser(res.data.data);
-        MySwal.fire({
-          title: "Berhasil",
-          text: res.data.message,
-          icon: "success",
-          confirmButtonAriaLabel: "ok",
-        });
       })
       .catch((err) => {
         MySwal.fire({
-          title: "Gagal Login",
+          title: "Gagal",
           text: err.response.data.message,
           icon: "error",
           confirmButtonAriaLabel: "ok",
@@ -104,11 +98,23 @@ export const TenantEdit = () => {
     axios
       .put(`https://bluepath.my.id/users`, formData)
       .then((response) => {
-        alert(response.data.message);
+        // alert(response.data.message);
+        MySwal.fire({
+          title: "Berhasil",
+          text: response.data.message,
+          icon: "success",
+          confirmButtonAriaLabel: "ok",
+        });
         navigate(`/profile-tenant`);
       })
       .catch((err) => {
-        alert(err.toString());
+        // alert(err.toString());
+        MySwal.fire({
+          title: "Gagal",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonAriaLabel: "ok",
+        });
       });
   };
 
