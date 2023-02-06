@@ -1,23 +1,121 @@
-import React from "react";
 import Button from "../../components/Button";
 import { Input, TextArea } from "../../components/Input";
 import { Layout } from "../../components/Layout";
+import { Link, useNavigate } from "react-router-dom";
+import { useTitle } from "../../utils/Title";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+
+interface userType {
+  id: number;
+  business_name: string;
+  email: string;
+  phone_number: number;
+  address: string;
+  password: string;
+}
 
 export const TenantEdit = () => {
+  useTitle("Sirloin-Profil Tenant");
+  const [user, setUser] = useState<userType>();
+  // const fileInputRef: any = React.createRef();
+
+  const [formUser, setFormUser] = useState({
+    id: -0,
+    business_name: "",
+    email: "",
+    phone_number: 0,
+    address: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      setFormUser({
+        id: user.id,
+        business_name: user.business_name,
+        email: user.email,
+        phone_number: user.phone_number,
+        address: user.address,
+        password: "",
+      });
+    }
+  }, [user]);
+
+  useEffect(() => {
+    fetchDataProfile();
+  }, []);
+
+  function fetchDataProfile() {
+    axios
+      .get("https://bluepath.my.id/users")
+      .then((res) => {
+        console.log(res.data.data);
+        setUser(res.data.data);
+      })
+      .catch((err) => {
+        alert(err.toString());
+      });
+  }
+
+  const handleChange = (event: any) => {
+    setFormUser({
+      ...formUser,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  // const handleFileChange = (event: any) => {
+  //   const file = fileInputRef.current.files[0];
+  //   setFormUser({
+  //     ...formUser,
+  //     profile_photo: file,
+  //   });
+  // };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData: any = new FormData();
+    // formData.append("profile_photo", fileInputRef.current.files[0]);
+    formData.append("business_name", formUser.business_name);
+    formData.append("email", formUser.email);
+    formData.append("phone_number", formUser.phone_number);
+    formData.append("address", formUser.address);
+    if (formUser.password != "") {
+      formData.append("password", formUser.password);
+    }
+    axios
+      .put(`https://bluepath.my.id/users`, formData)
+      .then((response) => {
+        alert(response.data.message);
+        navigate(`/profile-tenant`);
+      })
+      .catch((err) => {
+        alert(err.toString());
+      });
+  };
+
   return (
     <Layout>
       <h3 className="flex m-10 font-bold text-2xl text-[#4AA3BA]">
         Update Profil Tenant
       </h3>
-      <form className="flex flex-row m-5 justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-row m-5 justify-center"
+      >
         <div className="mx-10">
           <div className="flex flex-col py-2">
             <Input
-              id="business-name"
-              name="business-name"
+              id="business_name"
+              name="business_name"
               label="Nama Bisnis/Toko"
               placeholder="Nama Bisnis/Toko"
               type={"text"}
+              onChange={handleChange}
+              value={formUser.business_name}
             ></Input>
           </div>
           <div className="flex flex-col py-2">
@@ -27,6 +125,8 @@ export const TenantEdit = () => {
               label="Email"
               placeholder="Email"
               type={"email"}
+              onChange={handleChange}
+              value={formUser.email}
             ></Input>
           </div>
           <div className="flex flex-col py-2">
@@ -36,30 +136,44 @@ export const TenantEdit = () => {
               label="Password"
               placeholder="Password"
               type={"password"}
+              onChange={handleChange}
+              value={formUser.password}
             ></Input>
           </div>
         </div>
         <div className="mx-10">
           <div className="flex flex-col py-2">
             <Input
-              id="number-hp"
-              name="number-hp"
+              id="phone_number"
+              name="phone_number"
               label="No. Telephone"
               placeholder="0912XXXXX"
               type={"number"}
+              onChange={handleChange}
+              value={formUser.phone_number}
             ></Input>
           </div>
 
           <div className="flex flex-col py-2">
-            <TextArea id="address" name="address" label="Alamat" rows={5} />
+            <TextArea
+              id="address"
+              name="address"
+              label="Alamat"
+              rows={5}
+              onChange={handleChange}
+              value={formUser.address}
+            />
           </div>
           <div className="flex flex-row">
+            <Link to={`/profile-tenant`}>
+              <Button
+                id="back"
+                label="Kembali"
+                buttonSet="w-40 text-[#DA5C53] my-3 mr-10 btn-outline"
+              />
+            </Link>
             <Button
-              id="back"
-              label="Kembali"
-              buttonSet="w-40 text-[#DA5C53] my-3 mr-10 btn-outline"
-            />
-            <Button
+              type="submit"
               id="save-profile"
               label="Simpan"
               buttonSet="w-40 text-white bg-teal-700 my-3 mr-10 border-none"
