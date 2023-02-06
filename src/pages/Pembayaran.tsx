@@ -33,9 +33,13 @@ const Pembayaran = () => {
   const [payment, setPayment] = useState("");
   const MySwal = withReactContent(Swal);
   const navigate = useNavigate();
+  const [isDisable, setIsDisable] = useState(true);
 
   useEffect(() => {
     // console.log(carts, summary, payment);
+    if (payment !== "") {
+      setIsDisable(false);
+    }
   }, [payment]);
 
   const handleSubmit = () => {
@@ -168,6 +172,7 @@ const Pembayaran = () => {
         />
         <Button
           type="submit"
+          disabled={isDisable}
           id="order"
           label="Bayar"
           buttonSet="w-40 text-white bg-teal-700  border-none"
