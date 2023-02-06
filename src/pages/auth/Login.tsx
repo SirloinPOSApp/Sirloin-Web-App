@@ -7,6 +7,8 @@ import axios from "axios";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { useCookies } from "react-cookie";
+// import { useDispatch } from "react-redux";
+// import { handleAuth } from "../../utils/redux/reducers/reducer";
 
 export const Login = () => {
   const MySwal = withReactContent(Swal);
@@ -22,6 +24,7 @@ export const Login = () => {
     "business_name",
     "email",
   ]);
+  // const dispatch = useDispatch();
 
   // const handleChange = (event: any) => {
   //   setFormLogin({
@@ -46,10 +49,11 @@ export const Login = () => {
       .then((response) => {
         // console.log(response);
         localStorage.setItem("token", response.data.data.token);
-        removeCookie("token", { path: "/" });
-        removeCookie("id", { path: "/" });
-        removeCookie("business_name", { path: "/" });
-        removeCookie("email", { path: "/" });
+        // removeCookie("token", { path: "/" });
+        // removeCookie("id", { path: "/" });
+        // removeCookie("business_name", { path: "/" });
+        // removeCookie("email", { path: "/" });
+        // dispatch(handleAuth(true));
         setCookie("token", response.data.data.token, { path: "/" });
         setCookie("id", response.data.data.id, { path: "/" });
         setCookie("business_name", response.data.data.business_name, {
@@ -74,7 +78,8 @@ export const Login = () => {
         });
         // alert(err.response.data.message);
         // alert(err.toString());
-      });
+      })
+      .finally(() => window.location.reload());
   };
   return (
     <LayoutPlain>

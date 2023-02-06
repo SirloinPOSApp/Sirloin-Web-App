@@ -163,7 +163,7 @@ export const LandingPage = () => {
           ) : (
             <div>
               {carts.map((cart, index) => (
-                <div key={cart.id} className="grid grid-flow-row  gap-4 mb-7">
+                <div key={index} className="grid grid-flow-row  gap-4 mb-7">
                   <div className="flex  border rounded-2xl shadow-lg p-1 ">
                     {cart.product_image === "" ? (
                       <img
