@@ -1,12 +1,30 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button";
 import { Layout } from "../../components/Layout";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
+import { useTitle } from "../../utils/Title";
+import { Input } from "../../components/Input";
 
-const ProductInput = () => {
+interface ProductType {
+  id: number;
+  upc: string;
+  category: string;
+  product_name: string;
+  stock: number;
+  min_stock: number;
+  buy_price: number;
+  price: number;
+  product_image: string;
+  supplier: string;
+}
+
+const ProductEdit = () => {
+  useTitle("Sirloin-Edit Product Tenant");
+  const [product, setProduct] = useState<ProductType>();
+  const { product_id } = useParams();
   const [formProduct, setFormProduct] = useState({
     upc: "",
     category: "",
@@ -20,15 +38,7 @@ const ProductInput = () => {
   });
   const fileInputRef: any = React.createRef();
   const navigate = useNavigate();
-  const [isDisable, setIsDisable] = useState(true);
   const MySwal = withReactContent(Swal);
-
-  // const handleChange = (event: any) => {
-  //   setFormProduct({
-  //     ...formProduct,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
 
   const handleFileChange = (event: any) => {
     const file = fileInputRef.current.files[0];
@@ -39,23 +49,41 @@ const ProductInput = () => {
   };
 
   useEffect(() => {
-    if (
-      formProduct.upc === "" ||
-      formProduct.category === "" ||
-      formProduct.product_name === "" ||
-      formProduct.stock === 0 ||
-      formProduct.minimum_stock === 0 ||
-      formProduct.buying_price === 0 ||
-      formProduct.price === 0 ||
-      formProduct.product_image === null ||
-      formProduct.supplier === ""
-    ) {
-      setIsDisable(true);
-    } else {
-      setIsDisable(false);
+    if (product) {
+      setFormProduct({
+        upc: product.upc,
+        category: product.category,
+        product_name: product.product_name,
+        stock: product.stock,
+        minimum_stock: product.min_stock,
+        buying_price: product.buy_price,
+        price: product.buy_price,
+        product_image: product.product_image,
+        supplier: product.supplier,
+      });
     }
-    // console.log(formProduct);
-  }, [formProduct]);
+  }, [product]);
+
+  useEffect(() => {
+    Product();
+  }, []);
+
+  function Product() {
+    axios
+      .get(`https://bluepath.my.id/products/${product_id}`)
+      .then((product) => {
+        const { data } = product.data;
+        setProduct(data);
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Gagal",
+          text: error.response.data.message,
+          icon: "error",
+          confirmButtonAriaLabel: "ok",
+        });
+      });
+  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -71,9 +99,8 @@ const ProductInput = () => {
     formData.append("supplier", formProduct.supplier);
 
     axios
-      .post("https://bluepath.my.id/products", formData)
+      .put(`https://bluepath.my.id/products/${product_id}`, formData)
       .then((response) => {
-        // alert(response.data.message);
         MySwal.fire({
           title: "Berhasil",
           text: response.data.message,
@@ -89,8 +116,6 @@ const ProductInput = () => {
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-        // alert(err.response.data.message);
-        // alert(err.toString());
       });
   };
 
@@ -112,143 +137,98 @@ const ProductInput = () => {
               id="product_image"
               type="file"
               className="file-input file-input-bordered file-input-[#4AA3BA]  w-full max-w-md"
-              onChange={(e) => handleFileChange(e)}
-              // value={formProduct.product_image}
+              onChange={handleFileChange}
               ref={fileInputRef}
             />
           </div>
           <div className="flex flex-col py-2">
-            <label className="font-semibold text-[#4AA3BA]">
-              Kategori Product
-            </label>
-            <input
+            <Input
               id="category"
-              className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black w-96"
-              type="text"
+              type={"text"}
               placeholder="Kategori Product"
-              onChange={(e) =>
-                setFormProduct({
-                  ...formProduct,
-                  category: e.target.value,
-                })
-              }
+              onChange={handleFileChange}
               value={formProduct.category}
+              label="Kategori Product"
+              name="category"
             />
           </div>
           <div className="flex flex-col py-2">
-            <label className="font-semibold text-[#4AA3BA]">Nama Product</label>
-            <input
+            <Input
               id="product_name"
-              className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black w-96"
-              type="text"
+              type={"text"}
               placeholder="Nama Product"
-              onChange={(e) =>
-                setFormProduct({
-                  ...formProduct,
-                  product_name: e.target.value,
-                })
-              }
+              onChange={handleFileChange}
               value={formProduct.product_name}
+              label="Nama Product"
+              name="product_name"
             />
           </div>
           <div className="flex flex-col py-2">
-            <label className="font-semibold text-[#4AA3BA]">Stok Product</label>
-            <input
+            <Input
               id="stock"
-              className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black w-96"
-              type="number"
+              type={"number"}
               placeholder="10"
-              onChange={(e) =>
-                setFormProduct({
-                  ...formProduct,
-                  stock: parseInt(e.target.value),
-                })
-              }
+              onChange={handleFileChange}
               value={formProduct.stock}
+              label="Stok Product"
+              name="stock"
             />
           </div>
           <div className="flex flex-col py-2">
-            <label className="font-semibold text-[#4AA3BA]">
-              Minimum Stok Product
-            </label>
-            <input
+            <Input
               id="minimum_stock"
-              className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black w-96"
-              type="number"
+              type={"number"}
               placeholder="5"
-              onChange={(e) =>
-                setFormProduct({
-                  ...formProduct,
-                  minimum_stock: parseInt(e.target.value),
-                })
-              }
+              onChange={handleFileChange}
               value={formProduct.minimum_stock}
+              label="Minimum Stok Barang"
+              name="minimum_stock"
             />
           </div>
         </div>
         <div className="mx-10">
           <div className="flex flex-col py-2">
-            <label className="font-semibold text-[#4AA3BA]">No. Barcode</label>
-            <input
+            <Input
               id="upc"
-              className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black w-96"
-              type="text"
+              type={"text"}
               placeholder="No.barcode"
-              onChange={(e) =>
-                setFormProduct({
-                  ...formProduct,
-                  upc: e.target.value,
-                })
-              }
+              onChange={handleFileChange}
               value={formProduct.upc}
+              label="No.Barcode"
+              name="upc"
             />
           </div>
           <div className="flex flex-col py-2">
-            <label className="font-semibold text-[#4AA3BA]">Supplier</label>
-            <input
+            <Input
               id="supplier"
-              className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black w-96"
-              type="text"
+              type={"text"}
               placeholder="Supplier"
-              onChange={(e) =>
-                setFormProduct({
-                  ...formProduct,
-                  supplier: e.target.value,
-                })
-              }
+              onChange={handleFileChange}
               value={formProduct.supplier}
+              label="Nama Supllier"
+              name="supplier"
             />
           </div>
           <div className="flex flex-col py-2">
-            <label className="font-semibold text-[#4AA3BA]">Harga Jual</label>
-            <input
+            <Input
               id="price"
-              className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black w-96"
-              type="number"
+              type={"number"}
               placeholder="30000"
-              onChange={(e) =>
-                setFormProduct({
-                  ...formProduct,
-                  price: parseInt(e.target.value),
-                })
-              }
+              onChange={handleFileChange}
               value={formProduct.price}
+              label="Harga Jual"
+              name="price"
             />
           </div>
           <div className="flex flex-col py-2">
-            <label className="font-semibold text-[#4AA3BA]">Harga Beli</label>
-            <input
+            <Input
               id="buying_price"
-              className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black w-96"
               type="number"
               placeholder="25000"
-              onChange={(e) =>
-                setFormProduct({
-                  ...formProduct,
-                  buying_price: parseInt(e.target.value),
-                })
-              }
+              onChange={handleFileChange}
               value={formProduct.buying_price}
+              label="Harga Beli"
+              name="buying_price"
             />
           </div>
           <div className="flex flex-row">
@@ -261,7 +241,6 @@ const ProductInput = () => {
             <Button
               id="save"
               type="submit"
-              disabled={isDisable}
               label="Simpan"
               buttonSet="w-40 text-white bg-teal-700 my-3 mr-10 border-none"
             />
@@ -272,4 +251,4 @@ const ProductInput = () => {
   );
 };
 
-export default ProductInput;
+export default ProductEdit;
