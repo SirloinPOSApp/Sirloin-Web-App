@@ -58,7 +58,7 @@ const Pembayaran = () => {
         // console.log(res);
         if (payment == "cashless") {
           window.open(res.data.data.payment_url);
-          navigate("/landing");
+          navigate("/transaction");
         } else {
           MySwal.fire({
             title: "Berhasil",

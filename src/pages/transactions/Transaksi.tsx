@@ -7,6 +7,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
+import Swal from "../../utils/Swal";
+import withReactContent from "sweetalert2-react-content";
 
 const Transaksi = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -17,10 +19,13 @@ const Transaksi = () => {
   const [pdf, setPdf] = useState("");
   const [totalTransaction, setTotalTransaction] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
+  const [sendToEmail, setSendToEmail] = useState<boolean>(false);
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     fetchDataProducts();
-  }, []);
+    // console.log(sendToEmail);
+  }, [sendToEmail]);
 
   useEffect(() => {
     const start = startDate?.toISOString().split("T")[0];
@@ -41,7 +46,7 @@ const Transaksi = () => {
   function fetchDataProducts() {
     axios
       .get(
-        `https://bluepath.my.id/transactions?status=sell&from=${from}&to=${to}`
+        `https://bluepath.my.id/transactions?status=sell&from=${from}&to=${to}&send_email=${sendToEmail}`
       )
       .then((res) => {
         // console.log(res.data.data);
@@ -64,6 +69,18 @@ const Transaksi = () => {
 
   const handlePDF = () => {
     window.open(pdf);
+  };
+
+  const handleSendToEmail = async () => {
+    setSendToEmail(true);
+    await MySwal.fire({
+      title: "Berhasil",
+      text: "Sending to email",
+      icon: "success",
+      confirmButtonAriaLabel: "ok",
+    });
+    await fetchDataProducts();
+    setSendToEmail(false);
   };
 
   return (
@@ -115,7 +132,13 @@ const Transaksi = () => {
         </div>
       ) : (
         <div className="overflow-x-auto m-10">
-          <div className="flex justify-end mb-10 ">
+          <div className="flex justify-end mb-10 gap-3">
+            <Button
+              onClick={handleSendToEmail}
+              id="send-email"
+              label="Send To Email"
+              buttonSet="bg-[#4AA3BA] border-none capitalize btn-md w-32"
+            />
             <Button
               onClick={() => {
                 handlePDF();
