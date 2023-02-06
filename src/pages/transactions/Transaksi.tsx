@@ -16,6 +16,7 @@ const Transaksi = () => {
   const [datas, setDatas] = useState<any[]>([]);
   const [pdf, setPdf] = useState("");
   const [totalTransaction, setTotalTransaction] = useState(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     fetchDataProducts();
@@ -50,10 +51,14 @@ const Transaksi = () => {
       .catch((err) => {
         // alert(err.toString());
         alert(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
   const handleChangeDate = () => {
+    setLoading(true);
     fetchDataProducts();
   };
 
@@ -88,6 +93,11 @@ const Transaksi = () => {
             onChange={(date) => setEndDate(date)}
           />
           <AiOutlineCalendar className="absolute left-32 top-7" size={24} />
+          {loading && (
+            <div className="flex items-center">
+              <a href="">Loading...</a>
+            </div>
+          )}
           <Button
             onClick={() => {
               handleChangeDate();
