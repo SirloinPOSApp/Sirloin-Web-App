@@ -67,7 +67,7 @@ const router = createBrowserRouter([
     element: <Transaksi />,
   },
   {
-    path: "/detail-transaction",
+    path: "/detail-transaction/:transaction_id",
     element: <TransaksiDetail />,
   },
   {
