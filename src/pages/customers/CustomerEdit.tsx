@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import Button from "../../components/Button";
 import { Input, TextArea } from "../../components/Input";
@@ -15,11 +15,10 @@ interface CustType {
   address: string;
 }
 
-const CustomerInput = () => {
-  useTitle("Sirloin-Customer Tenant");
+const CustomerEdit = () => {
+  useTitle("Sirloin-Edit Customer Tenant");
   const [customer, setCustomer] = useState<CustType>();
-
-  const [isDisable, setIsDisable] = useState(true);
+  const { customer_id } = useParams();
   const navigate = useNavigate();
 
   const [formCust, setFormCust] = useState({
@@ -31,17 +30,45 @@ const CustomerInput = () => {
   });
 
   useEffect(() => {
-    if (
-      formCust.name === "" ||
-      formCust.email === "" ||
-      formCust.phone_number === 0 ||
-      formCust.address === ""
-    ) {
-      setIsDisable(true);
-    } else {
-      setIsDisable(false);
+    if (customer) {
+      setFormCust({
+        id: customer.id,
+        name: customer.business_name,
+        email: customer.email,
+        phone_number: customer.phone_number,
+        address: customer.address,
+      });
     }
-  }, [formCust]);
+  }, [customer]);
+
+  useEffect(() => {
+    Customer();
+  }, []);
+
+  function Customer() {
+    axios
+      .get(`https://bluepath.my.id/customers/${customer_id}`)
+      .then((customer) => {
+        const { data } = customer.data;
+        console.log(data);
+        setCustomer(data);
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Gagal",
+          text: error.response.data.message,
+          icon: "error",
+          confirmButtonAriaLabel: "ok",
+        });
+      });
+  }
+
+  const handleChange = (event: any) => {
+    setFormCust({
+      ...formCust,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,7 +80,7 @@ const CustomerInput = () => {
     formData.append("address", formCust.address);
 
     axios
-      .post("https://bluepath.my.id/customers", formData)
+      .put(`https://bluepath.my.id/customers/${customer_id}`, formData)
       .then((response) => {
         Swal.fire({
           title: "Berhasil",
@@ -85,18 +112,13 @@ const CustomerInput = () => {
         <div className="mx-10">
           <div className="flex flex-col py-2">
             <Input
+              type={"text"}
+              placeholder="Nama Lengkap"
+              onChange={handleChange}
+              value={formCust.name}
               id="name"
               label="Nama Customer"
               name="name"
-              type="text"
-              placeholder="Nama Lengkap"
-              onChange={(e) =>
-                setFormCust({
-                  ...formCust,
-                  name: e.target.value,
-                })
-              }
-              value={formCust.name}
             />
           </div>
           <div className="flex flex-col py-2">
@@ -104,14 +126,9 @@ const CustomerInput = () => {
               id="email"
               label="Email"
               name="email"
-              type="email"
-              placeholder="example@mail.com"
-              onChange={(e) =>
-                setFormCust({
-                  ...formCust,
-                  email: e.target.value,
-                })
-              }
+              type={"email"}
+              placeholder="email"
+              onChange={handleChange}
               value={formCust.email}
             />
           </div>
@@ -120,16 +137,11 @@ const CustomerInput = () => {
           <div className="flex flex-col py-2">
             <Input
               id="phone_number"
-              label="Nomor_Telephone"
+              label="No.Telephone"
               name="phone_number"
-              type="number"
+              type={"number"}
               placeholder="0912XXXXX"
-              onChange={(e) =>
-                setFormCust({
-                  ...formCust,
-                  phone_number: parseInt(e.target.value),
-                })
-              }
+              onChange={handleChange}
               value={formCust.phone_number}
             />
           </div>
@@ -138,14 +150,9 @@ const CustomerInput = () => {
             <TextArea
               id="address"
               label="Alamat"
-              name="addres"
-              placeholder="Alamat"
-              onChange={(e) =>
-                setFormCust({
-                  ...formCust,
-                  address: e.target.value,
-                })
-              }
+              name="address"
+              placeholder="25000"
+              onChange={handleChange}
               value={formCust.address}
             />
           </div>
@@ -157,9 +164,8 @@ const CustomerInput = () => {
               onClick={() => navigate("/customer")}
             />
             <Button
-              id="save"
+              id="save-customer"
               type="submit"
-              disabled={isDisable}
               label="Simpan"
               buttonSet="w-40 text-white bg-teal-700 my-3 mr-10 border-none"
             />
@@ -170,4 +176,4 @@ const CustomerInput = () => {
   );
 };
 
-export default CustomerInput;
+export default CustomerEdit;

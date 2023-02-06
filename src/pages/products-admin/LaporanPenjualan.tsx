@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { Layout } from "../../components/Layout";
 import DatePicker from "react-datepicker";
@@ -6,9 +6,62 @@ import { AiOutlineCalendar } from "react-icons/ai";
 
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "../../components/Button";
+import axios from "axios";
+import moment from "moment";
 const LaporanPenjualan = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
+  const [from, setFrom] = useState(startDate?.toISOString().split("T")[0]);
+  const [to, setTo] = useState(endDate?.toISOString().split("T")[0]);
+
+  const [datas, setDatas] = useState<any[]>([]);
+  const [pdf, setPdf] = useState("");
+  const [totalPenjualan, setTotalPenjualan] = useState(0);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    DataPenjualan();
+  }, []);
+
+  useEffect(() => {
+    const start = startDate?.toISOString().split("T")[0];
+    const end = endDate?.toISOString().split("T")[0];
+
+    if (start && end) {
+      setFrom(start);
+      setTo(end);
+    }
+    setTotalPenjualan(datas.reduce((acc, cur) => acc + cur.total_bill, 0));
+  }, [startDate, endDate, pdf, from, to]);
+
+  function DataPenjualan() {
+    axios
+      .get(
+        `https://bluepath.my.id/transactions/admin?status=sell&from=${from}&to=${to}`
+      )
+      .then((res) => {
+        // console.log(res.data.data);
+        setDatas(res.data.data);
+        setPdf(res.data.pdf_url);
+      })
+      .catch((err) => {
+        // alert(err.toString());
+        alert(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  const handleChangeDate = () => {
+    setLoading(true);
+    DataPenjualan();
+  };
+
+  const handlePDF = () => {
+    window.open(pdf);
+  };
+
   return (
     <Layout>
       <div className="flex flex-col m-10">
@@ -36,7 +89,15 @@ const LaporanPenjualan = () => {
             onChange={(date) => setEndDate(date)}
           />
           <AiOutlineCalendar className="absolute left-32 top-7" size={24} />
+          {loading && (
+            <div className="flex items-center">
+              <a href="">Loading...</a>
+            </div>
+          )}
           <Button
+            onClick={() => {
+              handleChangeDate();
+            }}
             id="tampil-data"
             label="Tampilkan Data"
             buttonSet="bg-[#4AA3BA] border-none capitalize btn-md w-64"
@@ -44,77 +105,79 @@ const LaporanPenjualan = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto m-10 ">
-        <table className="table w-full px-10 border z-0">
-          <thead>
-            <tr className=" text-white">
-              <th className="bg-[#306D75] text-lg font-normal">Tanggal</th>
-              <th className="bg-[#306D75] text-lg font-normal">
-                No. Transaksi
-              </th>
-              <th className="bg-[#306D75] text-lg font-normal">Nama Tenant</th>
-              <th className="bg-[#306D75] text-lg font-normal">
-                Total Belanja
-              </th>
-              <th className="bg-[#306D75] text-lg font-normal">
-                Status Transaksi
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>01/01/2023</th>
-              <td>INV/20230123/MPL/0002</td>
-              <td>Nana</td>
-              <td>Rp.300.000</td>
-              <td className="text-teal-700 font-semibold">Selesai</td>
-            </tr>
-
-            <tr>
-              <th>05/01/2023</th>
-              <td>INV/20230123/MPL/0003</td>
-              <td>Nina</td>
-              <td>Rp.300.000</td>
-              <td className="text-[#DA5C53] font-semibold">Dibatalkan</td>
-            </tr>
-
-            <tr>
-              <th>10/01/2023</th>
-              <td>INV/20230123/MPL/0004</td>
-              <td>Nunung</td>
-              <td>Rp.300.000</td>
-              <td className="text-teal-700 font-semibold">Selesai</td>
-            </tr>
-
-            <tr>
-              <th>15/01/2023</th>
-              <td>INV/20230123/MPL/0005</td>
-              <td>Nanang</td>
-              <td>Rp.300.000</td>
-              <td className="text-[#DA5C53] font-semibold">Dibatalkan</td>
-            </tr>
-
-            <tr>
-              <th>20/01/2023</th>
-              <td>INV/20230123/MPL/0006</td>
-              <td>Nani</td>
-              <td>Rp.300.000</td>
-              <td className="text-teal-700 font-semibold">Selesai</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th className="bg-[#306D75] text-lg font-normal text-white">
-                Total Transaksi
-              </th>
-              <th className="bg-[#306D75] text-lg font-normal"></th>
-              <th className="bg-[#306D75] text-lg font-normal"></th>
-              <th></th>
-              <th className="text-lg font-bold">Rp 1.500.000</th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+      {datas.length === 0 ? (
+        <div className="text-center">
+          <a href="">No Data</a>
+        </div>
+      ) : (
+        <div className="overflow-x-auto m-10 ">
+          <table className="table w-full px-10 border z-0">
+            <thead>
+              <tr className=" text-white">
+                <th className="bg-[#306D75] text-lg font-normal">Tanggal</th>
+                <th className="bg-[#306D75] text-lg font-normal">
+                  No. Transaksi
+                </th>
+                <th className="bg-[#306D75] text-lg font-normal">
+                  Nama Tenant
+                </th>
+                <th className="bg-[#306D75] text-lg font-normal">
+                  Total Belanja
+                </th>
+                <th className="bg-[#306D75] text-lg font-normal">
+                  Status Transaksi
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {datas.map((data, index) => (
+                <tr key={index}>
+                  <td>
+                    {moment(data.created_at).format("YYYY-MM-DD hh:mm A")}
+                  </td>
+                  <td>{data.invoice_number}</td>
+                  <td>{data.tenant_name}</td>
+                  <td className="text-right">
+                    Rp.{" "}
+                    {data.total_bill
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                  </td>
+                  <td
+                    className={
+                      data.transaction_status === "success"
+                        ? "text-green-600"
+                        : data.transaction_status === "pending"
+                        ? "text-orange-300"
+                        : data.transaction_status === "waiting payment"
+                        ? "text-orange-300"
+                        : "text-red-500"
+                    }
+                  >
+                    {data.transaction_status}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th className="bg-[#306D75] text-lg font-normal text-white">
+                  Total Transaksi Penjualan
+                </th>
+                <th className="bg-[#306D75] text-lg font-normal"></th>
+                <th className="bg-[#306D75] text-lg font-normal"></th>
+                <th></th>
+                <th className="text-lg font-bold">
+                  Rp.{" "}
+                  {totalPenjualan
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      )}
     </Layout>
   );
 };

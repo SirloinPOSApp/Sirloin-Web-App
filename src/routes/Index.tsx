@@ -18,6 +18,8 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import React, { useState, useMemo } from "react";
 import { userContext } from "../utils/context";
+import CustomerEdit from "../pages/customers/CustomerEdit";
+import ProductEdit from "../pages/products/ProductEdit";
 
 const router = createBrowserRouter([
   {
@@ -45,12 +47,20 @@ const router = createBrowserRouter([
     element: <ProductInput />,
   },
   {
+    path: "/edit-product/:product_id",
+    element: <ProductEdit />,
+  },
+  {
     path: "/customer",
     element: <Customer />,
   },
   {
     path: "/add-customer",
     element: <CustomerInput />,
+  },
+  {
+    path: "/edit-customer/:customer_id",
+    element: <CustomerEdit />,
   },
   {
     path: "/transaction",
