@@ -126,7 +126,12 @@ const router = createBrowserRouter([
 // ];
 
 const App = () => {
-  const [cookie, , removeCookie] = useCookies(["token", "id_user", "name"]);
+  const [cookie, , removeCookie] = useCookies([
+    "token",
+    "id",
+    "business_name",
+    "email",
+  ]);
   const checkToken = cookie.token;
 
   const [user, setUser] = useState(false);
@@ -149,8 +154,9 @@ const App = () => {
         [401, 403].includes(data.code)
       ) {
         removeCookie("token");
-        removeCookie("id_user");
-        removeCookie("name");
+        removeCookie("id");
+        removeCookie("business_name");
+        removeCookie("email");
       }
       return Promise.reject(error);
     }

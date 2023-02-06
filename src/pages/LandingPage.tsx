@@ -8,9 +8,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ProductsType } from "../utils/types/sirloin";
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { userContext } from "../utils/context";
+import { redirect, useNavigate } from "react-router-dom";
 export const LandingPage = () => {
   const [datas, setDatas] = useState<ProductsType[]>([]);
   const [carts, setCarts] = useState<ProductsType[]>([]);
@@ -20,11 +18,9 @@ export const LandingPage = () => {
     total: 0,
   });
   const navigate = useNavigate();
-  const { user, setUser } = useContext(userContext);
 
   useEffect(() => {
     fetchDataProducts();
-    // console.log(user);
   }, []);
 
   useEffect(() => {

@@ -24,6 +24,7 @@ import { useCookies, Cookies, withCookies } from "react-cookie";
 import Swal from "../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -40,12 +41,22 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
     "email",
   ]);
   const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const checkToken = cookie.token;
 
-  useEffect(() => {}, [isLoggedOut]);
+  useEffect(() => {
+    if (!checkToken) {
+      navigate("/login");
+      MySwal.fire({
+        title: "Login First",
+        icon: "info",
+        confirmButtonAriaLabel: "ok",
+      });
+    }
+  }, []);
 
   const handleLogout = () => {
     // alert("Log Out");
-    setIsLoggedOut(true);
+    setIsLoggedOut(!isLoggedOut);
     removeCookie("token", { path: "/" });
     removeCookie("id", { path: "/" });
     removeCookie("business_name", { path: "/" });
