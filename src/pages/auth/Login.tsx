@@ -59,16 +59,19 @@ export const Login = () => {
           path: "/",
         });
         setCookie("email", response.data.data.email, { path: "/" });
+        setUser(!user);
         MySwal.fire({
           title: "Berhasil Login",
           text: response.data.message,
           icon: "success",
           confirmButtonAriaLabel: "ok",
+        }).then(() => {
+          navigate("/landing");
+          window.location.reload();
         });
-        setUser(!user);
         // dispatch({ num: state.num + 1 })
         // alert(response.data.message);
-        navigate("/landing");
+        // navigate("/landing");
       })
       .catch((err) => {
         MySwal.fire({
@@ -79,8 +82,7 @@ export const Login = () => {
         });
         // alert(err.response.data.message);
         // alert(err.toString());
-      })
-      .finally(() => window.location.reload());
+      });
   };
 
   return (
