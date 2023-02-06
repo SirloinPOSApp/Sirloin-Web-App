@@ -10,21 +10,36 @@ import moment from "moment";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 
+interface datasType {
+  created_at: string;
+  customer_id: number;
+  customer_name: string;
+  discount: number;
+  id: number;
+  invoice_number: string;
+  invoice_url: string;
+  payment_url: string;
+  total_bill: number;
+  total_price: number;
+  transaction_Status: string;
+}
+
 const Transaksi = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [from, setFrom] = useState(startDate?.toISOString().split("T")[0]);
   const [to, setTo] = useState(endDate?.toISOString().split("T")[0]);
-  const [datas, setDatas] = useState<any[]>([]);
+  const [datas, setDatas] = useState<datasType[]>([]);
   const [pdf, setPdf] = useState("");
   const [totalTransaction, setTotalTransaction] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [sendToEmail, setSendToEmail] = useState<boolean>(false);
   const MySwal = withReactContent(Swal);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchDataProducts();
-    // console.log(sendToEmail);
+    fetchData();
+    console.log(datas);
   }, [sendToEmail]);
 
   useEffect(() => {
@@ -43,7 +58,7 @@ const Transaksi = () => {
     setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_price, 0));
   }, [startDate, endDate, pdf, from, to]);
 
-  function fetchDataProducts() {
+  function fetchData() {
     axios
       .get(
         `https://bluepath.my.id/transactions?status=sell&from=${from}&to=${to}&send_email=${sendToEmail}`
@@ -64,7 +79,7 @@ const Transaksi = () => {
 
   const handleChangeDate = () => {
     setLoading(true);
-    fetchDataProducts();
+    fetchData();
   };
 
   const handlePDF = () => {
@@ -79,7 +94,7 @@ const Transaksi = () => {
       icon: "success",
       confirmButtonAriaLabel: "ok",
     });
-    await fetchDataProducts();
+    await fetchData();
     setSendToEmail(false);
   };
 
@@ -193,7 +208,10 @@ const Transaksi = () => {
                     {data.transaction_Status}
                   </td>
                   <td className="flex justify-center">
-                    <button className="btn btn-ghost btn-square">
+                    <button
+                      className="btn btn-ghost btn-square"
+                      onClick={() => navigate(`/detail-transaction/${data.id}`)}
+                    >
                       <FiEdit size="20" color="teal" />
                     </button>
                   </td>
