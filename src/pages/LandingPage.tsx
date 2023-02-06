@@ -9,7 +9,8 @@ import { useEffect, useState } from "react";
 import { ProductsType } from "../utils/types/sirloin";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
+import { userContext } from "../utils/context";
 export const LandingPage = () => {
   const [datas, setDatas] = useState<ProductsType[]>([]);
   const [carts, setCarts] = useState<ProductsType[]>([]);
@@ -19,9 +20,11 @@ export const LandingPage = () => {
     total: 0,
   });
   const navigate = useNavigate();
+  const { user, setUser } = useContext(userContext);
 
   useEffect(() => {
     fetchDataProducts();
+    // console.log(user);
   }, []);
 
   useEffect(() => {
@@ -163,7 +166,7 @@ export const LandingPage = () => {
           ) : (
             <div>
               {carts.map((cart, index) => (
-                <div key={cart.id} className="grid grid-flow-row  gap-4 mb-7">
+                <div key={index} className="grid grid-flow-row  gap-4 mb-7">
                   <div className="flex  border rounded-2xl shadow-lg p-1 ">
                     {cart.product_image === "" ? (
                       <img

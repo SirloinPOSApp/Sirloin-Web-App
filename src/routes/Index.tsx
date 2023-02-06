@@ -16,6 +16,8 @@ import Pembayaran from "../pages/Pembayaran";
 import ProductInput from "../pages/products/ProductInput";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import React, { useState, useMemo } from "react";
+import { userContext } from "../utils/context";
 import CustomerEdit from "../pages/customers/CustomerEdit";
 import ProductEdit from "../pages/products/ProductEdit";
 
@@ -94,9 +96,41 @@ const router = createBrowserRouter([
   },
 ]);
 
+// const defaultGlobalState = {
+//   num: 0,
+//   text: "foo",
+//   bool: false,
+// };
+// const globalStateContext =
+//   React.createContext<typeof defaultGlobalState>(defaultGlobalState);
+// const dispatchStateContext = React.createContext<
+//   React.Dispatch<any> | undefined
+// >(undefined);
+
+// const GlobalStateProvider = ({ children }: any) => {
+//   const [state, dispatch] = React.useReducer(
+//     (state: any, newValue: any) => ({ ...state, ...newValue }),
+//     defaultGlobalState
+//   );
+//   return (
+//     <globalStateContext.Provider value={state}>
+//       <dispatchStateContext.Provider value={dispatch}>
+//         {children}
+//       </dispatchStateContext.Provider>
+//     </globalStateContext.Provider>
+//   );
+// };
+// export const useGlobalState = () => [
+//   React.useContext(globalStateContext),
+//   React.useContext(dispatchStateContext),
+// ];
+
 const App = () => {
   const [cookie, , removeCookie] = useCookies(["token", "id_user", "name"]);
   const checkToken = cookie.token;
+
+  const [user, setUser] = useState(false);
+  const data = useMemo(() => ({ user, setUser }), [user]);
 
   axios.interceptors.request.use(function (config: any) {
     config.headers = config.headers || {};
@@ -122,6 +156,10 @@ const App = () => {
     }
   );
 
-  return <RouterProvider router={router} />;
+  return (
+    <userContext.Provider value={data}>
+      <RouterProvider router={router} />
+    </userContext.Provider>
+  );
 };
 export default App;

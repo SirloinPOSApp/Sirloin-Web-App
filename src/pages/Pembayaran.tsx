@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../components/Button";
 import { Layout } from "../components/Layout";
 import { useEffect, useState } from "react";
@@ -57,7 +57,14 @@ const Pembayaran = () => {
       .then((res) => {
         // console.log(res);
         if (payment == "cashless") {
-          window.open(res.data.data.payment_url);
+          // window.open(res.data.data.payment_url);
+          MySwal.fire({
+            title: "Scan Barcode",
+            // text: res.data.message,
+            imageUrl: res.data.data.payment_url,
+            icon: "info",
+            confirmButtonAriaLabel: "ok",
+          }).then(() => navigate("/transaction"));
         } else {
           MySwal.fire({
             title: "Berhasil",
@@ -65,7 +72,7 @@ const Pembayaran = () => {
             icon: "success",
             confirmButtonAriaLabel: "ok",
           });
-          navigate("/landing");
+          navigate("/transaction");
         }
       })
       .catch((err) => {

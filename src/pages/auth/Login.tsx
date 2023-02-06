@@ -7,6 +7,8 @@ import axios from "axios";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { useCookies } from "react-cookie";
+import { useContext } from "react";
+import { userContext } from "../../utils/context";
 
 export const Login = () => {
   const MySwal = withReactContent(Swal);
@@ -22,6 +24,7 @@ export const Login = () => {
     "business_name",
     "email",
   ]);
+  const { user, setUser } = useContext(userContext);
 
   // const handleChange = (event: any) => {
   //   setFormLogin({
@@ -46,10 +49,10 @@ export const Login = () => {
       .then((response) => {
         // console.log(response);
         localStorage.setItem("token", response.data.data.token);
-        removeCookie("token", { path: "/" });
-        removeCookie("id", { path: "/" });
-        removeCookie("business_name", { path: "/" });
-        removeCookie("email", { path: "/" });
+        // removeCookie("token", { path: "/" });
+        // removeCookie("id", { path: "/" });
+        // removeCookie("business_name", { path: "/" });
+        // removeCookie("email", { path: "/" });
         setCookie("token", response.data.data.token, { path: "/" });
         setCookie("id", response.data.data.id, { path: "/" });
         setCookie("business_name", response.data.data.business_name, {
@@ -62,6 +65,8 @@ export const Login = () => {
           icon: "success",
           confirmButtonAriaLabel: "ok",
         });
+        setUser(!user);
+        // dispatch({ num: state.num + 1 })
         // alert(response.data.message);
         navigate("/landing");
       })
@@ -74,8 +79,10 @@ export const Login = () => {
         });
         // alert(err.response.data.message);
         // alert(err.toString());
-      });
+      })
+      .finally(() => window.location.reload());
   };
+
   return (
     <LayoutPlain>
       <div className="flex h-full gap-44 justify-center">
