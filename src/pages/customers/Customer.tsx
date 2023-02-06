@@ -34,6 +34,7 @@ const Customer = () => {
       .get("https://bluepath.my.id/customers")
       .then((customer) => {
         const { data } = customer.data;
+        console.log(data);
         setCustomer(data);
       })
       .catch((error) => {
@@ -70,8 +71,8 @@ const Customer = () => {
             </tr>
           </thead>
           <tbody>
-            {customer.map((customer) => (
-              <tr>
+            {customer.map((customer, index) => (
+              <tr key={index}>
                 <td>{customer.business_name}</td>
                 <td>{customer.address}</td>
                 <td>{customer.phone_number}</td>
@@ -84,7 +85,7 @@ const Customer = () => {
                     <FiEdit
                       size="20"
                       color="teal"
-                      onClick={() => navigate("/edit-customer")}
+                      onClick={() => navigate(`/edit-customer/${customer.id}`)}
                     />
                   </button>
                 </td>
