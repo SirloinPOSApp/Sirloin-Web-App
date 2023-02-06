@@ -19,6 +19,11 @@ import {
 } from "react-pro-sidebar";
 import { BsShop } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useCookies, Cookies, withCookies } from "react-cookie";
+import Swal from "../utils/Swal";
+import withReactContent from "sweetalert2-react-content";
+import { useEffect, useState } from "react";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -26,6 +31,35 @@ interface LayoutProps {
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
   const { collapseSidebar } = useProSidebar();
+  const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
+  const [cookie, , removeCookie] = useCookies([
+    "token",
+    "id",
+    "business_name",
+    "email",
+  ]);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+
+  useEffect(() => {}, [isLoggedOut]);
+
+  const handleLogout = () => {
+    // alert("Log Out");
+    setIsLoggedOut(true);
+    removeCookie("token", { path: "/" });
+    removeCookie("id", { path: "/" });
+    removeCookie("business_name", { path: "/" });
+    removeCookie("email", { path: "/" });
+    MySwal.fire({
+      title: "Berhasil Logout",
+      // text: response.data.message,
+      icon: "success",
+      confirmButtonAriaLabel: "ok",
+    }).then(() => {
+      navigate("/login");
+      window.location.reload();
+    });
+  };
 
   return (
     <div className="flex w-full h-screen bg-white overflow-auto">
@@ -106,7 +140,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
           </MenuItem>
 
           <MenuItem
-            component={<Link to="/login" />}
+            onClick={() => handleLogout()}
             id="logout"
             icon={<FiLogOut size="20" />}
           >
