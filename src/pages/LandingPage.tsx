@@ -36,7 +36,7 @@ export const LandingPage = () => {
       (acc, cart) => acc + cart.price * (cart.quantity || 0),
       0
     );
-    const discount = sub_total * 0.1;
+    const discount = 0;
     const total = sub_total - discount;
     setSummary((prevState) => ({
       ...prevState,
@@ -44,6 +44,20 @@ export const LandingPage = () => {
       discount,
       total,
     }));
+    if (summary.customer_id !== 0) {
+      const sub_total = carts.reduce(
+        (acc, cart) => acc + cart.price * (cart.quantity || 0),
+        0
+      );
+      const discount = sub_total * 0.1;
+      const total = sub_total - discount;
+      setSummary((prevState) => ({
+        ...prevState,
+        sub_total,
+        discount,
+        total,
+      }));
+    }
 
     if (carts.length == 0) {
       setSummary({
