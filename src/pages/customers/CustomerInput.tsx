@@ -6,14 +6,7 @@ import Button from "../../components/Button";
 import { Input, TextArea } from "../../components/Input";
 import { Layout } from "../../components/Layout";
 import { useTitle } from "../../utils/Title";
-
-interface CustType {
-  id: number;
-  email: string;
-  business_name: string;
-  phone_number: number;
-  address: string;
-}
+import { CustType } from "../../utils/types/sirloin";
 
 const CustomerInput = () => {
   useTitle("Sirloin-Customer Tenant");
