@@ -39,7 +39,7 @@ const Transaksi = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(datas);
+    // console.log(datas);
   }, [sendToEmail]);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Transaksi = () => {
     // console.log("to:", to);
     // console.log(pdf);
     setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_bill, 0));
-    console.log(datas);
+    // console.log(datas);
   }, [startDate, endDate, pdf, from, to]);
 
   function fetchData() {
