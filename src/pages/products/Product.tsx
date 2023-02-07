@@ -51,11 +51,7 @@ const Product = () => {
 
   function deleteProduct(id: number) {
     axios
-      .delete(`https://bluepath.my.id/products/${id}`, {
-        headers: {
-          Authorization: `Bearer ${cookie.token}`,
-        },
-      })
+      .delete(`https://bluepath.my.id/products/${id}`)
       .then((response) => {
         Swal.fire({
           title: "Berhasil",
