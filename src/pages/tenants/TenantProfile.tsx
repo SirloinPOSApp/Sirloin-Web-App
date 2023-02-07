@@ -5,18 +5,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import { Layout } from "../../components/Layout";
 import { useTitle } from "../../utils/Title";
-
-interface UserType {
-  id?: number;
-  business_name?: string;
-  email?: string;
-  phone_number?: number;
-  address?: string;
-}
+import { userType } from "../../utils/types/sirloin";
 
 export const TenantProfile = () => {
   useTitle("Sirloin-Profil Tenant");
-  const [user, setUser] = useState<UserType>({});
+  const [user, setUser] = useState<userType>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,11 +35,11 @@ export const TenantProfile = () => {
       </div>
       <div className="flex flex-col drop-shadow-xl bg-[#FAFAFA] rounded-3xl m-10  py-[9rem] px-[6.063rem] text-center gap-6  items-center">
         <h1 className=" text-[#4AA3BA] font-bold text-4xl ">
-          {user.business_name}
+          {user?.business_name}
         </h1>
-        <p>{user.email}</p>
-        <p>{user.phone_number}</p>
-        <p className="w-60">{user.address}</p>
+        <p>{user?.email}</p>
+        <p>{user?.phone_number}</p>
+        <p className="w-60">{user?.address}</p>
       </div>
       <div className=" flex justify-end">
         <Button

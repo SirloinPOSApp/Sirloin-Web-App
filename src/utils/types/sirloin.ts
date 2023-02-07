@@ -43,3 +43,12 @@ export interface transactionType {
   total_price: number;
   transaction_status: string;
 }
+
+export interface userType {
+  id: number;
+  business_name: string;
+  email: string;
+  phone_number: number;
+  address: string;
+  password: string;
+}

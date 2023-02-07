@@ -7,15 +7,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
-
-interface userType {
-  id: number;
-  business_name: string;
-  email: string;
-  phone_number: number;
-  address: string;
-  password: string;
-}
+import { userType } from "../../utils/types/sirloin";
 
 export const TenantEdit = () => {
   const MySwal = withReactContent(Swal);
