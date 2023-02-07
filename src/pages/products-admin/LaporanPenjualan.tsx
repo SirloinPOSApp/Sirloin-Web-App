@@ -19,6 +19,7 @@ const LaporanPenjualan = () => {
   const [datas, setDatas] = useState<transactionAdminType[]>([]);
   const [pdf, setPdf] = useState("");
   const [totalPenjualan, setTotalPenjualan] = useState(0);
+  const [totalTransactionSuccess, setTotalTransactionSuccess] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -34,6 +35,11 @@ const LaporanPenjualan = () => {
       setTo(end);
     }
     setTotalPenjualan(datas.reduce((acc, cur) => acc + cur.total_bill, 0));
+    setTotalTransactionSuccess(
+      datas
+        .filter((data) => data.transaction_status === "success")
+        .reduce((acc, cur) => acc + cur.total_bill, 0)
+    );
     // console.log(datas);
   }, [startDate, endDate, pdf, from, to, datas]);
 
@@ -173,6 +179,21 @@ const LaporanPenjualan = () => {
               ))}
             </tbody>
             <tfoot>
+              <tr>
+                <th className="bg-[#306D75] text-lg font-normal text-white">
+                  Total Transaksi Penjualan Sukses
+                </th>
+                <th className="bg-[#306D75]"></th>
+                <th className="bg-[#306D75]"></th>
+
+                <th></th>
+                <th className="text-lg font-bold">
+                  Rp.{" "}
+                  {totalTransactionSuccess
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                </th>
+              </tr>
               <tr>
                 <th className="bg-[#306D75] text-lg font-normal text-white">
                   Total Transaksi Penjualan

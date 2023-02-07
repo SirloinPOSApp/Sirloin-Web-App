@@ -19,6 +19,7 @@ const Transaksi = () => {
   const [datas, setDatas] = useState<transactionType[]>([]);
   const [pdf, setPdf] = useState("");
   const [totalTransaction, setTotalTransaction] = useState(0);
+  const [totalTransactionSuccess, setTotalTransactionSuccess] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [sendToEmail, setSendToEmail] = useState<boolean>(false);
   const MySwal = withReactContent(Swal);
@@ -43,6 +44,11 @@ const Transaksi = () => {
     // console.log("to:", to);
     // console.log(pdf);
     setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_bill, 0));
+    setTotalTransactionSuccess(
+      datas
+        .filter((data) => data.transaction_Status === "success")
+        .reduce((acc, cur) => acc + cur.total_bill, 0)
+    );
     console.log(datas);
   }, [startDate, endDate, pdf, from, to, datas]);
 
@@ -207,6 +213,21 @@ const Transaksi = () => {
               ))}
             </tbody>
             <tfoot>
+              <tr>
+                <th className="bg-[#306D75] text-lg font-bold text-white">
+                  Total Transaksi Sukses
+                </th>
+                <th className="bg-[#306D75]"></th>
+                <th className="bg-[#306D75]"></th>
+
+                <th></th>
+                <th className="text-lg font-bold">
+                  Rp.{" "}
+                  {totalTransactionSuccess
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                </th>
+              </tr>
               <tr>
                 <th className="bg-[#306D75] text-lg font-bold text-white">
                   Total Transaksi
