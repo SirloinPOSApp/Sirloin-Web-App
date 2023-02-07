@@ -8,7 +8,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ProductsType } from "../utils/types/sirloin";
 import { FC } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { redirect, useNavigate, useSearchParams } from "react-router-dom";
+
 export const LandingPage = () => {
   const [datas, setDatas] = useState<ProductsType[]>([]);
   const [carts, setCarts] = useState<ProductsType[]>([]);
@@ -18,10 +19,11 @@ export const LandingPage = () => {
     total: 0,
   });
   const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     fetchDataProducts();
-  }, []);
+  }, [searchValue]);
 
   useEffect(() => {
     // console.log("carts", carts);
@@ -36,7 +38,7 @@ export const LandingPage = () => {
 
   function fetchDataProducts() {
     axios
-      .get(`https://bluepath.my.id/products`)
+      .get(`https://bluepath.my.id/products?search=${searchValue}`)
       .then((res) => {
         // console.log(res.data.data);
         setDatas(res.data.data);
@@ -98,6 +100,13 @@ export const LandingPage = () => {
     localStorage.setItem("summary", JSON.stringify(summary));
     navigate(`/pembayaran_detail`);
   };
+  function submitForm(event: any) {
+    // const searchInput = document.getElementById("searchInput").value;
+    // window.location.href = "http://example.com/products?search=" + searchInput;
+    event.preventDefault();
+    // let params = serializeFormQuery(event.target);
+    // setSearchParams(params);
+  }
 
   return (
     <Layout>
@@ -105,18 +114,22 @@ export const LandingPage = () => {
         <div className=" p-10  w-3/4 bg-[#FAFAFA] h-screen ">
           <div className="flex justify-between ">
             <h3 className="font-bold text-3xl text-[#4AA3BA]">Product Toko</h3>
-            <form className=" relative w-64 ">
+            <div className=" relative w-64 ">
               <input
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
                 id="input-product"
                 name="search"
+                type={"text"}
                 placeholder="cari barang"
                 className="p-3 placeholder-[#9CA3AF] drop-shadow-lg rounded-lg w-64 border"
               />
               <FiSearch
-                id="search-product"
+                // type="submit"
+                id="icon-product"
                 className="absolute top-3 right-3 w-6 h-6 cursor-pointer"
               />
-            </form>
+            </div>
           </div>
           <div className="grid grid-cols-4  gap-4 mt-20">
             {datas.map((data) => (
