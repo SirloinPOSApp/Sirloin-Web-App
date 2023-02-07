@@ -7,23 +7,11 @@ import Swal from "sweetalert2";
 import Button from "../../components/Button";
 import { Layout } from "../../components/Layout";
 import { useTitle } from "../../utils/Title";
-
-interface ProductType {
-  id: number;
-  upc?: string;
-  category: string;
-  product_name: string;
-  stock: number;
-  min_stock: number;
-  buy_price: number;
-  price: number;
-  product_image: string;
-  supplier: string;
-}
+import { ProductsType } from "../../utils/types/sirloin";
 
 const Product = () => {
   useTitle("Sirloin-Product Tenant");
-  const [product, setProduct] = useState<ProductType[]>([]);
+  const [product, setProduct] = useState<ProductsType[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [cookie, setCookie] = useCookies();
   const navigate = useNavigate();
