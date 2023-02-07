@@ -7,33 +7,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
-
-interface datasType {
-  created_at: string;
-  customer_id: number;
-  customer_name: string;
-  discount: number;
-  id: number;
-  invoice_number: string;
-  invoice_url: string;
-  payment_url: string;
-  total_bill: number;
-  total_price: number;
-  transaction_status: string;
-  TransactionProductRes: [
-    {
-      price: number;
-      product_id: number;
-      product_image: string;
-      product_name: string;
-      quantity: number;
-      total_price: number;
-    }
-  ];
-}
+import { transactionType } from "../../utils/types/sirloin";
 
 export const TransaksiDetail = () => {
-  const [datas, setDatas] = useState<datasType>();
+  const [datas, setDatas] = useState<transactionType>();
   const { transaction_id } = useParams();
   const [total_quantity, setTotal_quantity] = useState(0);
   const [refresh, setRefresh] = useState(false);
@@ -132,15 +109,15 @@ export const TransaksiDetail = () => {
                   <img
                     src={data.product_image}
                     alt="product"
-                    className="w-36"
+                    className="w-36 rounded"
                   />
                 ) : (
                   <img
                     src={
-                      "https://s3-alpha-sig.figma.com/img/087e/7d99/bb4c9304728e8dcb2d6d815e2e44c4f5?Expires=1676246400&Signature=B2b~0n6LoIUHyBFrVZgujcgTh5jRsM4i3Vu7jAAXnsgOLdViDJtCjrut93dZ5lV~zEq18jWE17MWrCqcfIM8e-FAjJ9oVI3BGfW1RermqxD2XR3jDdq2DxpVTrDSrflXxYRI0H5ySpfDgjTLNv2PD3rBA8KXm6sSSklVGLpWJ310V97jFBLwnUeF5IY6Led-x-vfoZPFqtB4ohNBwBKFJiEXpQTRTDeDcQY7w4SbQtDb7yfPeOBKCxduxld3hmw8qy4JZINfs8UDaweLO4~HBKuWi-HRAo7EXsoZeipWupaICpWZHijVoljJdADPftLf~pFsAMAzvSo6rhc~poPHaA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                      "https://i.pinimg.com/564x/2c/4b/7f/2c4b7f4b0cb5ae1f3879ec36eb64386b.jpg"
                     }
                     alt="product"
-                    className="w-36"
+                    className="w-36 rounded"
                   />
                 )}
                 <p className="font-semibold text-xl">{data.product_name}</p>
