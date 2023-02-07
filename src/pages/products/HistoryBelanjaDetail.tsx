@@ -185,12 +185,16 @@ export const HistoryBelanjaDetail = () => {
           buttonSet="w-40 text-[#DA5C53] my-3 btn-outline"
           onClick={() => navigate("/history-shopping")}
         />
-        <Button
-          id="payment"
-          label="Kode Bayar"
-          buttonSet="w-40 text-white bg-teal-700 my-3 border-none"
-          onClick={() => handleClickKodeBayar()}
-        />
+        {datas?.transaction_status === "deny" ? (
+          <p></p>
+        ) : (
+          <Button
+            id="payment"
+            label="Bayar"
+            buttonSet="w-40 text-white bg-teal-700 my-3 border-none"
+            onClick={() => handleClickKodeBayar()}
+          />
+        )}
       </div>
     </Layout>
   );
