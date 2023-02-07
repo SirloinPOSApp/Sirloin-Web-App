@@ -44,7 +44,7 @@ export const LandingPage = () => {
       discount,
       total,
     }));
-    if (summary.customer_id !== 0) {
+    if (summary.customer_id > 0) {
       const sub_total = carts.reduce(
         (acc, cart) => acc + cart.price * (cart.quantity || 0),
         0
@@ -126,6 +126,7 @@ export const LandingPage = () => {
     setCarts((prevCarts) =>
       prevCarts.filter((cart, indexx) => indexx !== index)
     );
+    setCustomerId(0);
   };
 
   const handleSubmit = () => {
@@ -135,17 +136,20 @@ export const LandingPage = () => {
   };
 
   const handleAddMember = (num: any) => {
+    console.log("num", num);
     axios
       .get(`https://bluepath.my.id/customers/${num}`)
       .then((product) => {
         const { data } = product.data;
         console.log(data);
-        setSummary({
-          ...summary,
-          customer_id: num,
-          discount: summary.sub_total * 0.1,
-          total: summary.sub_total - summary.sub_total * 0.1,
-        });
+        if (num > 0) {
+          setSummary({
+            ...summary,
+            customer_id: num,
+            discount: summary.sub_total * 0.1,
+            total: summary.sub_total - summary.sub_total * 0.1,
+          });
+        }
       })
       .catch((error) => {
         Swal.fire({
