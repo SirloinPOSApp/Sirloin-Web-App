@@ -50,25 +50,37 @@ const Product = () => {
   }
 
   function deleteProduct(id: number) {
-    axios
-      .delete(`https://bluepath.my.id/products/${id}`)
-      .then((response) => {
-        Swal.fire({
-          title: "Berhasil",
-          text: response.data.message,
-          icon: "success",
-          confirmButtonAriaLabel: "ok",
-        });
-        setRefresh(!refresh);
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: "Gagal",
-          text: error.response.data.message,
-          icon: "error",
-          confirmButtonAriaLabel: "ok",
-        });
-      });
+    Swal.fire({
+      title: "Apakah Anda yakin akan menghapus produk ini?",
+      text: "Produk yang dihapus tidak bisa dikembalikan",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, hapus produk",
+    }).then((result) => {
+      if (result.value) {
+        axios
+          .delete(`https://bluepath.my.id/products/${id}`)
+          .then((response) => {
+            Swal.fire({
+              title: "Berhasil",
+              text: response.data.message,
+              icon: "success",
+              confirmButtonAriaLabel: "ok",
+            });
+            setRefresh(!refresh);
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Gagal",
+              text: error.response.data.message,
+              icon: "error",
+              confirmButtonAriaLabel: "ok",
+            });
+          });
+      }
+    });
   }
 
   return (

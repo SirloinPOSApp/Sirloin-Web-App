@@ -47,6 +47,28 @@ const Customer = () => {
       });
   }
 
+  // function deleteProduct(id: number) {
+  //   axios
+  //     .delete(`https://bluepath.my.id/customer/${id}`)
+  //     .then((response) => {
+  //       Swal.fire({
+  //         title: "Berhasil",
+  //         text: response.data.message,
+  //         icon: "success",
+  //         confirmButtonAriaLabel: "ok",
+  //       });
+  //       setRefresh(!refresh);
+  //     })
+  //     .catch((error) => {
+  //       Swal.fire({
+  //         title: "Gagal",
+  //         text: error.response.data.message,
+  //         icon: "error",
+  //         confirmButtonAriaLabel: "ok",
+  //       });
+  //     });
+  // }
+
   return (
     <Layout>
       <div className="flex flex-row justify-between m-10">
@@ -78,6 +100,13 @@ const Customer = () => {
                 <td>{customer.phone_number}</td>
                 <td>{customer.email}</td>
                 <td className="flex col-span-2">
+                  {/* <button id="del-product" className="btn btn-ghost btn-square">
+                    <FiTrash2
+                      size="20"
+                      color="red"
+                      onClick={() => deleteProduct(customer.id)}
+                    />
+                  </button> */}
                   <button
                     id="edit-custumer"
                     className="btn btn-ghost btn-square"
