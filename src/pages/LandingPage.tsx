@@ -11,6 +11,7 @@ import { FC } from "react";
 import { redirect, useNavigate, useSearchParams } from "react-router-dom";
 import Swal from "../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
+import { useCookies } from "react-cookie";
 
 export const LandingPage = () => {
   const [datas, setDatas] = useState<ProductsType[]>([]);
@@ -24,10 +25,20 @@ export const LandingPage = () => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   const [customerId, setCustomerId] = useState(0);
+  const [isHidden, setIsHidden] = useState(false);
+  const [cookie, , removeCookie] = useCookies([
+    "token",
+    "id",
+    "business_name",
+    "email",
+  ]);
   const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     fetchDataProducts();
+    if (cookie.id == 1) {
+      setIsHidden(true);
+    }
   }, [searchValue]);
 
   useEffect(() => {
@@ -169,10 +180,18 @@ export const LandingPage = () => {
 
   return (
     <Layout>
-      <div className="w-full flex font-medium">
-        <div className=" p-10  w-3/4 bg-[#FAFAFA] h-screen ">
+      <div className="w-full flex font-medium ">
+        <div className=" p-10  w-full bg-[#FAFAFA] h-screen ">
           <div className="flex justify-between ">
-            <h3 className="font-bold text-3xl text-[#4AA3BA]">Product Toko</h3>
+            {cookie.id != 1 ? (
+              <h3 className="font-bold text-3xl text-[#4AA3BA]">
+                Product Toko
+              </h3>
+            ) : (
+              <h3 className="font-bold text-3xl text-[#4AA3BA]">
+                Product Super Admin
+              </h3>
+            )}
             <div className=" relative w-64 ">
               <input
                 value={searchValue}
@@ -190,7 +209,7 @@ export const LandingPage = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-4  gap-4 mt-20">
+          <div className="grid grid-cols-4  gap-4 mt-20 pb-10">
             {datas.map((data) => (
               <div
                 key={data.id}
@@ -228,7 +247,7 @@ export const LandingPage = () => {
             ))}
           </div>
         </div>
-        <div className="p-10 w-1/4">
+        <div className="p-10 w-1/3" hidden={isHidden}>
           <h3 className="font-bold text-3xl text-[#4AA3BA] mb-20">Keranjang</h3>
           {carts.length === 0 ? (
             <div className="text-center text-lg text-[#a0a0a0]">
