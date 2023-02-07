@@ -135,11 +135,19 @@ export const Etalase = () => {
               {carts.map((cart, index) => (
                 <div key={index} className="grid grid-flow-row  gap-4 mb-7">
                   <div className="flex  border rounded-2xl shadow-lg p-1 ">
-                    <img
-                      src={cart.product_image}
-                      alt="product"
-                      className="h-32 w-32 p-1"
-                    />
+                    {cart.product_image === "" ? (
+                      <img
+                        src="https://i.pinimg.com/564x/2c/4b/7f/2c4b7f4b0cb5ae1f3879ec36eb64386b.jpg"
+                        alt="product"
+                        className="h-32 m-3 rounded"
+                      />
+                    ) : (
+                      <img
+                        src={cart.product_image}
+                        alt="product"
+                        className="h-32 w-32 p-1"
+                      />
+                    )}
 
                     <div className=" flex flex-col p-3 justify-between">
                       <p className="font-bold text-xl text-[#4AA3BA]">
