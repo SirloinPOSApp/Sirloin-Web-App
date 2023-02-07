@@ -8,15 +8,8 @@ import Swal from "sweetalert2";
 import Button from "../../components/Button";
 import { Layout } from "../../components/Layout";
 import { useTitle } from "../../utils/Title";
+import { CustType } from "../../utils/types/sirloin";
 import CustomerEdit from "./CustomerEdit";
-
-interface CustType {
-  id: number;
-  email: string;
-  business_name: string;
-  phone_number: number;
-  address: string;
-}
 
 const Customer = () => {
   useTitle("Sirloin-Customer Tenant");

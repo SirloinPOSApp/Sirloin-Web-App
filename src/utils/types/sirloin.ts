@@ -21,3 +21,11 @@ export interface SummaryType {
   discount: number;
   total: number;
 }
+
+export interface CustType {
+  id: number;
+  email: string;
+  business_name: string;
+  phone_number: number;
+  address: string;
+}
