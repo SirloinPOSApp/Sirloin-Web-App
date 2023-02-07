@@ -271,7 +271,21 @@ export const LandingPage = () => {
                           >
                             +
                           </button>
-                          <p className=" w-12 text-center">{cart.quantity}</p>
+                          {/* <p className=" w-12 text-center">{cart.quantity}</p> */}
+                          <input
+                            type="number"
+                            id="cart_quantity"
+                            name="cart_quantity"
+                            className="w-12 text-center"
+                            value={cart.quantity}
+                            onChange={(e) => {
+                              const updatedCart = [...carts];
+                              updatedCart[index].quantity = parseInt(
+                                e.target.value
+                              );
+                              setCarts(updatedCart);
+                            }}
+                          ></input>
                           <button
                             id="dec-product"
                             className="text-xl w-9 bg-white text-center rounded-r-xl"
