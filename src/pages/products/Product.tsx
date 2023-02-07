@@ -13,7 +13,12 @@ const Product = () => {
   useTitle("Sirloin-Product Tenant");
   const [product, setProduct] = useState<ProductsType[]>([]);
   const [refresh, setRefresh] = useState(false);
-  const [cookie, setCookie] = useCookies();
+  const [cookie, , removeCookie] = useCookies([
+    "token",
+    "id",
+    "business_name",
+    "email",
+  ]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,7 +79,13 @@ const Product = () => {
   return (
     <Layout>
       <div className="flex flex-row justify-between m-10">
-        <h3 className="font-bold text-2xl text-[#4AA3BA]">Product Tenant</h3>
+        {cookie.id != 1 ? (
+          <h3 className="font-bold text-2xl text-[#4AA3BA]">Product Tenant</h3>
+        ) : (
+          <h3 className="font-bold text-2xl text-[#4AA3BA]">
+            Product Super Admin
+          </h3>
+        )}
         <Button
           id="add-product"
           label="Tambah Product"

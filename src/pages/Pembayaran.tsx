@@ -167,9 +167,9 @@ const Pembayaran = () => {
           <option id="shopee" value="cashless">
             ShopeePay
           </option>
-          <option id="ottoclick" value="cashless">
+          {/* <option id="ottoclick" value="cashless">
             Octo Click
-          </option>
+          </option> */}
         </select>
       </div>
       <div className="flex flex-row justify-start space-x-10 px-10 py-20">

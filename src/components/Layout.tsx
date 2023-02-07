@@ -52,6 +52,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         confirmButtonAriaLabel: "ok",
       });
     }
+    console.log("cookie:", cookie.id);
   }, []);
 
   const handleLogout = () => {
@@ -87,76 +88,153 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
             {<FiMenu size="30" />}
           </button>
 
-          <MenuItem
-            component={<Link to="/landing" />}
-            id="home"
-            icon={<FiHome size="20" />}
-          >
-            Home
-          </MenuItem>
-          <MenuItem
-            component={<Link to="/products" />}
-            id="product"
-            icon={<FiPackage size="20" />}
-          >
-            Product
-          </MenuItem>
+          {cookie.id != 1 ? (
+            <div>
+              <MenuItem
+                component={<Link to="/landing" />}
+                id="home"
+                icon={<FiHome size="20" />}
+              >
+                Home
+              </MenuItem>
+              <MenuItem
+                component={<Link to="/products" />}
+                id="product"
+                icon={<FiPackage size="20" />}
+              >
+                Product
+              </MenuItem>
 
-          <MenuItem
-            component={<Link to="/etalase" />}
-            id="etalase-belanja"
-            icon={<FiShoppingBag size="20" />}
-          >
-            Etalase Belanja
-          </MenuItem>
+              <MenuItem
+                component={<Link to="/etalase" />}
+                id="etalase-belanja"
+                icon={<FiShoppingBag size="20" />}
+              >
+                Etalase Belanja
+              </MenuItem>
 
-          <MenuItem
-            component={<Link to="/customer" />}
-            id="customer"
-            icon={<FiUsers size="20" />}
-          >
-            Customer
-          </MenuItem>
+              <MenuItem
+                component={<Link to="/customer" />}
+                id="customer"
+                icon={<FiUsers size="20" />}
+              >
+                Customer
+              </MenuItem>
 
-          <MenuItem
-            component={<Link to="/report-selling" />}
-            id="laporan-penjualan"
-            icon={<FiFileText size="20" />}
-          >
-            Laporan Penjualan
-          </MenuItem>
+              {/* <MenuItem
+                component={<Link to="/report-selling" />}
+                id="laporan-penjualan"
+                icon={<FiFileText size="20" />}
+              >
+                Laporan Penjualan
+              </MenuItem> */}
 
-          <MenuItem
-            component={<Link to="/transaction" />}
-            id="laporan-transaksi"
-            icon={<FiRepeat size="20" />}
-          >
-            Laporan Transaksi
-          </MenuItem>
+              <MenuItem
+                component={<Link to="/transaction" />}
+                id="laporan-transaksi"
+                icon={<FiRepeat size="20" />}
+              >
+                Laporan Transaksi
+              </MenuItem>
 
-          <MenuItem
-            component={<Link to="/history-shopping" />}
-            id="history-pembelanjaan"
-            icon={<FiCalendar size="20" />}
-          >
-            History Pembelanjaan
-          </MenuItem>
+              <MenuItem
+                component={<Link to="/history-shopping" />}
+                id="history-pembelanjaan"
+                icon={<FiCalendar size="20" />}
+              >
+                History Pembelanjaan
+              </MenuItem>
 
-          <MenuItem
-            component={<Link to="/profile-tenant" />}
-            id="profil-tenant"
-            icon={<BsShop size="20" />}
-          >
-            Profil Tenant
-          </MenuItem>
+              <MenuItem
+                component={<Link to="/profile-tenant" />}
+                id="profil-tenant"
+                icon={<BsShop size="20" />}
+              >
+                Profil Tenant
+              </MenuItem>
 
-          <MenuItem
-            onClick={() => handleLogout()}
-            id="logout"
-            icon={<FiLogOut size="20" />}
-          >
-            Log Out
-          </MenuItem>
+              <MenuItem
+                onClick={() => handleLogout()}
+                id="logout"
+                icon={<FiLogOut size="20" />}
+              >
+                Log Out
+              </MenuItem>
+            </div>
+          ) : (
+            <div>
+              <MenuItem
+                component={<Link to="/landing" />}
+                id="home"
+                icon={<FiHome size="20" />}
+              >
+                Home
+              </MenuItem>
+              <MenuItem
+                component={<Link to="/products" />}
+                id="product"
+                icon={<FiPackage size="20" />}
+              >
+                Product
+              </MenuItem>
+
+              {/* <MenuItem
+                component={<Link to="/etalase" />}
+                id="etalase-belanja"
+                icon={<FiShoppingBag size="20" />}
+              >
+                Etalase Belanja
+              </MenuItem> */}
+
+              {/* <MenuItem
+                component={<Link to="/customer" />}
+                id="customer"
+                icon={<FiUsers size="20" />}
+              >
+                Customer
+              </MenuItem> */}
+
+              <MenuItem
+                component={<Link to="/report-selling" />}
+                id="laporan-penjualan"
+                icon={<FiFileText size="20" />}
+              >
+                Laporan Penjualan
+              </MenuItem>
+
+              {/* <MenuItem
+                component={<Link to="/transaction" />}
+                id="laporan-transaksi"
+                icon={<FiRepeat size="20" />}
+              >
+                Laporan Transaksi
+              </MenuItem>
+
+              <MenuItem
+                component={<Link to="/history-shopping" />}
+                id="history-pembelanjaan"
+                icon={<FiCalendar size="20" />}
+              >
+                History Pembelanjaan
+              </MenuItem> */}
+
+              <MenuItem
+                component={<Link to="/profile-tenant" />}
+                id="profil-tenant"
+                icon={<BsShop size="20" />}
+              >
+                Profile Super Admin
+              </MenuItem>
+
+              <MenuItem
+                onClick={() => handleLogout()}
+                id="logout"
+                icon={<FiLogOut size="20" />}
+              >
+                Log Out
+              </MenuItem>
+            </div>
+          )}
         </Menu>
       </Sidebar>
       <main className="h-full w-full overflow-auto">{children}</main>

@@ -10,6 +10,12 @@ import { userType } from "../../utils/types/sirloin";
 export const TenantProfile = () => {
   useTitle("Sirloin-Profil Tenant");
   const [user, setUser] = useState<userType>();
+  const [cookie, , removeCookie] = useCookies([
+    "token",
+    "id",
+    "business_name",
+    "email",
+  ]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +37,13 @@ export const TenantProfile = () => {
   return (
     <Layout>
       <div className="flex flex-row justify-between m-10">
-        <h3 className="font-bold text-2xl text-[#4AA3BA]">Profil Tenant</h3>
+        {cookie.id != 1 ? (
+          <h3 className="font-bold text-2xl text-[#4AA3BA]">Profil Tenant</h3>
+        ) : (
+          <h3 className="font-bold text-2xl text-[#4AA3BA]">
+            Product Super Admin
+          </h3>
+        )}
       </div>
       <div className="flex flex-col drop-shadow-xl bg-[#FAFAFA] rounded-3xl m-10  py-[9rem] px-[6.063rem] text-center gap-6  items-center">
         <h1 className=" text-[#4AA3BA] font-bold text-4xl ">
