@@ -128,6 +128,7 @@ export const Etalase = () => {
           .then((response) => {
             console.log(response);
             window.open(response.data.data.payment_url);
+            navigate("/history-shopping");
             // Swal.fire({
             //   title: "Scan Barcode",
             //   // text: res.data.message,
@@ -218,7 +219,21 @@ export const Etalase = () => {
                           >
                             +
                           </button>
-                          <p className=" w-12 text-center">{cart.quantity}</p>
+                          {/* <p className=" w-12 text-center">{cart.quantity}</p> */}
+                          <input
+                            type="number"
+                            id="cart_quantity"
+                            name="cart_quantity"
+                            className="w-12 text-center"
+                            value={cart.quantity}
+                            onChange={(e) => {
+                              const updatedCart = [...carts];
+                              updatedCart[index].quantity = parseInt(
+                                e.target.value
+                              );
+                              setCarts(updatedCart);
+                            }}
+                          ></input>
                           <button
                             id="dec-product"
                             className="text-xl w-9 bg-white text-center rounded-r-xl"
