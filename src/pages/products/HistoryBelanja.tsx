@@ -19,6 +19,7 @@ const HistoryBelanja = () => {
   const [datas, setDatas] = useState<transactionType[]>([]);
   const [pdf, setPdf] = useState("");
   const [totalTransaction, setTotalTransaction] = useState(0);
+  const [totalTransactionSuccess, setTotalTransactionSuccess] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
   const MySwal = withReactContent(Swal);
   const navigate = useNavigate();
@@ -36,6 +37,11 @@ const HistoryBelanja = () => {
       setTo(end);
     }
     setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_price, 0));
+    setTotalTransactionSuccess(
+      datas
+        .filter((data) => data.transaction_Status === "success")
+        .reduce((acc, cur) => acc + cur.total_bill, 0)
+    );
   }, [startDate, endDate, pdf, from, to]);
 
   function productData() {
@@ -181,6 +187,21 @@ const HistoryBelanja = () => {
               ))}
             </tbody>
             <tfoot>
+              <tr>
+                <th className="bg-[#306D75] text-lg font-bold text-white">
+                  Total Belanja Product Sukses
+                </th>
+                <th className="bg-[#306D75]"></th>
+                <th className="bg-[#306D75]"></th>
+
+                <th></th>
+                <th className="text-lg font-bold">
+                  Rp.{" "}
+                  {totalTransactionSuccess
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                </th>
+              </tr>
               <tr>
                 <th className="bg-[#306D75] text-lg font-bold text-white">
                   Total Belanja Product

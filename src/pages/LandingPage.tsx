@@ -73,7 +73,7 @@ export const LandingPage = () => {
     axios
       .get(`https://bluepath.my.id/products?search=${searchValue}`)
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         setDatas(res.data.data);
       })
       .catch((err) => {
@@ -195,7 +195,7 @@ export const LandingPage = () => {
               <div
                 key={data.id}
                 id={`select-product-${data.id}`}
-                className="flex flex-col text-center content-center justify-center items-center border rounded-2xl shadow-lg h-96 gap-2 bg-white cursor-pointer"
+                className="flex flex-col text-center content-center justify-center items-center border rounded-2xl shadow-lg h-[28rem] gap-2 bg-white cursor-pointer"
                 onClick={() => {
                   onClickProduct(data);
                 }}
@@ -213,6 +213,9 @@ export const LandingPage = () => {
                     className="w-64 h-64"
                   />
                 )}
+                <div className=" flex w-full px-5 ">
+                  <p className="text-sm">Stock: {data.stock}</p>
+                </div>
                 <p className="font-bold text-xl text-[#4AA3BA]">
                   {data.product_name}
                 </p>
