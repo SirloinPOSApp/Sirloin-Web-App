@@ -45,7 +45,8 @@ const LaporanPenjualan = () => {
       setTo(end);
     }
     setTotalPenjualan(datas.reduce((acc, cur) => acc + cur.total_bill, 0));
-  }, [startDate, endDate, pdf, from, to]);
+    // console.log(datas);
+  }, [startDate, endDate, pdf, from, to, datas]);
 
   function DataPenjualan() {
     axios

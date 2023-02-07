@@ -39,7 +39,7 @@ const Transaksi = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(datas);
+    // console.log(datas);
   }, [sendToEmail]);
 
   useEffect(() => {
@@ -55,8 +55,9 @@ const Transaksi = () => {
     // console.log("from:", from);
     // console.log("to:", to);
     // console.log(pdf);
-    setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_price, 0));
-  }, [startDate, endDate, pdf, from, to]);
+    setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_bill, 0));
+    // console.log(datas);
+  }, [startDate, endDate, pdf, from, to, datas]);
 
   function fetchData() {
     axios
