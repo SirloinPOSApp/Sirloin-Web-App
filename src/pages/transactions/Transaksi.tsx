@@ -9,27 +9,14 @@ import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
-
-interface datasType {
-  created_at: string;
-  customer_id: number;
-  customer_name: string;
-  discount: number;
-  id: number;
-  invoice_number: string;
-  invoice_url: string;
-  payment_url: string;
-  total_bill: number;
-  total_price: number;
-  transaction_Status: string;
-}
+import { transactionType } from "../../utils/types/sirloin";
 
 const Transaksi = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [from, setFrom] = useState(startDate?.toISOString().split("T")[0]);
   const [to, setTo] = useState(endDate?.toISOString().split("T")[0]);
-  const [datas, setDatas] = useState<datasType[]>([]);
+  const [datas, setDatas] = useState<transactionType[]>([]);
   const [pdf, setPdf] = useState("");
   const [totalTransaction, setTotalTransaction] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
@@ -197,16 +184,16 @@ const Transaksi = () => {
                   </td>
                   <td
                     className={
-                      data.transaction_Status === "success"
+                      data.transaction_status === "success"
                         ? "text-green-600"
-                        : data.transaction_Status === "pending"
+                        : data.transaction_status === "pending"
                         ? "text-orange-300"
-                        : data.transaction_Status === "waiting payment"
+                        : data.transaction_status === "waiting payment"
                         ? "text-orange-300"
                         : "text-red-500"
                     }
                   >
-                    {data.transaction_Status}
+                    {data.transaction_status}
                   </td>
                   <td className="flex justify-center">
                     <button

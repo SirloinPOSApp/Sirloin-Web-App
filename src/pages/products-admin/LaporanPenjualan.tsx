@@ -8,18 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Button from "../../components/Button";
 import axios from "axios";
 import moment from "moment";
-
-interface datasType {
-  created_at: string;
-  tenant_id: number;
-  tenant_name: string;
-  id: number;
-  invoice_number: string;
-  invoice_url: string;
-  payment_url: string;
-  total_bill: number;
-  transaction_status: string;
-}
+import { transactionAdminType } from "../../utils/types/sirloin";
 
 const LaporanPenjualan = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -27,7 +16,7 @@ const LaporanPenjualan = () => {
   const [from, setFrom] = useState(startDate?.toISOString().split("T")[0]);
   const [to, setTo] = useState(endDate?.toISOString().split("T")[0]);
 
-  const [datas, setDatas] = useState<datasType[]>([]);
+  const [datas, setDatas] = useState<transactionAdminType[]>([]);
   const [pdf, setPdf] = useState("");
   const [totalPenjualan, setTotalPenjualan] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
