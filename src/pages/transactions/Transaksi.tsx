@@ -55,7 +55,8 @@ const Transaksi = () => {
     // console.log("from:", from);
     // console.log("to:", to);
     // console.log(pdf);
-    setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_price, 0));
+    setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_bill, 0));
+    console.log(datas);
   }, [startDate, endDate, pdf, from, to]);
 
   function fetchData() {
