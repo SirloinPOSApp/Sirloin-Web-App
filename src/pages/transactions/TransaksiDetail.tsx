@@ -55,11 +55,56 @@ export const TransaksiDetail = () => {
   const handleClickKodeBayar = () => {
     Swal.fire({
       title: "Scan Barcode",
-      text: datas?.payment_url,
       imageUrl: datas?.payment_url,
       icon: "info",
       confirmButtonAriaLabel: "ok",
     }).then(() => setRefresh(!refresh));
+  };
+
+  const handleCashBayar = () => {
+    axios
+      .put(`https://bluepath.my.id/transactions/${transaction_id}`, {
+        transaction_status: "success",
+      })
+      .then((response) => {
+        Swal.fire({
+          title: "Berhasil",
+          text: response.data.message,
+          icon: "success",
+          confirmButtonAriaLabel: "ok",
+        }).then(() => setRefresh(!refresh));
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Gagal",
+          text: error.response.data.message,
+          icon: "error",
+          confirmButtonAriaLabel: "ok",
+        });
+      });
+  };
+
+  const handleCashBatal = () => {
+    axios
+      .put(`https://bluepath.my.id/transactions/${transaction_id}`, {
+        transaction_status: "failure",
+      })
+      .then((response) => {
+        Swal.fire({
+          title: "Berhasil",
+          text: response.data.message,
+          icon: "success",
+          confirmButtonAriaLabel: "ok",
+        }).then(() => setRefresh(!refresh));
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Gagal",
+          text: error.response.data.message,
+          icon: "error",
+          confirmButtonAriaLabel: "ok",
+        });
+      });
   };
 
   return (
@@ -184,12 +229,33 @@ export const TransaksiDetail = () => {
           buttonSet="w-40 text-[#DA5C53] my-3 btn-outline"
           onClick={() => navigate("/transaction")}
         />
-        <Button
-          id="payment"
-          label="Kode Bayar"
-          buttonSet="w-40 text-white bg-teal-700 my-3 border-none"
-          onClick={() => handleClickKodeBayar()}
-        />
+        {datas?.transaction_status == "failure" ||
+        datas?.transaction_status == "success" ? (
+          <p></p>
+        ) : datas?.customer_name !== "" ||
+          datas?.transaction_status == "waiting payment" ? (
+          <Button
+            id="payment"
+            label="Kode Bayar"
+            buttonSet="w-40 text-white bg-teal-700 my-3 border-none"
+            onClick={() => handleClickKodeBayar()}
+          />
+        ) : (
+          <div className="flex gap-10">
+            <Button
+              id="batalkan"
+              label="Batalkan"
+              buttonSet="w-40 text-white bg-red-500 my-3 border-none"
+              onClick={() => handleCashBatal()}
+            />
+            <Button
+              id="bayar"
+              label="Bayar"
+              buttonSet="w-40 text-white bg-teal-700 my-3 border-none"
+              onClick={() => handleCashBayar()}
+            />
+          </div>
+        )}
       </div>
     </Layout>
   );
