@@ -8,13 +8,26 @@ import "react-datepicker/dist/react-datepicker.css";
 import Button from "../../components/Button";
 import axios from "axios";
 import moment from "moment";
+
+interface datasType {
+  created_at: string;
+  tenant_id: number;
+  tenant_name: string;
+  id: number;
+  invoice_number: string;
+  invoice_url: string;
+  payment_url: string;
+  total_bill: number;
+  transaction_status: string;
+}
+
 const LaporanPenjualan = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [from, setFrom] = useState(startDate?.toISOString().split("T")[0]);
   const [to, setTo] = useState(endDate?.toISOString().split("T")[0]);
 
-  const [datas, setDatas] = useState<any[]>([]);
+  const [datas, setDatas] = useState<datasType[]>([]);
   const [pdf, setPdf] = useState("");
   const [totalPenjualan, setTotalPenjualan] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
@@ -40,7 +53,7 @@ const LaporanPenjualan = () => {
         `https://bluepath.my.id/transactions/admin?status=sell&from=${from}&to=${to}`
       )
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res);
         setDatas(res.data.data);
         setPdf(res.data.pdf_url);
       })
@@ -72,7 +85,7 @@ const LaporanPenjualan = () => {
           <label className="font-bold text-xl">Dari</label>
           <DatePicker
             id="start-date"
-            dateFormat="dd/MM/yyyy"
+            dateFormat="yyyy-MM-dd"
             className="z-10 border rounded-md p-2 pl-11 "
             selected={startDate}
             onChange={(date) => setStartDate(date)}
@@ -83,7 +96,7 @@ const LaporanPenjualan = () => {
           <label className="font-bold text-xl">Sampai</label>
           <DatePicker
             id="end-date"
-            dateFormat="dd/MM/yyyy"
+            dateFormat="yyyy-MM-dd"
             className="z-10 border rounded-md p-2 pl-11"
             selected={endDate}
             onChange={(date) => setEndDate(date)}
@@ -111,6 +124,16 @@ const LaporanPenjualan = () => {
         </div>
       ) : (
         <div className="overflow-x-auto m-10 ">
+          <div className="flex justify-end mb-10 gap-3">
+            <Button
+              onClick={() => {
+                handlePDF();
+              }}
+              id="pdf"
+              label="Print"
+              buttonSet="bg-[#4AA3BA] border-none capitalize btn-md w-32"
+            />
+          </div>
           <table className="table w-full px-10 border z-0">
             <thead>
               <tr className=" text-white">
