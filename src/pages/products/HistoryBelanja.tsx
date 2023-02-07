@@ -156,21 +156,23 @@ const HistoryBelanja = () => {
                   </td>
                   <td
                     className={
-                      data.transaction_status === "success"
+                      data.transaction_Status === "success"
                         ? "text-green-600"
-                        : data.transaction_status === "pending"
+                        : data.transaction_Status === "pending"
                         ? "text-orange-300"
-                        : data.transaction_status === "waiting payment"
+                        : data.transaction_Status === "waiting payment"
                         ? "text-orange-300"
                         : "text-red-500"
                     }
                   >
-                    {data.transaction_status}
+                    {data.transaction_Status}
                   </td>
                   <td className="flex justify-center">
                     <button
                       className="btn btn-ghost btn-square"
-                      onClick={() => navigate(`/detail-transaction/${data.id}`)}
+                      onClick={() =>
+                        navigate(`/detail-history-shopping/${data.id}`)
+                      }
                     >
                       <FiEdit size="20" color="teal" />
                     </button>
@@ -192,7 +194,6 @@ const HistoryBelanja = () => {
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                 </th>
-                <th></th>
               </tr>
             </tfoot>
           </table>

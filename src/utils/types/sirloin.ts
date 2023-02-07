@@ -41,6 +41,7 @@ export interface transactionType {
   payment_url: string;
   total_bill: number;
   total_price: number;
+  transaction_Status: string;
   transaction_status: string;
   TransactionProductRes: [
     {
@@ -52,6 +53,20 @@ export interface transactionType {
       total_price: number;
     }
   ];
+}
+
+export interface transactionDetailType {
+  created_at: string;
+  customer_id: number;
+  customer_name: string;
+  discount: number;
+  id: number;
+  invoice_number: string;
+  invoice_url: string;
+  payment_url: string;
+  total_bill: number;
+  total_price: number;
+  transaction_status: string;
 }
 
 export interface transactionAdminType {

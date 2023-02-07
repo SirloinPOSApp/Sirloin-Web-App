@@ -20,6 +20,7 @@ import React, { useState, useMemo } from "react";
 import { userContext } from "../utils/context";
 import CustomerEdit from "../pages/customers/CustomerEdit";
 import ProductEdit from "../pages/products/ProductEdit";
+import { HistoryBelanjaDetail } from "../pages/products/HistoryBelanjaDetail";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
   {
     path: "/history-shopping",
     element: <HistoryBelanja />,
+  },
+  {
+    path: "/detail-history-shopping/:transaction_id",
+    element: <HistoryBelanjaDetail />,
   },
   {
     path: "/report-selling",
