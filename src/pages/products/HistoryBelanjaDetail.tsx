@@ -9,7 +9,7 @@ import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { transactionType } from "../../utils/types/sirloin";
 
-export const TransaksiDetail = () => {
+export const HistoryBelanjaDetail = () => {
   const [datas, setDatas] = useState<transactionType>();
   const { transaction_id } = useParams();
   const [total_quantity, setTotal_quantity] = useState(0);
@@ -53,13 +53,14 @@ export const TransaksiDetail = () => {
   };
 
   const handleClickKodeBayar = () => {
-    Swal.fire({
-      title: "Scan Barcode",
-      text: datas?.payment_url,
-      imageUrl: datas?.payment_url,
-      icon: "info",
-      confirmButtonAriaLabel: "ok",
-    }).then(() => setRefresh(!refresh));
+    // Swal.fire({
+    //   title: "Scan Barcode",
+    //   text: datas?.payment_url,
+    //   imageUrl: datas?.payment_url,
+    //   icon: "info",
+    //   confirmButtonAriaLabel: "ok",
+    // }).then(() => setRefresh(!refresh));
+    window.open(datas?.payment_url);
   };
 
   return (
@@ -80,7 +81,7 @@ export const TransaksiDetail = () => {
           }`}
         >
           <h1 className="border-b-2 font-bold text-xl pb-5 mb-4 capitalize">
-            <p>{datas?.transaction_status}</p>
+            {datas?.transaction_status}
           </h1>
           <p className="absolute top-[-0.5rem] left-0 ml-[-1.5rem] text-5xl">
             l
@@ -182,7 +183,7 @@ export const TransaksiDetail = () => {
           id="back"
           label="Kembali"
           buttonSet="w-40 text-[#DA5C53] my-3 btn-outline"
-          onClick={() => navigate("/transaction")}
+          onClick={() => navigate("/history-shopping")}
         />
         <Button
           id="payment"

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { ProductsType } from "../utils/types/sirloin";
 import axios from "axios";
 import { copyFileSync } from "fs";
+import Swal from "../utils/Swal";
 
 export const Etalase = () => {
   const [product, setProduct] = useState<ProductsType[]>([]);
@@ -100,6 +101,52 @@ export const Etalase = () => {
     localStorage.setItem("summary", JSON.stringify(summary));
     navigate(`/pembayaran_detail`);
   };
+
+  function orderProduct() {
+    const data: any = {
+      items: carts.map((cart) => ({
+        product_id: cart.id,
+        quantity: cart.quantity,
+        price: cart.price,
+      })),
+    };
+    console.log(carts);
+    Swal.fire({
+      title: `Total order: Rp. ${summary.total
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`,
+      text: "Apakah Anda yakin dengan ordernya?",
+      // icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Order",
+    }).then((result) => {
+      if (result.value) {
+        axios
+          .post(`https://bluepath.my.id/transactions/buy`, data)
+          .then((response) => {
+            console.log(response);
+            window.open(response.data.data.payment_url);
+            // Swal.fire({
+            //   title: "Scan Barcode",
+            //   // text: res.data.message,
+            //   imageUrl: response.data.data.payment_url,
+            //   icon: "info",
+            //   confirmButtonAriaLabel: "ok",
+            // }).then(() => navigate("/history-shopping"));
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Gagal",
+              text: error.response.data.message,
+              icon: "error",
+              confirmButtonAriaLabel: "ok",
+            });
+          });
+      }
+    });
+  }
 
   return (
     <Layout>
@@ -223,7 +270,7 @@ export const Etalase = () => {
                 type="submit"
                 label="Bayar"
                 buttonSet="w-full bg-[#306D75] capitalize border-none mt-7 text-lg h-14"
-                onClick={() => handleSubmit()}
+                onClick={() => orderProduct()}
               />
             </div>
           )}

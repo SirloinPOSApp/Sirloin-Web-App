@@ -43,7 +43,7 @@ const Transaksi = () => {
     // console.log("to:", to);
     // console.log(pdf);
     setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_bill, 0));
-    // console.log(datas);
+    console.log(datas);
   }, [startDate, endDate, pdf, from, to, datas]);
 
   function fetchData() {
@@ -184,16 +184,16 @@ const Transaksi = () => {
                   </td>
                   <td
                     className={
-                      data.transaction_status === "success"
+                      data.transaction_Status === "success"
                         ? "text-green-600"
-                        : data.transaction_status === "pending"
+                        : data.transaction_Status === "pending"
                         ? "text-orange-300"
-                        : data.transaction_status === "waiting payment"
+                        : data.transaction_Status === "waiting payment"
                         ? "text-orange-300"
                         : "text-red-500"
                     }
                   >
-                    {data.transaction_status}
+                    {data.transaction_Status}
                   </td>
                   <td className="flex justify-center">
                     <button
