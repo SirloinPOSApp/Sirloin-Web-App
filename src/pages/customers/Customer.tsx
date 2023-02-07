@@ -86,6 +86,7 @@ const Customer = () => {
           <thead>
             <tr>
               <th>Nama Customer</th>
+              <th>No. Member</th>
               <th>Alamat</th>
               <th>Nomor Telephone</th>
               <th>Email</th>
@@ -96,6 +97,7 @@ const Customer = () => {
             {customer.map((customer, index) => (
               <tr key={index}>
                 <td>{customer.business_name}</td>
+                <td>{customer.id}</td>
                 <td>{customer.address}</td>
                 <td>{customer.phone_number}</td>
                 <td>{customer.email}</td>
