@@ -21,6 +21,7 @@ const Pembayaran = () => {
   const [summary, setSummary] = useState(() => {
     const saved = localStorage.getItem("summary");
     let initialValue: SummaryType = {
+      customer_id: -1,
       sub_total: 0,
       discount: 0,
       total: 0,
@@ -36,7 +37,7 @@ const Pembayaran = () => {
   const [isDisable, setIsDisable] = useState(true);
 
   useEffect(() => {
-    // console.log(carts, summary, payment);
+    console.log(carts, summary, payment);
     if (payment !== "") {
       setIsDisable(false);
     }
@@ -49,7 +50,7 @@ const Pembayaran = () => {
         quantity: cart.quantity,
         price: cart.price,
       })),
-      customer_id: 0,
+      customer_id: summary.customer_id,
       payment_method: payment,
     };
     axios
@@ -127,13 +128,13 @@ const Pembayaran = () => {
           <p>Diskon Member</p>
           <h5 className="font-bold text-lg text-[#4AA3BA]">Total Belanja</h5>
         </div>
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 text-end">
           <p>
             Rp.{" "}
             {summary.sub_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </p>
           <p>
-            Rp.{" "}
+            -Rp.{" "}
             {summary.discount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </p>
           <h5 className="font-bold text-lg text-[#4AA3BA]">

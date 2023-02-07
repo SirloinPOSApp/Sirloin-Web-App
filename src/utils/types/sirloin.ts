@@ -16,6 +16,7 @@ export interface ProductsType {
 }
 
 export interface SummaryType {
+  customer_id: number;
   sub_total: number;
   discount: number;
   total: number;

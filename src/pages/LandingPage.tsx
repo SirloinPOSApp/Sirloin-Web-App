@@ -9,17 +9,22 @@ import { useEffect, useState } from "react";
 import { ProductsType } from "../utils/types/sirloin";
 import { FC } from "react";
 import { redirect, useNavigate, useSearchParams } from "react-router-dom";
+import Swal from "../utils/Swal";
+import withReactContent from "sweetalert2-react-content";
 
 export const LandingPage = () => {
   const [datas, setDatas] = useState<ProductsType[]>([]);
   const [carts, setCarts] = useState<ProductsType[]>([]);
   const [summary, setSummary] = useState({
+    customer_id: -1,
     sub_total: 0,
     discount: 0,
     total: 0,
   });
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
+  const [customerId, setCustomerId] = useState(0);
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     fetchDataProducts();
@@ -31,9 +36,23 @@ export const LandingPage = () => {
       (acc, cart) => acc + cart.price * (cart.quantity || 0),
       0
     );
-    const total = sub_total - summary.discount;
-    setSummary((prevState) => ({ ...prevState, sub_total }));
-    setSummary((prevState) => ({ ...prevState, total }));
+    const discount = sub_total * 0.1;
+    const total = sub_total - discount;
+    setSummary((prevState) => ({
+      ...prevState,
+      sub_total,
+      discount,
+      total,
+    }));
+
+    if (carts.length == 0) {
+      setSummary({
+        ...summary,
+        customer_id: 0,
+        discount: 0,
+        total: summary.sub_total,
+      });
+    }
   }, [carts]);
 
   function fetchDataProducts() {
@@ -100,13 +119,35 @@ export const LandingPage = () => {
     localStorage.setItem("summary", JSON.stringify(summary));
     navigate(`/pembayaran_detail`);
   };
-  function submitForm(event: any) {
-    // const searchInput = document.getElementById("searchInput").value;
-    // window.location.href = "http://example.com/products?search=" + searchInput;
-    event.preventDefault();
-    // let params = serializeFormQuery(event.target);
-    // setSearchParams(params);
-  }
+
+  const handleAddMember = (num: any) => {
+    axios
+      .get(`https://bluepath.my.id/customers/${num}`)
+      .then((product) => {
+        const { data } = product.data;
+        console.log(data);
+        setSummary({
+          ...summary,
+          customer_id: num,
+          discount: summary.sub_total * 0.1,
+          total: summary.sub_total - summary.sub_total * 0.1,
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Gagal",
+          text: error.response.data.message,
+          icon: "error",
+          confirmButtonAriaLabel: "ok",
+        });
+        setSummary({
+          ...summary,
+          customer_id: 0,
+          discount: 0,
+          total: summary.sub_total,
+        });
+      });
+  };
 
   return (
     <Layout>
@@ -236,21 +277,23 @@ export const LandingPage = () => {
                 </div>
               ))}
               <div className="form-control w-full">
-                <form className="input-group">
+                <div className="input-group">
                   <input
-                    type="text"
-                    id="input-member"
-                    name="no-member"
+                    type="number"
+                    id="customer_id"
+                    name="customer_id"
                     className="rounded-lg bg-white p-3 border-2 focus:outline-none text-black w-full"
                     placeholder="No. member"
+                    onChange={(e) => setCustomerId(parseInt(e.target.value))}
                   ></input>
                   <Button
+                    onClick={() => handleAddMember(customerId)}
                     id="select-member"
                     type="submit"
                     label="member"
                     buttonSet="h-full py-5 bg-[#306D75] capitalize border-none"
                   />
-                </form>
+                </div>
               </div>
               <div className="bg-[#F7F6F6] mt-7 rounded-xl py-10 px-9 flex flex-col gap-6">
                 <div className="flex justify-between">
@@ -265,10 +308,16 @@ export const LandingPage = () => {
                 <div className="flex justify-between">
                   <p>Diskon Member</p>
                   <p>
-                    Rp.{" "}
-                    {summary.discount
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    -Rp.{" "}
+                    {summary.customer_id > 0
+                      ? (summary.sub_total * 0.1)
+                          .toFixed(0)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                      : summary.discount
+                          .toFixed(0)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                   </p>
                 </div>
                 <div className="flex justify-between">
