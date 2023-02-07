@@ -7,23 +7,11 @@ import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { useTitle } from "../../utils/Title";
 import { Input } from "../../components/Input";
-
-interface ProductType {
-  id: number;
-  upc: string;
-  category: string;
-  product_name: string;
-  stock: number;
-  minimum_stock: number;
-  buying_price: number;
-  price: number;
-  product_image: string;
-  supplier: string;
-}
+import { ProductsType } from "../../utils/types/sirloin";
 
 const ProductEdit = () => {
   useTitle("Sirloin-Edit Product Tenant");
-  const [product, setProduct] = useState<ProductType>();
+  const [product, setProduct] = useState<ProductsType>();
   const { product_id } = useParams();
   const [formProduct, setFormProduct] = useState({
     upc: "",

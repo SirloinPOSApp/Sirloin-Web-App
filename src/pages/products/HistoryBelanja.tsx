@@ -9,27 +9,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import { FiEdit } from "react-icons/fi";
-
-interface datasType {
-  created_at: string;
-  customer_id: number;
-  customer_name: string;
-  discount: number;
-  id: number;
-  invoice_number: string;
-  invoice_url: string;
-  payment_url: string;
-  total_bill: number;
-  total_price: number;
-  transaction_status: string;
-}
+import { transactionType } from "../../utils/types/sirloin";
 
 const HistoryBelanja = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [from, setFrom] = useState(startDate?.toISOString().split("T")[0]);
   const [to, setTo] = useState(endDate?.toISOString().split("T")[0]);
-  const [datas, setDatas] = useState<datasType[]>([]);
+  const [datas, setDatas] = useState<transactionType[]>([]);
   const [pdf, setPdf] = useState("");
   const [totalTransaction, setTotalTransaction] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);

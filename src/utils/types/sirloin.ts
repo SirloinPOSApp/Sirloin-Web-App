@@ -29,3 +29,17 @@ export interface CustType {
   phone_number: number;
   address: string;
 }
+
+export interface transactionType {
+  created_at: string;
+  customer_id: number;
+  customer_name: string;
+  discount: number;
+  id: number;
+  invoice_number: string;
+  invoice_url: string;
+  payment_url: string;
+  total_bill: number;
+  total_price: number;
+  transaction_status: string;
+}
