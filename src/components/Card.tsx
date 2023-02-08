@@ -22,7 +22,11 @@ export const CardEtalase: FC<CardProps> = ({
   onClickCart,
 }) => {
   return (
-    <div className="card shadow-lg h-96 bg-white" id={`${id}`}>
+    <div
+      className="card shadow-lg h-96 bg-white"
+      id={`${id}`}
+      onClick={onClickCart}
+    >
       <figure className="m-3">
         <img
           src={
