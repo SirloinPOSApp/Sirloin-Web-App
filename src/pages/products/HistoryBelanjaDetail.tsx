@@ -187,9 +187,7 @@ export const HistoryBelanjaDetail = () => {
           buttonSet="w-40 text-[#DA5C53] my-3 btn-outline"
           onClick={() => navigate("/history-shopping")}
         />
-        {datas?.transaction_status === "deny" ? (
-          <p></p>
-        ) : (
+        {datas?.transaction_status === "pending" && (
           <Button
             id="payment"
             label="Bayar"

@@ -10,7 +10,7 @@ import withReactContent from "sweetalert2-react-content";
 import { transactionType } from "../../utils/types/sirloin";
 
 export const TransaksiDetail = () => {
-  const [datas, setDatas] = useState<transactionType>();
+  const [datas, setDatas] = useState({} as transactionType);
   const { transaction_id } = useParams();
   const [total_quantity, setTotal_quantity] = useState(0);
   const [refresh, setRefresh] = useState(false);
@@ -207,7 +207,7 @@ export const TransaksiDetail = () => {
           </div>
           <div className="flex justify-between mb-4 border-b pb-4 w-1/2 mx-5">
             <p>Diskon</p>
-            <p>-Rp. {datas?.discount}</p>
+            <p>-Rp. {datas?.discount * datas?.total_price}</p>
           </div>
           <div className="flex justify-between mb-4 text-xl font-bold mt-7 w-1/2 mx-5">
             <p>Total Belanja</p>

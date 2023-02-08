@@ -123,24 +123,16 @@ const Product = () => {
                       <button
                         id="del-product"
                         className="btn btn-ghost btn-square"
+                        onClick={() => deleteProduct(product.id)}
                       >
-                        <FiTrash2
-                          size="20"
-                          color="red"
-                          onClick={() => deleteProduct(product.id)}
-                        />
+                        <FiTrash2 size="20" color="red" />
                       </button>
                       <button
                         id="edit-product"
                         className="btn btn-ghost btn-square"
+                        onClick={() => navigate(`/edit-product/${product.id}`)}
                       >
-                        <FiEdit
-                          size="20"
-                          color="teal"
-                          onClick={() =>
-                            navigate(`/edit-product/${product.id}`)
-                          }
-                        />
+                        <FiEdit size="20" color="teal" />
                       </button>
                     </td>
                   </tr>

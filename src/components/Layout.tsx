@@ -148,6 +148,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
           },
         }}
         className="h-full"
+        breakPoint="md"
       >
         <Menu className="text-white">
           <button id="burger" className="p-7" onClick={() => collapseSidebar()}>
