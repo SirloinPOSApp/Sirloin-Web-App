@@ -10,6 +10,7 @@ import withReactContent from "sweetalert2-react-content";
 import { userType } from "../../utils/types/sirloin";
 
 export const TenantEdit = () => {
+  useTitle("Sirloin - Edit Profil Tenant");
   const MySwal = withReactContent(Swal);
   useTitle("Sirloin-Profil Tenant");
   const [user, setUser] = useState<userType>();

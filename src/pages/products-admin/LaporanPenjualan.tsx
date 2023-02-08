@@ -9,8 +9,10 @@ import Button from "../../components/Button";
 import axios from "axios";
 import moment from "moment";
 import { transactionAdminType } from "../../utils/types/sirloin";
+import { useTitle } from "../../utils/Title";
 
 const LaporanPenjualan = () => {
+  useTitle("Sirloin - Laporan Penjualan");
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [from, setFrom] = useState(startDate?.toISOString().split("T")[0]);

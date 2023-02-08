@@ -13,7 +13,7 @@ import { CustType } from "../../utils/types/sirloin";
 import CustomerEdit from "./CustomerEdit";
 
 const Customer = () => {
-  useTitle("Sirloin-Customer Tenant");
+  useTitle("Sirloin - Customer Tenant");
   const [customer, setCustomer] = useState<CustType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [refresh, setRefresh] = useState(false);

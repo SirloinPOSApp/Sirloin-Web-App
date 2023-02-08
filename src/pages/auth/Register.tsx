@@ -6,8 +6,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
+import { useTitle } from "../../utils/Title";
 
 export const Register = () => {
+  useTitle("Sirloin - Register");
   const MySwal = withReactContent(Swal);
   const [formRegister, setFormRegister] = useState({
     business_name: "",

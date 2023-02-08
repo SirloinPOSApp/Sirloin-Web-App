@@ -10,8 +10,10 @@ import moment from "moment";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { transactionType } from "../../utils/types/sirloin";
+import { useTitle } from "../../utils/Title";
 
 const Transaksi = () => {
+  useTitle("Sirloin - Laporan Transaksi");
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [from, setFrom] = useState(startDate?.toISOString().split("T")[0]);

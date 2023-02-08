@@ -7,8 +7,10 @@ import axios from "axios";
 import Swal from "../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { Link, useNavigate } from "react-router-dom";
+import { useTitle } from "../utils/Title";
 
 const Pembayaran = () => {
+  useTitle("Sirloin - Detail Pembayaran");
   const [carts, setCarts] = useState<ProductsType[]>(() => {
     const saved = localStorage.getItem("carts");
     let initialValue = [];

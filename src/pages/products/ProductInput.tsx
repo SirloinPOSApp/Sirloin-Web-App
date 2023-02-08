@@ -5,8 +5,10 @@ import Button from "../../components/Button";
 import { Layout } from "../../components/Layout";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
+import { useTitle } from "../../utils/Title";
 
 const ProductInput = () => {
+  useTitle("Sirloin - Tambah Product");
   const [formProduct, setFormProduct] = useState({
     upc: "",
     category: "",

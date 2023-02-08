@@ -10,6 +10,7 @@ import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 
 export const TenantProfile = () => {
+  useTitle("Sirloin - Profile Tenant");
   const storedToken = localStorage.getItem("device_token");
   const tokenAsString = JSON.stringify(storedToken);
   const [form, setForm] = useState({

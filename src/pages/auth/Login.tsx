@@ -9,8 +9,10 @@ import withReactContent from "sweetalert2-react-content";
 import { useCookies } from "react-cookie";
 import { useContext } from "react";
 import { userContext } from "../../utils/context";
+import { useTitle } from "../../utils/Title";
 
 export const Login = () => {
+  useTitle("Sirloin - Login");
   const MySwal = withReactContent(Swal);
   const [formLogin, setFormLogin] = useState({
     email: "",
