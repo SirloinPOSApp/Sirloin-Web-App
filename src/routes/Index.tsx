@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Customer from "../pages/customers/Customer";
 import CustomerInput from "../pages/customers/CustomerInput";
 import { Login } from "../pages/auth/Login";
@@ -105,23 +109,24 @@ const App = () => {
     },
     {
       path: "/customer",
-      element: <Customer />,
+      element: cookie.id == 1 ? <Navigate to="/landing" /> : <Customer />,
     },
     {
       path: "/add-customer",
-      element: <CustomerInput />,
+      element: cookie.id == 1 ? <Navigate to="/landing" /> : <CustomerInput />,
     },
     {
       path: "/edit-customer/:customer_id",
-      element: <CustomerEdit />,
+      element: cookie.id == 1 ? <Navigate to="/landing" /> : <CustomerEdit />,
     },
     {
       path: "/transaction",
-      element: <Transaksi />,
+      element: cookie.id == 1 ? <Navigate to="/landing" /> : <Transaksi />,
     },
     {
       path: "/detail-transaction/:transaction_id",
-      element: <TransaksiDetail />,
+      element:
+        cookie.id == 1 ? <Navigate to="/landing" /> : <TransaksiDetail />,
     },
     {
       path: "/profile-tenant",
@@ -133,19 +138,21 @@ const App = () => {
     },
     {
       path: "/history-shopping",
-      element: <HistoryBelanja />,
+      element: cookie.id == 1 ? <Navigate to="/landing" /> : <HistoryBelanja />,
     },
     {
       path: "/detail-history-shopping/:transaction_id",
-      element: <HistoryBelanjaDetail />,
+      element:
+        cookie.id == 1 ? <Navigate to="/landing" /> : <HistoryBelanjaDetail />,
     },
     {
       path: "/report-selling",
-      element: <LaporanPenjualan />,
+      element:
+        cookie.id != 1 ? <Navigate to="/landing" /> : <LaporanPenjualan />,
     },
     {
       path: "/etalase",
-      element: <Etalase />,
+      element: cookie.id == 1 ? <Navigate to="/landing" /> : <Etalase />,
     },
     {
       path: "/pembayaran_detail",

@@ -6,7 +6,7 @@ import { ProductsType, SummaryType } from "../utils/types/sirloin";
 import axios from "axios";
 import Swal from "../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Pembayaran = () => {
   const [carts, setCarts] = useState<ProductsType[]>(() => {
@@ -173,11 +173,13 @@ const Pembayaran = () => {
         </select>
       </div>
       <div className="flex flex-row justify-start space-x-10 px-10 py-20">
-        <Button
-          id="back"
-          label="Kembali"
-          buttonSet="w-40 text-[#DA5C53]  btn-outline"
-        />
+        <Link to={"/landing"}>
+          <Button
+            id="back"
+            label="Kembali"
+            buttonSet="w-40 text-[#DA5C53]  btn-outline"
+          />
+        </Link>
         <Button
           type="submit"
           disabled={isDisable}
