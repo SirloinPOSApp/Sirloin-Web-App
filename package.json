@@ -11,11 +11,13 @@
   "dependencies": {
     "axios": "^1.2.6",
     "daisyui": "^2.49.0",
+    "firebase": "^9.17.1",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
     "react-pro-sidebar": "^1.0.0",
     "react-router-dom": "^6.8.0",

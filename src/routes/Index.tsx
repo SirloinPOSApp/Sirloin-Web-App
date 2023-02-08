@@ -22,85 +22,6 @@ import CustomerEdit from "../pages/customers/CustomerEdit";
 import ProductEdit from "../pages/products/ProductEdit";
 import { HistoryBelanjaDetail } from "../pages/products/HistoryBelanjaDetail";
 
-const router = createBrowserRouter([
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/landing",
-    element: <LandingPage />,
-  },
-  {
-    path: "/products",
-    element: <Product />,
-  },
-  {
-    path: "/add-product",
-    element: <ProductInput />,
-  },
-  {
-    path: "/edit-product/:product_id",
-    element: <ProductEdit />,
-  },
-  {
-    path: "/customer",
-    element: <Customer />,
-  },
-  {
-    path: "/add-customer",
-    element: <CustomerInput />,
-  },
-  {
-    path: "/edit-customer/:customer_id",
-    element: <CustomerEdit />,
-  },
-  {
-    path: "/transaction",
-    element: <Transaksi />,
-  },
-  {
-    path: "/detail-transaction/:transaction_id",
-    element: <TransaksiDetail />,
-  },
-  {
-    path: "/profile-tenant",
-    element: <TenantProfile />,
-  },
-  {
-    path: "/edit-tenant",
-    element: <TenantEdit />,
-  },
-  {
-    path: "/history-shopping",
-    element: <HistoryBelanja />,
-  },
-  {
-    path: "/detail-history-shopping/:transaction_id",
-    element: <HistoryBelanjaDetail />,
-  },
-  {
-    path: "/report-selling",
-    element: <LaporanPenjualan />,
-  },
-  {
-    path: "/etalase",
-    element: <Etalase />,
-  },
-  {
-    path: "/pembayaran_detail",
-    element: <Pembayaran />,
-  },
-]);
-
 // const defaultGlobalState = {
 //   num: 0,
 //   text: "foo",
@@ -130,6 +51,17 @@ const router = createBrowserRouter([
 //   React.useContext(dispatchStateContext),
 // ];
 
+// if ("serviceWorker" in navigator) {
+//   navigator.serviceWorker
+//     .register("/firebase-messaging-sw.js")
+//     .then(function (registration) {
+//       console.log("Registration successful, scope is:", registration.scope);
+//     })
+//     .catch(function (err) {
+//       console.log("Service worker registration failed, error:", err);
+//     });
+// }
+
 const App = () => {
   const [cookie, , removeCookie] = useCookies([
     "token",
@@ -141,6 +73,85 @@ const App = () => {
 
   const [user, setUser] = useState(false);
   const data = useMemo(() => ({ user, setUser }), [user]);
+
+  const router = createBrowserRouter([
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
+    },
+    {
+      path: "/landing",
+      element: <LandingPage />,
+    },
+    {
+      path: "/products",
+      element: <Product />,
+    },
+    {
+      path: "/add-product",
+      element: <ProductInput />,
+    },
+    {
+      path: "/edit-product/:product_id",
+      element: <ProductEdit />,
+    },
+    {
+      path: "/customer",
+      element: <Customer />,
+    },
+    {
+      path: "/add-customer",
+      element: <CustomerInput />,
+    },
+    {
+      path: "/edit-customer/:customer_id",
+      element: <CustomerEdit />,
+    },
+    {
+      path: "/transaction",
+      element: <Transaksi />,
+    },
+    {
+      path: "/detail-transaction/:transaction_id",
+      element: <TransaksiDetail />,
+    },
+    {
+      path: "/profile-tenant",
+      element: <TenantProfile />,
+    },
+    {
+      path: "/edit-tenant",
+      element: <TenantEdit />,
+    },
+    {
+      path: "/history-shopping",
+      element: <HistoryBelanja />,
+    },
+    {
+      path: "/detail-history-shopping/:transaction_id",
+      element: <HistoryBelanjaDetail />,
+    },
+    {
+      path: "/report-selling",
+      element: <LaporanPenjualan />,
+    },
+    {
+      path: "/etalase",
+      element: <Etalase />,
+    },
+    {
+      path: "/pembayaran_detail",
+      element: <Pembayaran />,
+    },
+  ]);
 
   axios.interceptors.request.use(function (config: any) {
     config.headers = config.headers || {};
