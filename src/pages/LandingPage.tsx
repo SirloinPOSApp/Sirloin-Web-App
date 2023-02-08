@@ -12,6 +12,7 @@ import { redirect, useNavigate, useSearchParams } from "react-router-dom";
 import Swal from "../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { useCookies } from "react-cookie";
+import { SkeletonLoading } from "../components/Loading";
 
 export const LandingPage = () => {
   const [datas, setDatas] = useState<ProductsType[]>([]);
@@ -33,6 +34,7 @@ export const LandingPage = () => {
     "email",
   ]);
   const MySwal = withReactContent(Swal);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     fetchDataProducts();
@@ -90,7 +92,8 @@ export const LandingPage = () => {
       .catch((err) => {
         // alert(err.toString());
         alert(err.response.data.message);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   const onClickProduct = (data: ProductsType) => {
@@ -210,41 +213,46 @@ export const LandingPage = () => {
             </div>
           </div>
           <div className="grid grid-cols-4  gap-4 mt-20 pb-10">
-            {datas.map((data) => (
-              <div
-                key={data.id}
-                id={`select-product-${data.id}`}
-                className="flex flex-col text-center content-center justify-center items-center border rounded-2xl shadow-lg h-[28rem] gap-2 bg-white cursor-pointer"
-                onClick={() => {
-                  onClickProduct(data);
-                }}
-              >
-                {data.product_image === "" ? (
-                  <img
-                    src="https://i.pinimg.com/564x/2c/4b/7f/2c4b7f4b0cb5ae1f3879ec36eb64386b.jpg"
-                    alt="product"
-                    className="w-64 h-64 m-3 rounded"
-                  />
-                ) : (
-                  <img
-                    src={data.product_image}
-                    alt="product"
-                    className="w-64 h-64"
-                  />
-                )}
-                <div className=" flex w-full px-5 ">
-                  <p className="text-sm">Stock: {data.stock}</p>
-                </div>
-                <p className="font-bold text-xl text-[#4AA3BA]">
-                  {data.product_name}
-                </p>
-                <p>
-                  Rp.{" "}
-                  {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                  .-
-                </p>
-              </div>
-            ))}
+            {loading
+              ? [...Array(20).keys()].map((data) => (
+                  <SkeletonLoading key={data} />
+                ))
+              : datas.map((data) => (
+                  <div
+                    key={data.id}
+                    id={`select-product-${data.id}`}
+                    className="flex flex-col text-center content-center justify-center items-center border rounded-2xl shadow-lg h-[28rem] gap-2 bg-white cursor-pointer"
+                    onClick={() => {
+                      onClickProduct(data);
+                    }}
+                  >
+                    {data.product_image === "" ? (
+                      <img
+                        src="https://i.pinimg.com/564x/2c/4b/7f/2c4b7f4b0cb5ae1f3879ec36eb64386b.jpg"
+                        alt="product"
+                        className="w-64 h-64 m-3 rounded"
+                      />
+                    ) : (
+                      <img
+                        src={data.product_image}
+                        alt="product"
+                        className="w-64 h-64"
+                      />
+                    )}
+
+                    <p className="font-bold text-xl text-[#4AA3BA]">
+                      {data.product_name}
+                    </p>
+                    <p>
+                      Rp.{" "}
+                      {data.price
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                      .-
+                    </p>
+                    <p className="text-sm text-teal-800">Stock: {data.stock}</p>
+                  </div>
+                ))}
           </div>
         </div>
         <div className="p-10 w-1/3" hidden={isHidden}>
