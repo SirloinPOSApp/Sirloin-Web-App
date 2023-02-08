@@ -6,8 +6,15 @@ import Button from "../../components/Button";
 import { Layout } from "../../components/Layout";
 import { useTitle } from "../../utils/Title";
 import { userType } from "../../utils/types/sirloin";
+import Swal from "../../utils/Swal";
+import withReactContent from "sweetalert2-react-content";
 
 export const TenantProfile = () => {
+  const storedToken = localStorage.getItem("device_token");
+  const tokenAsString = JSON.stringify(storedToken);
+  const [form, setForm] = useState({
+    device_token: storedToken,
+  });
   useTitle("Sirloin-Profil Tenant");
   const [user, setUser] = useState<userType>();
   const [cookie, , removeCookie] = useCookies([
@@ -17,9 +24,12 @@ export const TenantProfile = () => {
     "email",
   ]);
   const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
+  const [deviceToken, setDeviceToken] = useState("");
 
   useEffect(() => {
     fetchData();
+    console.log(storedToken);
   }, []);
 
   function fetchData() {
@@ -33,6 +43,29 @@ export const TenantProfile = () => {
         alert(error.toString());
       });
   }
+
+  const sendDeviceToken = () => {
+    axios
+      .postForm("https://bluepath.my.id/register_device", form)
+      .then((response) => {
+        // console.log(response);
+        MySwal.fire({
+          title: "Berhasil",
+          text: response.data.message,
+          icon: "success",
+          confirmButtonAriaLabel: "ok",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        MySwal.fire({
+          title: "Gagal",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonAriaLabel: "ok",
+        });
+      });
+  };
 
   return (
     <Layout>
@@ -59,6 +92,12 @@ export const TenantProfile = () => {
           label="Kembali"
           buttonSet="w-40 text-[#DA5C53] my-3 mr-10 btn-outline"
           onClick={() => navigate("/landing")}
+        />
+        <Button
+          id="active_notif"
+          label="Aktifkan Notif"
+          buttonSet="w-40 text-white bg-teal-700 my-3 mr-10 border-none"
+          onClick={() => sendDeviceToken()}
         />
         <Button
           id="edit-profile"

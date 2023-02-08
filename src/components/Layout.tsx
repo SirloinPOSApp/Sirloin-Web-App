@@ -25,6 +25,13 @@ import Swal from "../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { useEffect, useState } from "react";
 import axios from "axios";
+// import { messaging } from "../utils/firebase/firebase.utils.js";
+// import { requestForToken } from "../utils/firebase/firebase.utils.js";
+import toast, { Toaster } from "react-hot-toast";
+import {
+  requestForToken,
+  onMessageListener,
+} from "../utils/firebase/firebase.utils.js";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -34,7 +41,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
   const { collapseSidebar } = useProSidebar();
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
-  const [cookie, , removeCookie] = useCookies([
+  const [cookie, setCookie, removeCookie] = useCookies([
     "token",
     "id",
     "business_name",
@@ -42,6 +49,59 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
   ]);
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const checkToken = cookie.token;
+  const [isTokenFound, setTokenFound] = useState(false);
+
+  const [notification, setNotification] = useState({ title: "", body: "" });
+  const notify = () => toast(<ToastDisplay />);
+  function ToastDisplay() {
+    return (
+      <div>
+        <p>
+          <b>{notification?.title}</b>
+        </p>
+        <p>{notification?.body}</p>
+      </div>
+    );
+  }
+  // requestForToken();
+
+  // useEffect(() => {
+  //   sendDeviceToken();
+  // }, []);
+
+  // const sendDeviceToken = () => {
+  //   var storedToken = localStorage.getItem("device_token");
+  //   axios
+  //     .postForm("https://bluepath.my.id/register_device", {
+  //       device_token: storedToken,
+  //     })
+  //     .then((response) => {
+  //       // console.log(response);
+  //       MySwal.fire({
+  //         title: "Berhasil",
+  //         text: response.data.message,
+  //         icon: "success",
+  //         confirmButtonAriaLabel: "ok",
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       MySwal.fire({
+  //         title: "Gagal",
+  //         text: err.response.data.message,
+  //         icon: "error",
+  //         confirmButtonAriaLabel: "ok",
+  //       });
+  //     });
+  // };
+
+  onMessageListener()
+    .then((payload: any) => {
+      setNotification({
+        title: payload?.notification?.title,
+        body: payload?.notification?.body,
+      });
+    })
+    .catch((err) => console.log("failed: ", err));
 
   useEffect(() => {
     if (!checkToken) {
@@ -53,7 +113,12 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
       });
     }
     console.log("cookie:", cookie.id);
-  }, []);
+    requestForToken();
+    if (notification?.title) {
+      notify();
+    }
+    console.log("asas", notification);
+  }, [notification]);
 
   const handleLogout = () => {
     // alert("Log Out");
@@ -75,6 +140,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="flex w-full h-screen bg-white overflow-auto">
+      <Toaster />
       <Sidebar
         rootStyles={{
           [`.${sidebarClasses.container}`]: {
