@@ -109,7 +109,7 @@ export const TransaksiDetail = () => {
 
   return (
     <Layout>
-      <h3 className="flex m-10 font-bold text-2xl text-[#4AA3BA]">
+      <h3 className="flex m-10 font-bold text-2xl text-[#4AA3BA] ">
         Detail Transaksi
       </h3>
       <div className="rounded-xl border m-10 p-5 mx-40 shadow-lg font-medium text-lg">
@@ -131,7 +131,7 @@ export const TransaksiDetail = () => {
             l
           </p>
         </div>
-        <div className="flex justify-between font-semibold mb-4">
+        <div className="flex justify-between font-semibold mb-4 mx-5">
           <p>INV/MPL/{datas?.id}</p>
           <p
             onClick={() => {
@@ -143,16 +143,16 @@ export const TransaksiDetail = () => {
           </p>
         </div>
         {datas?.customer_name && (
-          <div className="flex justify-between mb-4">
+          <div className="flex justify-between mb-4 mx-5">
             <p>Nama Pembeli</p>
             <p>{datas?.customer_name}</p>
           </div>
         )}
-        <div className="flex justify-between mb-4">
+        <div className="flex justify-between mb-4 mx-5">
           <p>Tanggal Pembelian</p>
           <p>{moment(datas?.created_at).format("YYYY-MM-DD hh:mm A")}</p>
         </div>
-        <h1 className="flex my-10  text-xl font-bold">Detail Transaksi</h1>
+        <h1 className="flex m-5 mt-10 text-xl font-bold ">Detail Transaksi</h1>
         {datas?.TransactionProductRes.map((data) => (
           <div
             key={data.product_id}
@@ -175,7 +175,9 @@ export const TransaksiDetail = () => {
                     className="w-36 rounded"
                   />
                 )}
-                <p className="font-semibold text-xl">{data.product_name}</p>
+                <p className="font-semibold text-xl px-10">
+                  {data.product_name}
+                </p>
               </div>
               <div>
                 <p>
@@ -192,24 +194,22 @@ export const TransaksiDetail = () => {
         ))}
 
         <div className="flex flex-col items-end">
-          <div className=" flex  w-1/2">
-            <h1 className="flex my-10  text-xl font-bold">
-              Rincian Pembayaran
-            </h1>
+          <div className=" flex  w-1/2 mx-5">
+            <h1 className="flex my-10 text-xl font-bold">Rincian Pembayaran</h1>
           </div>
           {/* <div className="flex justify-between mb-4 border-b pb-4 w-1/2">
             <p>Metode Pembayaran</p>
             <p>Tunai</p>
           </div> */}
-          <div className="flex justify-between mb-4 w-1/2">
+          <div className="flex justify-between mb-4 w-1/2 mx-5">
             <p>Total Harga ({total_quantity} barang)</p>
             <p>Rp. {datas?.total_price}</p>
           </div>
-          <div className="flex justify-between mb-4 border-b pb-4 w-1/2">
+          <div className="flex justify-between mb-4 border-b pb-4 w-1/2 mx-5">
             <p>Diskon</p>
             <p>-Rp. {datas?.discount}</p>
           </div>
-          <div className="flex justify-between mb-4 text-xl font-bold mt-7 w-1/2">
+          <div className="flex justify-between mb-4 text-xl font-bold mt-7 w-1/2 mx-5">
             <p>Total Belanja</p>
             <p>Rp. {datas?.total_bill}</p>
           </div>
@@ -222,7 +222,7 @@ export const TransaksiDetail = () => {
           />
         </div> */}
       </div>
-      <div className="flex justify-end mx-40 gap-10">
+      <div className="flex justify-end mx-32 gap-10">
         <Button
           id="back"
           label="Kembali"
