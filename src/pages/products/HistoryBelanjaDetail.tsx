@@ -134,18 +134,24 @@ export const HistoryBelanjaDetail = () => {
                   />
                 )}
                 <p className="font-semibold text-xl px-10">
-                  {data.product_name}
+                  {data.product_name
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                 </p>
               </div>
               <div>
                 <p>
-                  {data.quantity} x Rp. {data.price}
+                  {data.quantity} x Rp.{" "}
+                  {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                 </p>
               </div>
             </div>
             <div className="flex justify-end mt-5 pt-5 border-t">
               <p className="font-bold text-xl">
-                Total Harga : Rp: {data.total_price}
+                Total Harga : Rp:{" "}
+                {data.total_price
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
               </p>
             </div>
           </div>
@@ -163,7 +169,12 @@ export const HistoryBelanjaDetail = () => {
           </div> */}
           <div className="flex justify-between mb-4 w-1/2 mx-5">
             <p>Total Harga ({total_quantity} barang)</p>
-            <p>Rp. {datas?.total_price}</p>
+            <p>
+              Rp.{" "}
+              {datas?.total_price
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            </p>
           </div>
           <div className="flex justify-between mb-4 border-b pb-4 w-1/2 mx-5">
             <p>Diskon</p>
@@ -171,7 +182,12 @@ export const HistoryBelanjaDetail = () => {
           </div>
           <div className="flex justify-between m-4 text-xl font-bold  w-1/2 mx-5">
             <p>Total Belanja</p>
-            <p>Rp. {datas?.total_bill}</p>
+            <p>
+              Rp.{" "}
+              {datas?.total_bill
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            </p>
           </div>
         </div>
         {/* <div className="flex justify-end">
@@ -189,9 +205,7 @@ export const HistoryBelanjaDetail = () => {
           buttonSet="w-40 text-[#DA5C53] my-3 btn-outline"
           onClick={() => navigate("/history-shopping")}
         />
-        {datas?.transaction_status === "deny" ? (
-          <p></p>
-        ) : (
+        {datas?.transaction_status === "pending" && (
           <Button
             id="payment"
             label="Bayar"
