@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Button from "../../components/Button";
 import { Layout } from "../../components/Layout";
+import { SkeletonLoadingTabel } from "../../components/Loading";
 import { useTitle } from "../../utils/Title";
 import { CustType } from "../../utils/types/sirloin";
 import CustomerEdit from "./CustomerEdit";
@@ -14,6 +15,7 @@ import CustomerEdit from "./CustomerEdit";
 const Customer = () => {
   useTitle("Sirloin-Customer Tenant");
   const [customer, setCustomer] = useState<CustType[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [refresh, setRefresh] = useState(false);
   const [cookie, setCookie] = useCookies();
   const navigate = useNavigate();
@@ -37,7 +39,8 @@ const Customer = () => {
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   // function deleteProduct(id: number) {
@@ -87,34 +90,40 @@ const Customer = () => {
             </tr>
           </thead>
           <tbody>
-            {customer.map((customer, index) => (
-              <tr key={index}>
-                <td>{customer.business_name}</td>
-                <td>{customer.id}</td>
-                <td>{customer.address}</td>
-                <td>{customer.phone_number}</td>
-                <td>{customer.email}</td>
-                <td className="flex col-span-2">
-                  {/* <button id="del-product" className="btn btn-ghost btn-square">
+            {loading
+              ? [...Array(20).keys()].map((customer) => (
+                  <SkeletonLoadingTabel key={customer} />
+                ))
+              : customer.map((customer, index) => (
+                  <tr key={index}>
+                    <td>{customer.business_name}</td>
+                    <td>{customer.id}</td>
+                    <td>{customer.address}</td>
+                    <td>{customer.phone_number}</td>
+                    <td>{customer.email}</td>
+                    <td className="flex col-span-2">
+                      {/* <button id="del-product" className="btn btn-ghost btn-square">
                     <FiTrash2
                       size="20"
                       color="red"
                       onClick={() => deleteProduct(customer.id)}
                     />
                   </button> */}
-                  <button
-                    id="edit-custumer"
-                    className="btn btn-ghost btn-square"
-                  >
-                    <FiEdit
-                      size="20"
-                      color="teal"
-                      onClick={() => navigate(`/edit-customer/${customer.id}`)}
-                    />
-                  </button>
-                </td>
-              </tr>
-            ))}
+                      <button
+                        id="edit-custumer"
+                        className="btn btn-ghost btn-square"
+                      >
+                        <FiEdit
+                          size="20"
+                          color="teal"
+                          onClick={() =>
+                            navigate(`/edit-customer/${customer.id}`)
+                          }
+                        />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>
