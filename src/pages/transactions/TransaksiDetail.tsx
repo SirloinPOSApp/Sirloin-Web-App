@@ -8,8 +8,10 @@ import moment from "moment";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { transactionType } from "../../utils/types/sirloin";
+import { useTitle } from "../../utils/Title";
 
 export const TransaksiDetail = () => {
+  useTitle("Sirloin - Detail Laporan Transaksi");
   const [datas, setDatas] = useState<transactionType>();
   const { transaction_id } = useParams();
   const [total_quantity, setTotal_quantity] = useState(0);

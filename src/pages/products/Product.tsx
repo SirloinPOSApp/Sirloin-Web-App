@@ -11,7 +11,7 @@ import { useTitle } from "../../utils/Title";
 import { ProductsType } from "../../utils/types/sirloin";
 
 const Product = () => {
-  useTitle("Sirloin-Product Tenant");
+  useTitle("Sirloin - Product");
   const [product, setProduct] = useState<ProductsType[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);

@@ -11,8 +11,10 @@ import axios from "axios";
 import { copyFileSync } from "fs";
 import Swal from "../utils/Swal";
 import { SkeletonLoadingEtalase } from "../components/Loading";
+import { useTitle } from "../utils/Title";
 
 export const Etalase = () => {
+  useTitle("Sirloin - Etalase Belanja");
   const [product, setProduct] = useState<ProductsType[]>([]);
   const [carts, setCarts] = useState<ProductsType[]>([]);
   const [summary, setSummary] = useState({

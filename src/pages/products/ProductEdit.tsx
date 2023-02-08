@@ -10,7 +10,7 @@ import { Input } from "../../components/Input";
 import { ProductsType } from "../../utils/types/sirloin";
 
 const ProductEdit = () => {
-  useTitle("Sirloin-Edit Product Tenant");
+  useTitle("Sirloin - Edit Product");
   const [product, setProduct] = useState<ProductsType>();
   const { product_id } = useParams();
   const [formProduct, setFormProduct] = useState({

@@ -9,7 +9,7 @@ import { useTitle } from "../../utils/Title";
 import { CustType } from "../../utils/types/sirloin";
 
 const CustomerInput = () => {
-  useTitle("Sirloin-Customer Tenant");
+  useTitle("Sirloin - Tambah Customer Tenant");
   const [customer, setCustomer] = useState<CustType>();
 
   const [isDisable, setIsDisable] = useState(true);

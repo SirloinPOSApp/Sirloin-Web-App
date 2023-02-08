@@ -10,8 +10,10 @@ import axios from "axios";
 import moment from "moment";
 import { FiEdit } from "react-icons/fi";
 import { transactionType } from "../../utils/types/sirloin";
+import { useTitle } from "../../utils/Title";
 
 const HistoryBelanja = () => {
+  useTitle("Sirloin - History Pembelanjaan");
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [from, setFrom] = useState(startDate?.toISOString().split("T")[0]);

@@ -13,8 +13,10 @@ import Swal from "../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { useCookies } from "react-cookie";
 import { SkeletonLoading } from "../components/Loading";
+import { useTitle } from "../utils/Title";
 
 export const LandingPage = () => {
+  useTitle("Sirloin - Sistem Kasir Online");
   const [datas, setDatas] = useState<ProductsType[]>([]);
   const [carts, setCarts] = useState<ProductsType[]>([]);
   const [summary, setSummary] = useState({

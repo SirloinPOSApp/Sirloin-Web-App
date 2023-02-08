@@ -9,7 +9,7 @@ import { useTitle } from "../../utils/Title";
 import { CustType } from "../../utils/types/sirloin";
 
 const CustomerEdit = () => {
-  useTitle("Sirloin-Edit Customer Tenant");
+  useTitle("Sirloin - Edit Customer Tenant");
   const [customer, setCustomer] = useState<CustType>();
   const { customer_id } = useParams();
   const navigate = useNavigate();
