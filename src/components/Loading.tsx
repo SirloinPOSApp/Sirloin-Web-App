@@ -32,3 +32,29 @@ export const SkeletonLoadingEtalase = () => {
     </div>
   );
 };
+
+export const SkeletonLoadingTabel = () => {
+  return (
+    <tr className="animate-pulse p-2">
+      <td>
+        <div className="h-5 w-48 bg-slate-200 rounded "></div>
+      </td>
+      <td>
+        <div className="h-5 w-48 bg-slate-200 rounded "></div>
+      </td>
+      <td>
+        <div className="h-5 w-48 bg-slate-200 rounded "></div>
+      </td>
+      <td>
+        <div className="h-5 w-48 bg-slate-200 rounded "></div>
+      </td>
+      <td>
+        <div className="h-5 w-48 bg-slate-200 rounded "></div>
+      </td>
+      <td className="flex col-span-2 space-x-2">
+        <div className="h-5 w-12 bg-slate-200 rounded "></div>
+        <div className="h-5 w-12 bg-slate-200 rounded "></div>
+      </td>
+    </tr>
+  );
+};

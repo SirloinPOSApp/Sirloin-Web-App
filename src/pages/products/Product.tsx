@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Button from "../../components/Button";
 import { Layout } from "../../components/Layout";
+import { SkeletonLoadingTabel } from "../../components/Loading";
 import { useTitle } from "../../utils/Title";
 import { ProductsType } from "../../utils/types/sirloin";
 
@@ -13,6 +14,7 @@ const Product = () => {
   useTitle("Sirloin-Product Tenant");
   const [product, setProduct] = useState<ProductsType[]>([]);
   const [refresh, setRefresh] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [cookie, , removeCookie] = useCookies([
     "token",
     "id",
@@ -39,7 +41,8 @@ const Product = () => {
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   function deleteProduct(id: number) {
@@ -106,33 +109,43 @@ const Product = () => {
             </tr>
           </thead>
           <tbody>
-            {product.map((product, index) => (
-              <tr key={index}>
-                <th>{product.product_name}</th>
-                <td>{product.category}</td>
-                <td>{product.price}</td>
-                <td>{product.stock}</td>
-                <td className="flex col-span-2">
-                  <button id="del-product" className="btn btn-ghost btn-square">
-                    <FiTrash2
-                      size="20"
-                      color="red"
-                      onClick={() => deleteProduct(product.id)}
-                    />
-                  </button>
-                  <button
-                    id="edit-product"
-                    className="btn btn-ghost btn-square"
-                  >
-                    <FiEdit
-                      size="20"
-                      color="teal"
-                      onClick={() => navigate(`/edit-product/${product.id}`)}
-                    />
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {loading
+              ? [...Array(20).keys()].map((product) => (
+                  <SkeletonLoadingTabel key={product} />
+                ))
+              : product.map((product, index) => (
+                  <tr key={index}>
+                    <td>{product.product_name}</td>
+                    <td>{product.category}</td>
+                    <td>{product.price}</td>
+                    <td>{product.stock}</td>
+                    <td className="flex col-span-2">
+                      <button
+                        id="del-product"
+                        className="btn btn-ghost btn-square"
+                      >
+                        <FiTrash2
+                          size="20"
+                          color="red"
+                          onClick={() => deleteProduct(product.id)}
+                        />
+                      </button>
+                      <button
+                        id="edit-product"
+                        className="btn btn-ghost btn-square"
+                      >
+                        <FiEdit
+                          size="20"
+                          color="teal"
+                          onClick={() =>
+                            navigate(`/edit-product/${product.id}`)
+                          }
+                        />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            {/* <SkeletonLoadingTabel /> */}
           </tbody>
         </table>
       </div>
