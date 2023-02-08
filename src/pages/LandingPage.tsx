@@ -221,7 +221,7 @@ export const LandingPage = () => {
                   <div
                     key={data.id}
                     id={`select-product-${data.id}`}
-                    className="flex flex-col text-center content-center justify-center items-center border rounded-2xl shadow-lg h-[28rem] gap-2 bg-white cursor-pointer"
+                    className="flex flex-col text-center   items-center border rounded-2xl shadow-lg h-[28rem] gap-2 pt-5 bg-white cursor-pointer"
                     onClick={() => {
                       onClickProduct(data);
                     }}
@@ -230,13 +230,13 @@ export const LandingPage = () => {
                       <img
                         src="https://i.pinimg.com/564x/2c/4b/7f/2c4b7f4b0cb5ae1f3879ec36eb64386b.jpg"
                         alt="product"
-                        className="w-64 h-64 m-3 rounded"
+                        className="w-56 m-3 rounded"
                       />
                     ) : (
                       <img
                         src={data.product_image}
                         alt="product"
-                        className="w-64 h-64"
+                        className="w-56 "
                       />
                     )}
 
