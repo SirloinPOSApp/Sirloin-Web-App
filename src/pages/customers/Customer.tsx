@@ -112,14 +112,11 @@ const Customer = () => {
                       <button
                         id="edit-custumer"
                         className="btn btn-ghost btn-square"
+                        onClick={() =>
+                          navigate(`/edit-customer/${customer.id}`)
+                        }
                       >
-                        <FiEdit
-                          size="20"
-                          color="teal"
-                          onClick={() =>
-                            navigate(`/edit-customer/${customer.id}`)
-                          }
-                        />
+                        <FiEdit size="20" color="teal" />
                       </button>
                     </td>
                   </tr>
