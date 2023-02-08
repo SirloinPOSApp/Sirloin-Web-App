@@ -10,7 +10,7 @@ import withReactContent from "sweetalert2-react-content";
 import { transactionType } from "../../utils/types/sirloin";
 
 export const TransaksiDetail = () => {
-  const [datas, setDatas] = useState({} as transactionType);
+  const [datas, setDatas] = useState<transactionType>();
   const { transaction_id } = useParams();
   const [total_quantity, setTotal_quantity] = useState(0);
   const [refresh, setRefresh] = useState(false);
@@ -181,13 +181,17 @@ export const TransaksiDetail = () => {
               </div>
               <div>
                 <p>
-                  {data.quantity} x Rp. {data.price}
+                  {data.quantity} x Rp.{" "}
+                  {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                 </p>
               </div>
             </div>
             <div className="flex justify-end mt-5 pt-5 border-t">
               <p className="font-bold text-xl">
-                Total Harga : Rp: {data.total_price}
+                Total Harga : Rp:{" "}
+                {data.total_price
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
               </p>
             </div>
           </div>
@@ -203,15 +207,34 @@ export const TransaksiDetail = () => {
           </div> */}
           <div className="flex justify-between mb-4 w-1/2 mx-5">
             <p>Total Harga ({total_quantity} barang)</p>
-            <p>Rp. {datas?.total_price}</p>
+            <p>
+              Rp.{" "}
+              {datas?.total_price
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            </p>
           </div>
           <div className="flex justify-between mb-4 border-b pb-4 w-1/2 mx-5">
             <p>Diskon</p>
-            <p>-Rp. {datas?.discount * datas?.total_price}</p>
+            <p>
+              -Rp.{" "}
+              {datas?.discount == 0.1
+                ? (datas?.total_bill * datas?.discount)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                : datas?.discount
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            </p>
           </div>
           <div className="flex justify-between mb-4 text-xl font-bold mt-7 w-1/2 mx-5">
             <p>Total Belanja</p>
-            <p>Rp. {datas?.total_bill}</p>
+            <p>
+              Rp.{" "}
+              {datas?.total_bill
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            </p>
           </div>
         </div>
         {/* <div className="flex justify-end">
@@ -232,8 +255,7 @@ export const TransaksiDetail = () => {
         {datas?.transaction_status == "failure" ||
         datas?.transaction_status == "success" ? (
           <p></p>
-        ) : datas?.customer_name !== "" ||
-          datas?.transaction_status == "waiting payment" ? (
+        ) : datas?.transaction_status == "waiting payment" ? (
           <Button
             id="payment"
             label="Kode Bayar"

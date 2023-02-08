@@ -10,6 +10,7 @@ import {
   FiShoppingBag,
   FiUsers,
 } from "react-icons/fi";
+import { CiWarning } from "react-icons/ci";
 import {
   Menu,
   MenuItem,
@@ -55,11 +56,12 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
   const notify = () => toast(<ToastDisplay />);
   function ToastDisplay() {
     return (
-      <div>
-        <p>
-          <b>{notification?.title}</b>
+      <div className="px-10 py-6 text-red-600 text-center  items-center   flex flex-col">
+        <CiWarning className="w-20 h-20 text-yellow-400" />
+        <p className="text-3xl font-bold mb-3 mt-3 capitalize">
+          {notification?.title}
         </p>
-        <p>{notification?.body}</p>
+        <p className="text-xl">{notification?.body}</p>
       </div>
     );
   }
