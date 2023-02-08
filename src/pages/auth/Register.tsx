@@ -53,7 +53,7 @@ export const Register = () => {
           icon: "success",
           confirmButtonAriaLabel: "ok",
         });
-        alert(response.data.message);
+        // alert(response.data.message);
         navigate("/login");
       })
       .catch((err) => {
