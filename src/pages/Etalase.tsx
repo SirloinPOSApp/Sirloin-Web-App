@@ -10,6 +10,7 @@ import { ProductsType } from "../utils/types/sirloin";
 import axios from "axios";
 import { copyFileSync } from "fs";
 import Swal from "../utils/Swal";
+import { SkeletonLoadingEtalase } from "../components/Loading";
 
 export const Etalase = () => {
   const [product, setProduct] = useState<ProductsType[]>([]);
@@ -20,6 +21,7 @@ export const Etalase = () => {
     total: 0,
   });
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     listProducts();
@@ -47,7 +49,8 @@ export const Etalase = () => {
       .catch((err) => {
         // alert(err.toString());
         alert(err.response.data.message);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   const onClickProduct = (data: ProductsType) => {
@@ -159,17 +162,21 @@ export const Etalase = () => {
             </h3>
           </div>
           <div className="grid grid-cols-4  gap-4 mt-20">
-            {product.map((product, index) => (
-              <CardEtalase
-                key={index}
-                id={product.id}
-                product_name={product.product_name}
-                product_image={product.product_image}
-                stock={product.stock}
-                price={product.price}
-                onClickCart={() => onClickProduct(product)}
-              />
-            ))}
+            {loading
+              ? [...Array(20).keys()].map((product) => (
+                  <SkeletonLoadingEtalase key={product} />
+                ))
+              : product.map((product, index) => (
+                  <CardEtalase
+                    key={index}
+                    id={product.id}
+                    product_name={product.product_name}
+                    product_image={product.product_image}
+                    stock={product.stock}
+                    price={product.price}
+                    onClickCart={() => onClickProduct(product)}
+                  />
+                ))}
           </div>
         </div>
         <div className="p-10 w-1/4">
