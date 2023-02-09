@@ -20,20 +20,19 @@ import {
   useProSidebar,
 } from "react-pro-sidebar";
 import { BsShop } from "react-icons/bs";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useCookies, Cookies, withCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import Swal from "../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { useEffect, useState } from "react";
-import axios from "axios";
-// import { messaging } from "../utils/firebase/firebase.utils.js";
-// import { requestForToken } from "../utils/firebase/firebase.utils.js";
 import toast, { Toaster } from "react-hot-toast";
 import {
   requestForToken,
   onMessageListener,
 } from "../utils/firebase/firebase.utils.js";
+
+import logo from "../assets/logo.png";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -51,7 +50,6 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
   ]);
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const checkToken = cookie.token;
-  const [isTokenFound, setTokenFound] = useState(false);
 
   const [notification, setNotification] = useState({ title: "", body: "" });
   const notify = () => toast(<ToastDisplay />);
@@ -66,36 +64,6 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
       </div>
     );
   }
-  // requestForToken();
-
-  // useEffect(() => {
-  //   sendDeviceToken();
-  // }, []);
-
-  // const sendDeviceToken = () => {
-  //   var storedToken = localStorage.getItem("device_token");
-  //   axios
-  //     .postForm("https://bluepath.my.id/register_device", {
-  //       device_token: storedToken,
-  //     })
-  //     .then((response) => {
-  //       // console.log(response);
-  //       MySwal.fire({
-  //         title: "Berhasil",
-  //         text: response.data.message,
-  //         icon: "success",
-  //         confirmButtonAriaLabel: "ok",
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       MySwal.fire({
-  //         title: "Gagal",
-  //         text: err.response.data.message,
-  //         icon: "error",
-  //         confirmButtonAriaLabel: "ok",
-  //       });
-  //     });
-  // };
 
   onMessageListener()
     .then((payload: any) => {
@@ -124,7 +92,6 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
   }, [notification]);
 
   const handleLogout = () => {
-    // alert("Log Out");
     setIsLoggedOut(!isLoggedOut);
     removeCookie("token", { path: "/" });
     removeCookie("id", { path: "/" });
@@ -132,7 +99,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
     removeCookie("email", { path: "/" });
     MySwal.fire({
       title: "Berhasil Logout",
-      // text: response.data.message,
+
       icon: "success",
       confirmButtonAriaLabel: "ok",
     }).then(() => {
@@ -155,8 +122,9 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
       >
         <Menu className="text-white">
           <button id="burger" className="p-7" onClick={() => collapseSidebar()}>
-            {<FiMenu size="30" />}
+            {<FiChevronsRight size="30" />}
           </button>
+          <img src={logo} alt="logo" />
 
           {cookie.id != 1 ? (
             <div>
@@ -190,14 +158,6 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
               >
                 Customer
               </MenuItem>
-
-              {/* <MenuItem
-                component={<Link to="/report-selling" />}
-                id="laporan-penjualan"
-                icon={<FiFileText size="20" />}
-              >
-                Laporan Penjualan
-              </MenuItem> */}
 
               <MenuItem
                 component={<Link to="/transaction" />}
@@ -248,22 +208,6 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
                 Product
               </MenuItem>
 
-              {/* <MenuItem
-                component={<Link to="/etalase" />}
-                id="etalase-belanja"
-                icon={<FiShoppingBag size="20" />}
-              >
-                Etalase Belanja
-              </MenuItem> */}
-
-              {/* <MenuItem
-                component={<Link to="/customer" />}
-                id="customer"
-                icon={<FiUsers size="20" />}
-              >
-                Customer
-              </MenuItem> */}
-
               <MenuItem
                 component={<Link to="/report-selling" />}
                 id="laporan-penjualan"
@@ -271,22 +215,6 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
               >
                 Laporan Penjualan
               </MenuItem>
-
-              {/* <MenuItem
-                component={<Link to="/transaction" />}
-                id="laporan-transaksi"
-                icon={<FiRepeat size="20" />}
-              >
-                Laporan Transaksi
-              </MenuItem>
-
-              <MenuItem
-                component={<Link to="/history-shopping" />}
-                id="history-pembelanjaan"
-                icon={<FiCalendar size="20" />}
-              >
-                History Pembelanjaan
-              </MenuItem> */}
 
               <MenuItem
                 component={<Link to="/profile-tenant" />}
@@ -313,7 +241,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
             className="btn btn-ghost rounded"
             onClick={() => toggleSidebar()}
           >
-            <FiChevronsRight size={20} />
+            <FiMenu size={30} />
           </button>
         )}
         {children}
