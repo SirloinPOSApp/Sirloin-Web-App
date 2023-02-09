@@ -19,7 +19,7 @@ const CustomerInput = () => {
     id: -0,
     name: "",
     email: "",
-    phone_number: 0,
+    phone_number: "",
     address: "",
   });
 
@@ -27,7 +27,7 @@ const CustomerInput = () => {
     if (
       formCust.name === "" ||
       formCust.email === "" ||
-      formCust.phone_number === 0 ||
+      formCust.phone_number === "" ||
       formCust.address === ""
     ) {
       setIsDisable(true);
@@ -120,7 +120,7 @@ const CustomerInput = () => {
               onChange={(e) =>
                 setFormCust({
                   ...formCust,
-                  phone_number: parseInt(e.target.value),
+                  phone_number: e.target.value,
                 })
               }
               value={formCust.phone_number}

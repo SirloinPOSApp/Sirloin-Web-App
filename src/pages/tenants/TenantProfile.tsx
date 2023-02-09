@@ -53,6 +53,7 @@ export const TenantProfile = () => {
         MySwal.fire({
           title: "Berhasil",
           text: response.data.message,
+          html: <p>Tolong aktifkan notifikasi pada browser anda</p>,
           icon: "success",
           confirmButtonAriaLabel: "ok",
         });
@@ -62,6 +63,7 @@ export const TenantProfile = () => {
         MySwal.fire({
           title: "Gagal",
           text: err.response.data.message,
+          html: <p>Tolong aktifkan notifikasi pada browser anda</p>,
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
