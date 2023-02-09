@@ -110,7 +110,7 @@ const Customer = () => {
                     />
                   </button> */}
                       <button
-                        id="edit-custumer"
+                        id={`customer-${customer.id}`}
                         className="btn btn-ghost btn-square"
                         onClick={() =>
                           navigate(`/edit-customer/${customer.id}`)
