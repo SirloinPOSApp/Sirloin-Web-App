@@ -22,12 +22,8 @@ export const CardEtalase: FC<CardProps> = ({
   onClickCart,
 }) => {
   return (
-    <div
-      className="card shadow-lg h-96 bg-white"
-      id={`${id}`}
-      onClick={onClickCart}
-    >
-      <figure className="m-3">
+    <div className="card shadow-lg bg-white" id={`${id}`} onClick={onClickCart}>
+      <figure className="m-3 h-96">
         <img
           src={
             product_image
@@ -35,7 +31,6 @@ export const CardEtalase: FC<CardProps> = ({
               : "https://i.pinimg.com/564x/2c/4b/7f/2c4b7f4b0cb5ae1f3879ec36eb64386b.jpg"
           }
           alt="product"
-          className="w-64"
         />
       </figure>
       <div className="card-normal mx-5 my-3">
