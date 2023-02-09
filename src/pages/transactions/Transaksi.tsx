@@ -205,6 +205,7 @@ const Transaksi = () => {
                   </td>
                   <td className="flex justify-center">
                     <button
+                      id={`transaction-${data.id}`}
                       className="btn btn-ghost btn-square"
                       onClick={() => navigate(`/detail-transaction/${data.id}`)}
                     >

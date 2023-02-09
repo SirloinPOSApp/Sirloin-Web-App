@@ -121,14 +121,14 @@ const Product = () => {
                     <td>{product.stock}</td>
                     <td className="flex col-span-2">
                       <button
-                        id="del-product"
+                        id={`delete-product-${product.id}`}
                         className="btn btn-ghost btn-square"
                         onClick={() => deleteProduct(product.id)}
                       >
                         <FiTrash2 size="20" color="red" />
                       </button>
                       <button
-                        id="edit-product"
+                        id={`edit-product-${product.id}`}
                         className="btn btn-ghost btn-square"
                         onClick={() => navigate(`/edit-product/${product.id}`)}
                       >

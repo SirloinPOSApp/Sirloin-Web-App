@@ -177,6 +177,7 @@ const HistoryBelanja = () => {
                   </td>
                   <td className="flex justify-center">
                     <button
+                      id={`history-shopping-${data.id}`}
                       className="btn btn-ghost btn-square"
                       onClick={() =>
                         navigate(`/detail-history-shopping/${data.id}`)
