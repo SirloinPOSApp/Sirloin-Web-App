@@ -28,20 +28,12 @@ export const Login = () => {
   ]);
   const { user, setUser } = useContext(userContext);
 
-  // const handleChange = (event: any) => {
-  //   setFormLogin({
-  //     ...formLogin,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
-
   useEffect(() => {
     if (formLogin.email === "" || formLogin.password === "") {
       setIsDisable(true);
     } else {
       setIsDisable(false);
     }
-    // console.log(formLogin);
   }, [formLogin]);
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -49,12 +41,7 @@ export const Login = () => {
     axios
       .postForm("https://bluepath.my.id/login", formLogin)
       .then((response) => {
-        // console.log(response);
         localStorage.setItem("token", response.data.data.token);
-        // removeCookie("token", { path: "/" });
-        // removeCookie("id", { path: "/" });
-        // removeCookie("business_name", { path: "/" });
-        // removeCookie("email", { path: "/" });
         setCookie("token", response.data.data.token, { path: "/" });
         setCookie("id", response.data.data.id, { path: "/" });
         setCookie("business_name", response.data.data.business_name, {
@@ -71,9 +58,6 @@ export const Login = () => {
           navigate("/landing");
           window.location.reload();
         });
-        // dispatch({ num: state.num + 1 })
-        // alert(response.data.message);
-        // navigate("/landing");
       })
       .catch((err) => {
         MySwal.fire({
@@ -82,8 +66,6 @@ export const Login = () => {
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-        // alert(err.response.data.message);
-        // alert(err.toString());
       });
   };
 

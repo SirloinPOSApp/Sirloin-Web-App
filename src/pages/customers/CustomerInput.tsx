@@ -6,12 +6,9 @@ import Button from "../../components/Button";
 import { Input, TextArea } from "../../components/Input";
 import { Layout } from "../../components/Layout";
 import { useTitle } from "../../utils/Title";
-import { CustType } from "../../utils/types/sirloin";
 
 const CustomerInput = () => {
   useTitle("Sirloin - Tambah Customer Tenant");
-  const [customer, setCustomer] = useState<CustType>();
-
   const [isDisable, setIsDisable] = useState(true);
   const navigate = useNavigate();
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
@@ -12,7 +12,6 @@ import withReactContent from "sweetalert2-react-content";
 export const TenantProfile = () => {
   useTitle("Sirloin - Profile Tenant");
   const storedToken = localStorage.getItem("device_token");
-  const tokenAsString = JSON.stringify(storedToken);
   const [form, setForm] = useState({
     device_token: storedToken,
   });
@@ -26,11 +25,9 @@ export const TenantProfile = () => {
   ]);
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
-  const [deviceToken, setDeviceToken] = useState("");
 
   useEffect(() => {
     fetchData();
-    console.log(storedToken);
   }, []);
 
   function fetchData() {
@@ -49,7 +46,6 @@ export const TenantProfile = () => {
     axios
       .postForm("https://bluepath.my.id/register_device", form)
       .then((response) => {
-        // console.log(response);
         MySwal.fire({
           title: "Berhasil",
           html: (
@@ -64,7 +60,6 @@ export const TenantProfile = () => {
         });
       })
       .catch((err) => {
-        console.log(err);
         MySwal.fire({
           title: "Gagal",
           html: (

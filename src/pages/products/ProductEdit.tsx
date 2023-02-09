@@ -61,7 +61,6 @@ const ProductEdit = () => {
 
   useEffect(() => {
     Product();
-    console.log(product);
   }, []);
 
   function Product() {

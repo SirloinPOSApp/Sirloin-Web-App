@@ -25,13 +25,6 @@ const ProductInput = () => {
   const [isDisable, setIsDisable] = useState(true);
   const MySwal = withReactContent(Swal);
 
-  // const handleChange = (event: any) => {
-  //   setFormProduct({
-  //     ...formProduct,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
-
   const handleFileChange = (event: any) => {
     const file = fileInputRef.current.files[0];
     setFormProduct({
@@ -56,7 +49,6 @@ const ProductInput = () => {
     } else {
       setIsDisable(false);
     }
-    // console.log(formProduct);
   }, [formProduct]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -75,7 +67,6 @@ const ProductInput = () => {
     axios
       .post("https://bluepath.my.id/products", formData)
       .then((response) => {
-        // alert(response.data.message);
         MySwal.fire({
           title: "Berhasil",
           text: response.data.message,
@@ -91,8 +82,6 @@ const ProductInput = () => {
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-        // alert(err.response.data.message);
-        // alert(err.toString());
       });
   };
 
@@ -115,7 +104,6 @@ const ProductInput = () => {
               type="file"
               className="file-input file-input-bordered file-input-[#4AA3BA]  w-full max-w-md"
               onChange={(e) => handleFileChange(e)}
-              // value={formProduct.product_image}
               ref={fileInputRef}
             />
           </div>

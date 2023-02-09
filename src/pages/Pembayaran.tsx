@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import Button from "../components/Button";
 import { Layout } from "../components/Layout";
 import { useEffect, useState } from "react";
@@ -39,7 +38,6 @@ const Pembayaran = () => {
   const [isDisable, setIsDisable] = useState(true);
 
   useEffect(() => {
-    console.log(carts, summary, payment);
     if (payment !== "") {
       setIsDisable(false);
     }
@@ -58,12 +56,9 @@ const Pembayaran = () => {
     axios
       .post(`https://bluepath.my.id/transactions`, data)
       .then((res) => {
-        // console.log(res);
         if (payment == "cashless") {
-          // window.open(res.data.data.payment_url);
           MySwal.fire({
             title: "Scan Barcode",
-            // text: res.data.message,
             imageUrl: res.data.data.payment_url,
             icon: "info",
             confirmButtonAriaLabel: "ok",
@@ -79,16 +74,12 @@ const Pembayaran = () => {
         }
       })
       .catch((err) => {
-        // alert(err.toString());
         MySwal.fire({
           title: "Gagal",
           text: err.response.data.message,
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-      })
-      .finally(() => {
-        // console.log(data);
       });
   };
 
@@ -145,7 +136,6 @@ const Pembayaran = () => {
         </div>
       </div>
       <div className="divider mx-5"></div>
-      {/* <form onSubmit={handleSubmit}> */}
       <div className="flex flex-row mx-10 space-x-96">
         <h3 className="font-bold text-2xl text-[#4AA3BA] ">Cara Bayar</h3>
         <select
@@ -169,9 +159,6 @@ const Pembayaran = () => {
           <option id="shopee" value="cashless">
             ShopeePay
           </option>
-          {/* <option id="ottoclick" value="cashless">
-            Octo Click
-          </option> */}
         </select>
       </div>
       <div className="flex flex-row justify-start space-x-10 px-10 py-20">
@@ -193,7 +180,6 @@ const Pembayaran = () => {
           }}
         />
       </div>
-      {/* </form> */}
     </Layout>
   );
 };

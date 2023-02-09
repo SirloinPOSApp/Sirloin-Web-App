@@ -65,14 +65,13 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
     );
   }
 
-  onMessageListener()
-    .then((payload: any) => {
-      setNotification({
-        title: payload?.notification?.title,
-        body: payload?.notification?.body,
-      });
-    })
-    .catch((err) => console.log("failed: ", err));
+  onMessageListener().then((payload: any) => {
+    setNotification({
+      title: payload?.notification?.title,
+      body: payload?.notification?.body,
+    });
+  });
+  // .catch((err) => console.log("failed: ", err));
 
   useEffect(() => {
     if (!checkToken) {
@@ -83,12 +82,10 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         confirmButtonAriaLabel: "ok",
       });
     }
-    console.log("cookie:", cookie.id);
     requestForToken();
     if (notification?.title) {
       notify();
     }
-    console.log("asas", notification);
   }, [notification]);
 
   const handleLogout = () => {

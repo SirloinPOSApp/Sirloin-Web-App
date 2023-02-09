@@ -21,13 +21,6 @@ export const Register = () => {
   const navigate = useNavigate();
   const [isDisable, setIsDisable] = useState(true);
 
-  // const handleChange = (event: any) => {
-  //   setFormRegister({
-  //     ...formRegister,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
-
   useEffect(() => {
     if (
       formRegister.business_name === "" ||
@@ -40,7 +33,6 @@ export const Register = () => {
     } else {
       setIsDisable(false);
     }
-    // console.log(formRegister);
   }, [formRegister]);
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -48,14 +40,12 @@ export const Register = () => {
     axios
       .postForm("https://bluepath.my.id/register", formRegister)
       .then((response) => {
-        // console.log(response);
         MySwal.fire({
           title: "Berhasil Register",
           text: response.data.message,
           icon: "success",
           confirmButtonAriaLabel: "ok",
         });
-        // alert(response.data.message);
         navigate("/login");
       })
       .catch((err) => {
@@ -65,8 +55,6 @@ export const Register = () => {
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-        // alert(err.response.data.message);
-        // alert(err.toString());
       });
   };
 

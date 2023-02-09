@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { useEffect, useState } from "react";
 import { Layout } from "../../components/Layout";
 import DatePicker from "react-datepicker";
 import { AiOutlineCalendar } from "react-icons/ai";
@@ -42,7 +41,6 @@ const LaporanPenjualan = () => {
         .filter((data) => data.transaction_status === "success")
         .reduce((acc, cur) => acc + cur.total_bill, 0)
     );
-    // console.log(datas);
   }, [startDate, endDate, pdf, from, to, datas]);
 
   function DataPenjualan() {
@@ -51,12 +49,10 @@ const LaporanPenjualan = () => {
         `https://bluepath.my.id/transactions/admin?status=sell&from=${from}&to=${to}`
       )
       .then((res) => {
-        console.log(res);
         setDatas(res.data.data);
         setPdf(res.data.pdf_url);
       })
       .catch((err) => {
-        // alert(err.toString());
         alert(err.response.data.message);
       })
       .finally(() => {

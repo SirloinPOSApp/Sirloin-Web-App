@@ -14,8 +14,6 @@ export const TenantEdit = () => {
   const MySwal = withReactContent(Swal);
   useTitle("Sirloin-Profil Tenant");
   const [user, setUser] = useState<userType>();
-  // const fileInputRef: any = React.createRef();
-
   const [formUser, setFormUser] = useState({
     id: -0,
     business_name: "",
@@ -48,7 +46,6 @@ export const TenantEdit = () => {
     axios
       .get("https://bluepath.my.id/users")
       .then((res) => {
-        // console.log(res.data.data);
         setUser(res.data.data);
       })
       .catch((err) => {
@@ -58,7 +55,6 @@ export const TenantEdit = () => {
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-        // alert(err.toString());
       });
   }
 
@@ -69,18 +65,9 @@ export const TenantEdit = () => {
     });
   };
 
-  // const handleFileChange = (event: any) => {
-  //   const file = fileInputRef.current.files[0];
-  //   setFormUser({
-  //     ...formUser,
-  //     profile_photo: file,
-  //   });
-  // };
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData: any = new FormData();
-    // formData.append("profile_photo", fileInputRef.current.files[0]);
     formData.append("business_name", formUser.business_name);
     formData.append("email", formUser.email);
     formData.append("phone_number", formUser.phone_number);
@@ -91,7 +78,6 @@ export const TenantEdit = () => {
     axios
       .put(`https://bluepath.my.id/users`, formData)
       .then((response) => {
-        // alert(response.data.message);
         MySwal.fire({
           title: "Berhasil",
           text: response.data.message,
@@ -101,7 +87,6 @@ export const TenantEdit = () => {
         navigate(`/profile-tenant`);
       })
       .catch((err) => {
-        // alert(err.toString());
         MySwal.fire({
           title: "Gagal",
           text: err.response.data.message,
