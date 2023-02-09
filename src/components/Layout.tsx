@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import {
   FiCalendar,
+  FiChevronsRight,
   FiFileText,
   FiHome,
   FiLogOut,
@@ -39,7 +40,7 @@ interface LayoutProps {
 }
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
-  const { collapseSidebar } = useProSidebar();
+  const { collapseSidebar, toggleSidebar, broken } = useProSidebar();
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
   const [cookie, setCookie, removeCookie] = useCookies([
@@ -150,7 +151,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
           },
         }}
         className="h-full"
-        breakPoint="md"
+        breakPoint="lg"
       >
         <Menu className="text-white">
           <button id="burger" className="p-7" onClick={() => collapseSidebar()}>
@@ -306,7 +307,17 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
           )}
         </Menu>
       </Sidebar>
-      <main className="h-full w-full overflow-auto">{children}</main>
+      <main className="h-full w-full overflow-auto">
+        {broken && (
+          <button
+            className="btn btn-ghost rounded"
+            onClick={() => toggleSidebar()}
+          >
+            <FiChevronsRight size={20} />
+          </button>
+        )}
+        {children}
+      </main>
     </div>
   );
 };
