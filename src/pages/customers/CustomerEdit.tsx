@@ -96,7 +96,7 @@ const CustomerEdit = () => {
   return (
     <Layout>
       <h3 className="flex m-10 font-bold text-2xl text-[#4AA3BA]">
-        Tambah Customer
+        Edit Customer
       </h3>
       <form
         onSubmit={handleSubmit}

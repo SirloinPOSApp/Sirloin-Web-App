@@ -118,7 +118,7 @@ const ProductEdit = () => {
   return (
     <Layout>
       <h3 className="flex m-10 font-bold text-2xl text-[#4AA3BA]">
-        Tambah Product
+        Edit Product
       </h3>
       <form
         onSubmit={handleSubmit}
