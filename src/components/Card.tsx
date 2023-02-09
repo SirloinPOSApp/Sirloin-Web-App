@@ -1,7 +1,4 @@
-import React, { FC } from "react";
-import { FiShoppingCart } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
-import Product from "../pages/products/Product";
+import { FC } from "react";
 import Button from "./Button";
 
 interface CardProps {
