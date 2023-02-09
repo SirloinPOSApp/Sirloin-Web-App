@@ -214,7 +214,7 @@ export const LandingPage = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-4  gap-4 mt-20 pb-10">
+          <div className="grid grid-cols-4  gap-4 mt-20 pb-10 sm:grid-cols-2 lg:grid-cols-4">
             {loading
               ? [...Array(20).keys()].map((data) => (
                   <SkeletonLoading key={data} />
@@ -257,17 +257,17 @@ export const LandingPage = () => {
                 ))}
           </div>
         </div>
-        <div className="p-10 w-1/3" hidden={isHidden}>
+        <div className="p-10 w-1/3  md:w-2/3 lg:w-1/3 " hidden={isHidden}>
           <h3 className="font-bold text-3xl text-[#4AA3BA] mb-20">Keranjang</h3>
           {carts.length === 0 ? (
             <div className="text-center text-lg text-[#a0a0a0]">
               <a href="">Select Product</a>
             </div>
           ) : (
-            <div>
+            <div className="md:text-xs lg:text-base">
               {carts.map((cart, index) => (
-                <div key={index} className="grid grid-flow-row  gap-4 mb-7">
-                  <div className="flex  border rounded-2xl shadow-lg p-1 ">
+                <div key={index} className="grid grid-flow-row  gap-4 mb-7 ">
+                  <div className="flex  border rounded-2xl shadow-lg p-1">
                     {cart.product_image === "" ? (
                       <img
                         src="https://i.pinimg.com/564x/2c/4b/7f/2c4b7f4b0cb5ae1f3879ec36eb64386b.jpg"
@@ -281,8 +281,8 @@ export const LandingPage = () => {
                         className="h-32 w-32 p-1"
                       />
                     )}
-                    <div className=" flex flex-col p-3 justify-between">
-                      <p className="font-bold text-xl text-[#4AA3BA]">
+                    <div className=" flex flex-col p-3 justify-between ">
+                      <p className="font-bold text-xl md:text-base lg:text-xl text-[#4AA3BA]">
                         {cart.product_name}
                       </p>
                       <p>
@@ -293,10 +293,10 @@ export const LandingPage = () => {
                         .-
                       </p>
                       <div className="flex gap-5">
-                        <div className="flex items-center rounded-xl border-2 w-28 divide-x border-gray-300">
+                        <div className="flex items-center rounded-xl border-2 w-28 md:w-20 lg:w-28 divide-x border-gray-300">
                           <button
                             id="inc-product"
-                            className="text-xl w-9 bg-white  rounded-l-xl"
+                            className="text-xl w-9 bg-white hidden lg:flex lg:px-2 rounded-l-xl md:hidden"
                             onClick={() => {
                               handleIncCart(index);
                             }}
@@ -308,7 +308,7 @@ export const LandingPage = () => {
                             type="number"
                             id="cart_quantity"
                             name="cart_quantity"
-                            className="w-12 text-center"
+                            className="w-12 text-center md:w-full lg:w-12"
                             value={cart.quantity}
                             onChange={(e) => {
                               const updatedCart = [...carts];
@@ -320,7 +320,7 @@ export const LandingPage = () => {
                           ></input>
                           <button
                             id="dec-product"
-                            className="text-xl w-9 bg-white text-center rounded-r-xl"
+                            className="text-xl w-9 bg-white hidden lg:flex lg:px-2 rounded-r-xl md:hidden"
                             onClick={() => {
                               handleDecCart(index);
                             }}
@@ -385,10 +385,10 @@ export const LandingPage = () => {
                   </p>
                 </div>
                 <div className="flex justify-between">
-                  <p className="font-bold text-xl text-[#4AA3BA]">
+                  <p className="font-bold text-xl md:text-sm lg:text-xl text-[#4AA3BA]">
                     Total Belanja
                   </p>
-                  <p className="font-bold text-xl ">
+                  <p className="font-bold text-xl md:text-sm lg:text-xl">
                     Rp.{" "}
                     {summary.total
                       .toString()
