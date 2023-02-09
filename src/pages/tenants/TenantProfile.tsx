@@ -52,8 +52,13 @@ export const TenantProfile = () => {
         // console.log(response);
         MySwal.fire({
           title: "Berhasil",
-          text: response.data.message,
-          html: <p>Tolong aktifkan notifikasi pada browser anda</p>,
+          html: (
+            <div>
+              {" "}
+              <p>{response.data.message}</p>
+              <p>Tolong aktifkan notifikasi pada browser anda</p>
+            </div>
+          ),
           icon: "success",
           confirmButtonAriaLabel: "ok",
         });
@@ -62,8 +67,13 @@ export const TenantProfile = () => {
         console.log(err);
         MySwal.fire({
           title: "Gagal",
-          text: err.response.data.message,
-          html: <p>Tolong aktifkan notifikasi pada browser anda</p>,
+          html: (
+            <div>
+              {" "}
+              <p>{err.response.data.message}</p>
+              <p>Tolong aktifkan notifikasi pada browser anda</p>
+            </div>
+          ),
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
