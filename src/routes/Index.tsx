@@ -20,51 +20,11 @@ import Pembayaran from "../pages/Pembayaran";
 import ProductInput from "../pages/products/ProductInput";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { userContext } from "../utils/context";
 import CustomerEdit from "../pages/customers/CustomerEdit";
 import ProductEdit from "../pages/products/ProductEdit";
 import { HistoryBelanjaDetail } from "../pages/products/HistoryBelanjaDetail";
-
-// const defaultGlobalState = {
-//   num: 0,
-//   text: "foo",
-//   bool: false,
-// };
-// const globalStateContext =
-//   React.createContext<typeof defaultGlobalState>(defaultGlobalState);
-// const dispatchStateContext = React.createContext<
-//   React.Dispatch<any> | undefined
-// >(undefined);
-
-// const GlobalStateProvider = ({ children }: any) => {
-//   const [state, dispatch] = React.useReducer(
-//     (state: any, newValue: any) => ({ ...state, ...newValue }),
-//     defaultGlobalState
-//   );
-//   return (
-//     <globalStateContext.Provider value={state}>
-//       <dispatchStateContext.Provider value={dispatch}>
-//         {children}
-//       </dispatchStateContext.Provider>
-//     </globalStateContext.Provider>
-//   );
-// };
-// export const useGlobalState = () => [
-//   React.useContext(globalStateContext),
-//   React.useContext(dispatchStateContext),
-// ];
-
-// if ("serviceWorker" in navigator) {
-//   navigator.serviceWorker
-//     .register("/firebase-messaging-sw.js")
-//     .then(function (registration) {
-//       console.log("Registration successful, scope is:", registration.scope);
-//     })
-//     .catch(function (err) {
-//       console.log("Service worker registration failed, error:", err);
-//     });
-// }
 
 const App = () => {
   const [cookie, , removeCookie] = useCookies([

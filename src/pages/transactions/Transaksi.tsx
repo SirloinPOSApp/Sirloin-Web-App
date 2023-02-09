@@ -1,5 +1,5 @@
 import { AiOutlineCalendar } from "react-icons/ai";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
 import { Layout } from "../../components/Layout";
 import DatePicker from "react-datepicker";
 import Button from "../../components/Button";
@@ -29,7 +29,6 @@ const Transaksi = () => {
 
   useEffect(() => {
     fetchData();
-    // console.log(datas);
   }, [sendToEmail]);
 
   useEffect(() => {
@@ -40,18 +39,12 @@ const Transaksi = () => {
       setFrom(start);
       setTo(end);
     }
-    // console.log("start:", start);
-    // console.log("end:", end);
-    // console.log("from:", from);
-    // console.log("to:", to);
-    // console.log(pdf);
     setTotalTransaction(datas.reduce((acc, cur) => acc + cur.total_bill, 0));
     setTotalTransactionSuccess(
       datas
         .filter((data) => data.transaction_Status === "success")
         .reduce((acc, cur) => acc + cur.total_bill, 0)
     );
-    console.log(datas);
   }, [startDate, endDate, pdf, from, to, datas]);
 
   function fetchData() {
@@ -60,12 +53,10 @@ const Transaksi = () => {
         `https://bluepath.my.id/transactions?status=sell&from=${from}&to=${to}&send_email=${sendToEmail}`
       )
       .then((res) => {
-        // console.log(res.data.data);
         setDatas(res.data.data);
         setPdf(res.data.pdf_url);
       })
       .catch((err) => {
-        // alert(err.toString());
         alert(err.response.data.message);
       })
       .finally(() => {

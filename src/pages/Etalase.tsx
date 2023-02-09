@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Layout } from "../components/Layout";
-import { FiSearch } from "react-icons/fi";
 import { HiOutlineTrash } from "react-icons/hi";
-import { Input } from "../components/Input";
 import Button from "../components/Button";
 import { CardEtalase } from "../components/Card";
 import { useNavigate } from "react-router-dom";
 import { ProductsType } from "../utils/types/sirloin";
 import axios from "axios";
-import { copyFileSync } from "fs";
 import Swal from "../utils/Swal";
 import { SkeletonLoadingEtalase } from "../components/Loading";
 import { useTitle } from "../utils/Title";
@@ -30,7 +27,6 @@ export const Etalase = () => {
   }, []);
 
   useEffect(() => {
-    // console.log("carts", carts);
     const sub_total = carts.reduce(
       (acc, cart) => acc + cart.price * (cart.quantity || 0),
       0
@@ -45,18 +41,15 @@ export const Etalase = () => {
       .get(`https://bluepath.my.id/products/admin`)
       .then((product) => {
         const { data } = product.data;
-        //console.log(data);
         setProduct(data);
       })
       .catch((err) => {
-        // alert(err.toString());
         alert(err.response.data.message);
       })
       .finally(() => setLoading(false));
   }
 
   const onClickProduct = (data: ProductsType) => {
-    // console.log(data);
     const existingProductIndex = carts.findIndex((cart) => cart.id === data.id);
     if (existingProductIndex !== -1) {
       const existingProduct = carts[existingProductIndex];
@@ -101,12 +94,6 @@ export const Etalase = () => {
     );
   };
 
-  const handleSubmit = () => {
-    localStorage.setItem("carts", JSON.stringify(carts));
-    localStorage.setItem("summary", JSON.stringify(summary));
-    navigate(`/pembayaran_detail`);
-  };
-
   function orderProduct() {
     const data: any = {
       items: carts.map((cart) => ({
@@ -115,13 +102,11 @@ export const Etalase = () => {
         price: cart.price,
       })),
     };
-    console.log(carts);
     Swal.fire({
       title: `Total order: Rp. ${summary.total
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`,
       text: "Apakah Anda yakin dengan ordernya?",
-      // icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -131,16 +116,8 @@ export const Etalase = () => {
         axios
           .post(`https://bluepath.my.id/transactions/buy`, data)
           .then((response) => {
-            console.log(response);
             window.open(response.data.data.payment_url);
             navigate("/history-shopping");
-            // Swal.fire({
-            //   title: "Scan Barcode",
-            //   // text: res.data.message,
-            //   imageUrl: response.data.data.payment_url,
-            //   icon: "info",
-            //   confirmButtonAriaLabel: "ok",
-            // }).then(() => navigate("/history-shopping"));
           })
           .catch((error) => {
             Swal.fire({
@@ -228,7 +205,6 @@ export const Etalase = () => {
                           >
                             +
                           </button>
-                          {/* <p className=" w-12 text-center">{cart.quantity}</p> */}
                           <input
                             type="number"
                             id="cart_quantity"

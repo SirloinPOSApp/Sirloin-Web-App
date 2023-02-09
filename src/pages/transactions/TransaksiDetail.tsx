@@ -1,12 +1,10 @@
-import React from "react";
 import Button from "../../components/Button";
 import { Layout } from "../../components/Layout";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import Swal from "../../utils/Swal";
-import withReactContent from "sweetalert2-react-content";
 import { transactionType } from "../../utils/types/sirloin";
 import { useTitle } from "../../utils/Title";
 
@@ -20,19 +18,13 @@ export const TransaksiDetail = () => {
 
   useEffect(() => {
     fetchData();
-    // console.log(refresh);
   }, [refresh]);
-
-  // useEffect(() => {
-  //   console.log("tot", total_quantity);
-  // }, [total_quantity]);
 
   function fetchData() {
     axios
       .get(`https://bluepath.my.id/transactions/${transaction_id}`)
       .then((customer) => {
         const { data } = customer.data;
-        console.log(data);
         setDatas(data);
         let sum = 0;
         data.TransactionProductRes.forEach((item: any) => {
@@ -203,10 +195,6 @@ export const TransaksiDetail = () => {
           <div className=" flex  w-1/2 mx-5">
             <h1 className="flex my-10 text-xl font-bold">Rincian Pembayaran</h1>
           </div>
-          {/* <div className="flex justify-between mb-4 border-b pb-4 w-1/2">
-            <p>Metode Pembayaran</p>
-            <p>Tunai</p>
-          </div> */}
           <div className="flex justify-between mb-4 w-1/2 mx-5">
             <p>Total Harga ({total_quantity} barang)</p>
             <p>
@@ -239,13 +227,6 @@ export const TransaksiDetail = () => {
             </p>
           </div>
         </div>
-        {/* <div className="flex justify-end">
-          <Button
-            id="cancel-order"
-            label="Batalkan Order"
-            buttonSet="w-48 h-16 text-white bg-teal-700 mt-7 border-none bg-[#DA5C53] capitalize "
-          />
-        </div> */}
       </div>
       <div className="flex justify-end mx-32 gap-10">
         <Button

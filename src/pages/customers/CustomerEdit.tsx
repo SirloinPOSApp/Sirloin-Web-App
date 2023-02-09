@@ -43,7 +43,6 @@ const CustomerEdit = () => {
       .get(`https://bluepath.my.id/customers/${customer_id}`)
       .then((customer) => {
         const { data } = customer.data;
-        console.log(data);
         setCustomer(data);
       })
       .catch((error) => {

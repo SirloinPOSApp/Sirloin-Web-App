@@ -1,16 +1,12 @@
-import React from "react";
 import { Layout } from "../components/Layout";
 import { FiSearch } from "react-icons/fi";
 import { HiOutlineTrash } from "react-icons/hi";
-import { Input } from "../components/Input";
 import Button from "../components/Button";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ProductsType } from "../utils/types/sirloin";
-import { FC } from "react";
-import { redirect, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "../utils/Swal";
-import withReactContent from "sweetalert2-react-content";
 import { useCookies } from "react-cookie";
 import { SkeletonLoading } from "../components/Loading";
 import { useTitle } from "../utils/Title";
@@ -35,7 +31,6 @@ export const LandingPage = () => {
     "business_name",
     "email",
   ]);
-  const MySwal = withReactContent(Swal);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -46,7 +41,6 @@ export const LandingPage = () => {
   }, [searchValue]);
 
   useEffect(() => {
-    // console.log("carts", carts);
     const sub_total = carts.reduce(
       (acc, cart) => acc + cart.price * (cart.quantity || 0),
       0
@@ -88,18 +82,15 @@ export const LandingPage = () => {
     axios
       .get(`https://bluepath.my.id/products?search=${searchValue}`)
       .then((res) => {
-        console.log(res.data.data);
         setDatas(res.data.data);
       })
       .catch((err) => {
-        // alert(err.toString());
         alert(err.response.data.message);
       })
       .finally(() => setLoading(false));
   }
 
   const onClickProduct = (data: ProductsType) => {
-    // console.log(data);
     const existingProductIndex = carts.findIndex((cart) => cart.id === data.id);
     if (existingProductIndex !== -1) {
       const existingProduct = carts[existingProductIndex];
@@ -152,12 +143,10 @@ export const LandingPage = () => {
   };
 
   const handleAddMember = (num: any) => {
-    console.log("num", num);
     axios
       .get(`https://bluepath.my.id/customers/${num}`)
       .then((product) => {
         const { data } = product.data;
-        console.log(data);
         if (num > 0) {
           setSummary({
             ...summary,
@@ -208,7 +197,6 @@ export const LandingPage = () => {
                 className="p-3 placeholder-[#9CA3AF] drop-shadow-lg rounded-lg w-64 border"
               />
               <FiSearch
-                // type="submit"
                 id="icon-product"
                 className="absolute top-3 right-3 w-6 h-6 cursor-pointer"
               />
@@ -303,7 +291,6 @@ export const LandingPage = () => {
                           >
                             +
                           </button>
-                          {/* <p className=" w-12 text-center">{cart.quantity}</p> */}
                           <input
                             type="number"
                             id="cart_quantity"

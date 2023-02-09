@@ -10,14 +10,12 @@ import { Layout } from "../../components/Layout";
 import { SkeletonLoadingTabel } from "../../components/Loading";
 import { useTitle } from "../../utils/Title";
 import { CustType } from "../../utils/types/sirloin";
-import CustomerEdit from "./CustomerEdit";
 
 const Customer = () => {
   useTitle("Sirloin - Customer Tenant");
   const [customer, setCustomer] = useState<CustType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [refresh, setRefresh] = useState(false);
-  const [cookie, setCookie] = useCookies();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +27,6 @@ const Customer = () => {
       .get("https://bluepath.my.id/customers")
       .then((customer) => {
         const { data } = customer.data;
-        console.log(data);
         setCustomer(data);
       })
       .catch((error) => {
@@ -42,28 +39,6 @@ const Customer = () => {
       })
       .finally(() => setLoading(false));
   }
-
-  // function deleteProduct(id: number) {
-  //   axios
-  //     .delete(`https://bluepath.my.id/customer/${id}`)
-  //     .then((response) => {
-  //       Swal.fire({
-  //         title: "Berhasil",
-  //         text: response.data.message,
-  //         icon: "success",
-  //         confirmButtonAriaLabel: "ok",
-  //       });
-  //       setRefresh(!refresh);
-  //     })
-  //     .catch((error) => {
-  //       Swal.fire({
-  //         title: "Gagal",
-  //         text: error.response.data.message,
-  //         icon: "error",
-  //         confirmButtonAriaLabel: "ok",
-  //       });
-  //     });
-  // }
 
   return (
     <Layout>
@@ -102,13 +77,6 @@ const Customer = () => {
                     <td>{customer.phone_number}</td>
                     <td>{customer.email}</td>
                     <td className="flex col-span-2">
-                      {/* <button id="del-product" className="btn btn-ghost btn-square">
-                    <FiTrash2
-                      size="20"
-                      color="red"
-                      onClick={() => deleteProduct(customer.id)}
-                    />
-                  </button> */}
                       <button
                         id={`customer-${customer.id}`}
                         className="btn btn-ghost btn-square"
