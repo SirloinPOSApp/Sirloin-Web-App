@@ -157,13 +157,13 @@ export const Etalase = () => {
   return (
     <Layout>
       <div className="w-full flex font-medium">
-        <div className=" p-10  w-3/4 bg-[#FAFAFA] h-screen ">
+        <div className=" p-10  w-3/4 bg-[#FAFAFA] h-screen">
           <div className="flex justify-between ">
             <h3 className="font-bold text-3xl text-[#4AA3BA]">
               Etalase Belanja Product
             </h3>
           </div>
-          <div className="grid grid-cols-4  gap-4 mt-20">
+          <div className="grid grid-cols-4  gap-4 mt-20 sm:grid-cols-2 lg:grid-cols-4">
             {loading
               ? [...Array(20).keys()].map((product) => (
                   <SkeletonLoadingEtalase key={product} />
@@ -181,14 +181,14 @@ export const Etalase = () => {
                 ))}
           </div>
         </div>
-        <div className="p-10 w-1/4">
+        <div className="p-10 w-1/4 md:w-1/2 lg:w-1/4">
           <h3 className="font-bold text-3xl text-[#4AA3BA] mb-20">Keranjang</h3>
           {carts.length === 0 ? (
             <div className="text-center text-lg text-[#a0a0a0]">
               <a href="">Select Product</a>
             </div>
           ) : (
-            <div>
+            <div className="md:text-xs lg:text-base">
               {carts.map((cart, index) => (
                 <div key={index} className="grid grid-flow-row  gap-4 mb-7">
                   <div className="flex  border rounded-2xl shadow-lg p-1 ">
@@ -207,7 +207,7 @@ export const Etalase = () => {
                     )}
 
                     <div className=" flex flex-col p-3 justify-between">
-                      <p className="font-bold text-xl text-[#4AA3BA]">
+                      <p className="font-bold text-xl md:text-base lg:text-xl text-[#4AA3BA]">
                         {cart.product_name}
                       </p>
                       <p>
@@ -221,7 +221,7 @@ export const Etalase = () => {
                         <div className="flex items-center rounded-xl border-2 w-28 divide-x border-gray-300">
                           <button
                             id="inc-product"
-                            className="text-xl w-9 bg-white  rounded-l-xl"
+                            className="text-xl  w-9 bg-white  rounded-l-xl"
                             onClick={() => {
                               handleIncCart(index);
                             }}
@@ -278,10 +278,10 @@ export const Etalase = () => {
                 </div>
 
                 <div className="flex justify-between">
-                  <p className="font-bold text-xl text-[#4AA3BA]">
+                  <p className="font-bold text-xl md:text-base lg:text-xl text-[#4AA3BA]">
                     Total Belanja
                   </p>
-                  <p className="font-bold text-xl ">
+                  <p className="font-bold text-xl md:text-base lg:text-xl ">
                     Rp.{" "}
                     {summary.total
                       .toString()
