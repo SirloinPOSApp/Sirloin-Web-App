@@ -1,5 +1,3 @@
-import React from "react";
-
 export const SkeletonLoading = () => {
   return (
     <div className="flex flex-col text-center   items-center border rounded-2xl shadow-lg h-[28rem] gap-2 pt-5 bg-white ">
