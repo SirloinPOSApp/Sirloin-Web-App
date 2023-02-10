@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { FiEdit, FiShoppingBag, FiTrash2 } from "react-icons/fi";
+import { FiEdit, FiSearch, FiShoppingBag, FiTrash2 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Button from "../../components/Button";
@@ -13,8 +13,10 @@ import { ProductsType } from "../../utils/types/sirloin";
 const Product = () => {
   useTitle("Sirloin - Product");
   const [product, setProduct] = useState<ProductsType[]>([]);
+  const [original, setOriginal] = useState<ProductsType[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [searchValue, setSearchValue] = useState("");
   const [cookie, , removeCookie] = useCookies([
     "token",
     "id",
@@ -33,6 +35,7 @@ const Product = () => {
       .then((product) => {
         const { data } = product.data;
         setProduct(data);
+        setOriginal(data);
       })
       .catch((error) => {
         Swal.fire({
@@ -78,6 +81,20 @@ const Product = () => {
       }
     });
   }
+  const filterProducts = (data: string, products: ProductsType[]) =>
+    products.filter(
+      (item: ProductsType) =>
+        item.product_name.toLowerCase().indexOf(data.toLowerCase()) !== -1
+    );
+
+  const handleSearch = (data: string) => {
+    if (data === "") {
+      setProduct(original);
+    } else {
+      const result = filterProducts(data, product);
+      setProduct(result);
+    }
+  };
 
   return (
     <Layout>
@@ -94,6 +111,24 @@ const Product = () => {
           label="Tambah Product"
           buttonSet="bg-[#4AA3BA] border-none capitalize w-48"
           onClick={() => navigate("/add-product")}
+        />
+      </div>
+      <div className=" relative w-64 ml-10">
+        <input
+          value={searchValue}
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+            handleSearch(e.target.value);
+          }}
+          id="input-product"
+          name="search"
+          type="text"
+          placeholder="cari barang"
+          className="p-3 placeholder-[#9CA3AF] drop-shadow-lg rounded-lg w-64 border"
+        />
+        <FiSearch
+          id="icon-product"
+          className="absolute top-3 right-3 w-6 h-6 cursor-pointer"
         />
       </div>
 
