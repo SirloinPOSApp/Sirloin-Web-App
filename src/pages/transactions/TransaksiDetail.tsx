@@ -15,7 +15,7 @@ export const TransaksiDetail = () => {
   const [total_quantity, setTotal_quantity] = useState(0);
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
-  const [isDisable, setIsDisable] = useState(true);
+  const [isDisable, setIsDisable] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -57,6 +57,7 @@ export const TransaksiDetail = () => {
   };
 
   const handleCashBayar = () => {
+    setIsDisable(true);
     axios
       .put(`https://bluepath.my.id/transactions/${transaction_id}`, {
         transaction_status: "success",
@@ -68,7 +69,6 @@ export const TransaksiDetail = () => {
           icon: "success",
           confirmButtonAriaLabel: "ok",
         }).then(() => setRefresh(!refresh));
-        setIsDisable(true);
       })
       .catch((error) => {
         Swal.fire({
@@ -77,8 +77,7 @@ export const TransaksiDetail = () => {
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-      })
-      .finally(() => setIsDisable(false));
+      });
   };
 
   const handleCashBatal = () => {
@@ -259,6 +258,7 @@ export const TransaksiDetail = () => {
             <Button
               id="bayar"
               label="Bayar"
+              disabled={isDisable}
               buttonSet="w-40 text-white bg-teal-700 my-3 border-none"
               onClick={() => handleCashBayar()}
             />
