@@ -18,6 +18,7 @@ import {
   Sidebar,
   sidebarClasses,
   useProSidebar,
+  menuClasses,
 } from "react-pro-sidebar";
 import { BsShop } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -112,6 +113,9 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         rootStyles={{
           [`.${sidebarClasses.container}`]: {
             backgroundColor: "teal",
+          },
+          [`.${menuClasses.button}`]: {
+            "&:hover": { color: "teal" },
           },
         }}
         className="h-full"
