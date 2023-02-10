@@ -81,6 +81,7 @@ export const TransaksiDetail = () => {
   };
 
   const handleCashBatal = () => {
+    setIsDisable(true);
     axios
       .put(`https://bluepath.my.id/transactions/${transaction_id}`, {
         transaction_status: "failure",
@@ -252,6 +253,7 @@ export const TransaksiDetail = () => {
             <Button
               id="batalkan"
               label="Batalkan"
+              disabled={isDisable}
               buttonSet="w-40 text-white bg-red-500 my-3 border-none"
               onClick={() => handleCashBatal()}
             />
