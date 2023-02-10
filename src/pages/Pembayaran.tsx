@@ -44,6 +44,7 @@ const Pembayaran = () => {
   }, [payment]);
 
   const handleSubmit = () => {
+    setIsDisable(true);
     const data: any = {
       items: carts.map((cart) => ({
         product_id: cart.id,
@@ -80,7 +81,8 @@ const Pembayaran = () => {
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-      });
+      })
+      .finally(() => setIsDisable(false));
   };
 
   return (

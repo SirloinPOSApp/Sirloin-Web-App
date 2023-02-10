@@ -15,6 +15,7 @@ export const TransaksiDetail = () => {
   const [total_quantity, setTotal_quantity] = useState(0);
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
+  const [isDisable, setIsDisable] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -67,6 +68,7 @@ export const TransaksiDetail = () => {
           icon: "success",
           confirmButtonAriaLabel: "ok",
         }).then(() => setRefresh(!refresh));
+        setIsDisable(true);
       })
       .catch((error) => {
         Swal.fire({
@@ -75,7 +77,8 @@ export const TransaksiDetail = () => {
           icon: "error",
           confirmButtonAriaLabel: "ok",
         });
-      });
+      })
+      .finally(() => setIsDisable(false));
   };
 
   const handleCashBatal = () => {
