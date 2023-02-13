@@ -82,7 +82,7 @@ export const TenantProfile = () => {
           <h3 className="font-bold text-2xl text-[#4AA3BA]">Profil Tenant</h3>
         ) : (
           <h3 className="font-bold text-2xl text-[#4AA3BA]">
-            Profil Super Admin
+            Product Super Admin
           </h3>
         )}
       </div>
