@@ -62,11 +62,7 @@ export const Register = () => {
     <LayoutPlain>
       <div className="flex h-full gap-44 justify-center">
         <div className="justify-center items-center content-center flex h-full ">
-          <img
-            src="https://s3-alpha-sig.figma.com/img/6a22/f8f5/dcdc0cb9315f24ecd0cb322db5fe8a3e?Expires=1676246400&Signature=pc8iLYIXdxv3011XIaimZNf-7UTYRwIUIqHcbQJ6xdl-urLocfFc6OhfdDw9cVwKycwv9OsPo2bT-FQcExJ0tNqfLL3oIQ8Kd9zMrm-f4C1brcjw9nE4wrlgNyCbK027b3gFS6j4SSuwPBsjqb6qcMqyyXy7IRgwd~3pS5plkjuTjq9xMkk6M0YMRJO3KaIJ9jIsCEI0BDxBQfxhyE70pCQra2Nuzb29ESt~uX67vQaQJeXA9bEQnJEHrRintLJrcqG75-OguHiWBX-LBOASDs6PmOXAt7XY9RE5JzfNf3Ae2i66okiCjcHHw8ziDNUZe9JaaR0tkjdZOP8yQeM0~A__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-            alt="Sirloin"
-            className="w-[50rem]"
-          />
+          <img src="/Logo_Sirloin.png" alt="Sirloin" className="w-[50rem]" />
         </div>
         <div className="flex h-full  justify-center items-center content-center">
           <form>

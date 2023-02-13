@@ -55,7 +55,14 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
   const [notification, setNotification] = useState({ title: "", body: "" });
   const notify = () => toast(<ToastDisplay />);
   function ToastDisplay() {
-    return (
+    return notification.body.length > 30 ? (
+      <div className="px-10 py-6  items-center  text-center flex flex-col">
+        <p className="text-3xl font-bold mb-3 mt-3 capitalize">
+          {notification?.title}
+        </p>
+        <p className="text-xl">{notification?.body}</p>
+      </div>
+    ) : (
       <div className="px-10 py-6 text-red-600 text-center  items-center   flex flex-col">
         <CiWarning className="w-20 h-20 text-yellow-400" />
         <p className="text-3xl font-bold mb-3 mt-3 capitalize">
