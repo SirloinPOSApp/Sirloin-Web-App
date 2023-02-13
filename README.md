@@ -1,18 +1,18 @@
 ![logo](https://user-images.githubusercontent.com/98010765/218352146-8422c49b-be33-4b31-9354-aeb3d91de7cc.png)
 
-# Sirloin-Web-App
+# 📑 Sirloin-Web-App
 Web App about Point of Sale (POS) using React ts (Vite) styling with tailwind
 
-## Overview
+## 🌐 Overview
 
 SIRLOIN
 an Application about Online Cashier
 
-### Fiture
+### 🔮 Fiture
 
 The user should be able to:
 
-Super Admin:
+✨ Super Admin:
 - Login
 - Management Product (add, edit, delete, read)
 - Show products for sale on shopping display
@@ -22,7 +22,7 @@ Super Admin:
 - Edit Profile
 - LogOut
 
-Tenant:
+🌟 Tenant:
 - Signup
 - Login
 - Show profile
@@ -37,27 +37,27 @@ Tenant:
 - Show Purchase history
 - Download Purchase history
 
-Transaction:
+⌛ Transaction:
 - Add product to cart
 - Edit quantity in cart
 - Payment with QR Code
 - Payment with Midtrans
 
 
-The app should be able to:
+🚀 The app should be able to:
 
 - Receive and store information about the users application from the specified fields in object format
 - Send JSON obect to the the backend server where object data is transfered to the markdown template
 - Generate a README.md file from the markdown tempelate stored in an output directory
 - Allow user to download the README.md file to thier computer
 
-### Links
+### 🌐 Links
 
 - Design Website : [Figma URL here](https://www.figma.com/file/nJZY9px7L8uVPUdIucXygT/Sirloin-POS-Application?t=JER9baweJxhT73bG-6)
 - GitHub URL: [GitHub URL here](https://github.com/ALTA-CAPSTONE-GROUP1-SirloinPOSApp/Sirloin-Web-App)
 - Live Site URL: [Live site URL here](https://sirloin-pos.vercel.app/)
 
-### Built with
+### 🛠️ Built with
 
 - React.Js with Vite
 - React Router Dom
@@ -70,7 +70,7 @@ The app should be able to:
 - Axios
 - JSX Functionality
 
-## Run Locally
+## 🧰 Run Locally
 
 Clone the project
 
@@ -97,7 +97,7 @@ Start the server
 ```
 
 
-## Screenshots
+## 🖼 Screenshots
 
 ![screencapture-sirloin-pos-vercel-app-2023-02-13-08_48_51](https://user-images.githubusercontent.com/98010765/218353542-ce274450-2340-47ff-ac39-e6844c8a896a.png)
 ![screencapture-sirloin-pos-vercel-app-landing-2023-02-13-08_51_16](https://user-images.githubusercontent.com/98010765/218353540-70054855-812a-4b6b-96f0-6a88bc9041f1.png)
@@ -107,7 +107,7 @@ Start the server
 ![screencapture-sirloin-pos-vercel-app-profile-tenant-2023-02-13-08_54_02](https://user-images.githubusercontent.com/98010765/218353532-c5373b13-20f1-4b08-b40e-68267bedc37a.png)
 
 
-## Authors
+## 🤖 Authors
 
 - [@deradhista13](https://github.com/deradhista13)
 - [@wildanmujahidin](https://github.com/wildanmujahidin)
