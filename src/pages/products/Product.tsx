@@ -91,7 +91,7 @@ const Product = () => {
     if (data === "") {
       setProduct(original);
     } else {
-      const result = filterProducts(data, original);
+      const result = filterProducts(data, product);
       setProduct(result);
     }
   };
@@ -113,7 +113,7 @@ const Product = () => {
           onClick={() => navigate("/add-product")}
         />
       </div>
-      <div className=" relative w-64 m-10">
+      <div className=" relative w-64 ml-10">
         <input
           value={searchValue}
           onChange={(e) => {
