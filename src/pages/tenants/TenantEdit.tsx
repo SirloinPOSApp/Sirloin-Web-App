@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import Swal from "../../utils/Swal";
 import withReactContent from "sweetalert2-react-content";
 import { userType } from "../../utils/types/sirloin";
+import { useCookies } from "react-cookie";
 
 export const TenantEdit = () => {
   useTitle("Sirloin - Edit Profil Tenant");
@@ -22,6 +23,12 @@ export const TenantEdit = () => {
     address: "",
     password: "",
   });
+  const [cookie, , removeCookie] = useCookies([
+    "token",
+    "id",
+    "business_name",
+    "email",
+  ]);
 
   const navigate = useNavigate();
 
@@ -98,9 +105,15 @@ export const TenantEdit = () => {
 
   return (
     <Layout>
-      <h3 className="flex m-10 font-bold text-2xl text-[#4AA3BA]">
-        Update Profil Tenant
-      </h3>
+      {cookie.id != 1 ? (
+        <h3 className="font-bold text-2xl m-10 text-[#4AA3BA]">
+          Update Profil Tenant
+        </h3>
+      ) : (
+        <h3 className="font-bold text-2xl m-10 text-[#4AA3BA]">
+          Update Profil Super Admin
+        </h3>
+      )}
       <form
         onSubmit={handleSubmit}
         className="flex flex-row m-5 justify-center"
