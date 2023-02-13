@@ -113,6 +113,7 @@ Start the server
 - [@wildanmujahidin](https://github.com/wildanmujahidin)
 
 ### 🛠️ Depedency
+<div style={{ display: "flex", flexWrap: "wrap" }}>
 <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" height="50px">
 <img src="https://vitejs.dev/logo-with-shadow.png" height="50px">
 <img src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.79614a5f61617ba49a0891494521226b.svg" height="50px">
@@ -123,3 +124,4 @@ Start the server
 <img src="https://static.javatpoint.com/tutorial/reactjs/images/react-icons.png" height="50px">
 <img src="https://reactrouter.com/twitterimage.jpg" height="50px">
 <img src="[https://reactrouter.com/twitterimage.jpg](https://www.gstatic.com/devrel-devsite/prod/vde5e97689c1d94fa683b9e5392f0f6b6562f68c8b527194cc7ca91d97bde649f/firebase/images/lockup.svg)" height="50px">
+</div>
