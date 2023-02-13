@@ -111,3 +111,15 @@ Start the server
 
 - [@deradhista13](https://github.com/deradhista13)
 - [@wildanmujahidin](https://github.com/wildanmujahidin)
+
+### 🛠️ Depedency
+![This is an image](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg)
+![This is an image](https://vitejs.dev/logo-with-shadow.png)
+![This is an image](https://tailwindcss.com/_next/static/media/tailwindcss-mark.79614a5f61617ba49a0891494521226b.svg)
+![This is an image](https://raw.githubusercontent.com/saadeghi/files/main/daisyui/logo-4.svg)
+![This is an image](https://raw.githubusercontent.com/sweetalert2/sweetalert2/HEAD/assets/swal2-logo.png)
+![This is an image](https://www.drupal.org/files/project-images/moment.png)
+![This is an image](https://miro.medium.com/v2/resize:fit:786/format:webp/1*3ZOwBIddHRkF7AkM2DjG1g.png)
+![This is an image](https://static.javatpoint.com/tutorial/reactjs/images/react-icons.png)
+![This is an image](https://reactrouter.com/twitterimage.jpg)
+![This is an image](https://www.gstatic.com/devrel-devsite/prod/vde5e97689c1d94fa683b9e5392f0f6b6562f68c8b527194cc7ca91d97bde649f/firebase/images/lockup.svg)
